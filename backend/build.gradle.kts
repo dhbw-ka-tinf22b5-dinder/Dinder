@@ -1,6 +1,7 @@
 plugins {
     `java-library`
     application
+    eclipse
 }
 
 group = "de.dhbw.tinf22b5"
