@@ -6,7 +6,7 @@ plugins {
 
 group = "de.dhbw.tinf22b5"
 version = "1.0.0"
-description = "Dinder"
+description = "Dinder-Backend"
 
 repositories {
     mavenCentral()
