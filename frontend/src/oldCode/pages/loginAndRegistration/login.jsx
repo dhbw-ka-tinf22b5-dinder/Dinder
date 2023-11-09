@@ -1,7 +1,7 @@
 import './style.css'
-import Button from '../../components/atoms/button/Button'
-import Input from '../../components/atoms/input-field/InputField'
-import Background from "../../components/atoms/background/Background";
+import Button from '../../components/atoms/button/Button.jsx'
+import Input from '../../components/atoms/input-field/InputField.jsx'
+import Background from "../../components/atoms/background/Background.jsx";
 import {useNavigate} from "react-router-dom";
 export  default  function Login() {
     const navigate = useNavigate();

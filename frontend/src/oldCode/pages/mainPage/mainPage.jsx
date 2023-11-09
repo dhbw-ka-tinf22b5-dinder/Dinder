@@ -1,8 +1,8 @@
 import {Outlet, useNavigate} from "react-router-dom";
-import Background from "../../components/atoms/background/Background";
-import Button from "../../components/atoms/button/Button";
+import Background from "../../components/atoms/background/Background.jsx";
+import Button from "../../components/atoms/button/Button.jsx";
 import  './mainPage.css'
-import {Logo} from "../../styled-components/home.styles";
+import {Logo} from "../../../styled-components/home.styles.js";
 export default function MainPage(){
     const navigate = useNavigate()
     return(

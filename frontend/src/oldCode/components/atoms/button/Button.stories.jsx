@@ -1,7 +1,7 @@
 import React from 'react';
-import Background from '../background/Background';
+import Background from '../background/Background.jsx';
 
-import Button from './Button';
+import Button from './Button.jsx';
 
 export default {
   title: 'Components/Atoms/Button',

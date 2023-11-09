@@ -1,9 +1,9 @@
 import {Component} from "react";
 import './style.css'
-import Button from '../../components/atoms/button/Button'
-import Input from '../../components/atoms/input-field/InputField'
+import Button from '../../components/atoms/button/Button.jsx'
+import Input from '../../components/atoms/input-field/InputField.jsx'
 import {useNavigate} from "react-router-dom";
-import Background from "../../components/atoms/background/Background";
+import Background from "../../components/atoms/background/Background.jsx";
 
 
 export default function Registration() {

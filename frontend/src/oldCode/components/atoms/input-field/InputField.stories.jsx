@@ -1,7 +1,7 @@
 import React from 'react';
-import Background from '../background/Background';
+import Background from '../background/Background.jsx';
 
-import InputField from './InputField';
+import InputField from './InputField.jsx';
 
 export default {
     title: 'Components/Atoms/InputField',
