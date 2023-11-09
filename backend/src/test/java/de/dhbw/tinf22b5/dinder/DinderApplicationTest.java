@@ -6,9 +6,9 @@ package de.dhbw.tinf22b5.dinder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class AppTest {
+class DinderApplicationTest {
     @Test void appHasAGreeting() {
-        App classUnderTest = new App();
+        DinderApplication classUnderTest = new DinderApplication();
         Assertions.assertNotNull("app should have a greeting", classUnderTest.getGreeting());
     }
 }
