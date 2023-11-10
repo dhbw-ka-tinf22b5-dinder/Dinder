@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div``
+export const MainContainer = styled.div`
+    display: grid;
+    gap: 60px;
+    grid-template-columns: auto auto;
+    border-radius: 25px;
+    color: black;
+    padding: 10px;
+`
 
 export const MainBackgroundImg = styled.img`
   position: absolute;
