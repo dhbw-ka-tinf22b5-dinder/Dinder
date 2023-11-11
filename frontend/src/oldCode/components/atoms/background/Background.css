@@ -1,5 +1,5 @@
 .startUpBackground{
-  background-image: url("../../../../assets/pictures/img.png");
+  background-image: url("../../../../../public/pictures/startBackground.png");
   background-size: cover ;
   min-height: 100vh;
   display: flex;

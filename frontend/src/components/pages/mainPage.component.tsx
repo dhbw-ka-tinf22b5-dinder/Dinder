@@ -1,7 +1,7 @@
-import {MainBackgroundImg} from "../../styles/mainPage.styles.ts";
-import {Button} from "@mui/material";
+import {MainBackgroundImg, MainContainer} from "../../styles/mainPage.styles";
 import {useNavigate} from "react-router-dom";
-import {APP_ROUTES} from "../../routes/routes.ts";
+import {APP_ROUTES} from "../../routes/routes";
+import {Button} from "../atoms/Button.component";
 
 
 const MainPageComponent = () => {
@@ -12,9 +12,11 @@ const MainPageComponent = () => {
     }
 
     return <>
-        <MainBackgroundImg onClick={() => nav(APP_ROUTES.home)}
-                           src={"https://wohnungsgesellschaft.de/wp-content/uploads/2019/02/Handwerker-1.jpg"}/>
-        <Button onClick={() => nav(APP_ROUTES.login)}>Login</Button>
+        <MainBackgroundImg src={"./pictures/startBackground.png"} onClick={()=>nav(APP_ROUTES.login)}/>
+        <MainContainer $isMain>
+            <Button span={1} click={() => nav(APP_ROUTES.login)} text={"Login"} />
+            <Button span={1} click={() => nav(APP_ROUTES.registration)} text={"Registrierung"} />
+        </MainContainer>
     </>
 }
 export default MainPageComponent;

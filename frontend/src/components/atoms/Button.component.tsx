@@ -1,5 +1,7 @@
-const Button=({click,text})=>{
+import { ButtonStyled} from "../../styles/buttons.styles";
+
+export const Button=({click,text,span})=>{
     return <>
-        <button onClick={click} >{text}</button>
+        <ButtonStyled $span={span} onClick={click}>{text}</ButtonStyled>
     </>
 }

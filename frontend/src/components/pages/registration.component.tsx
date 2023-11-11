@@ -4,7 +4,7 @@ import {APP_ROUTES} from "../../routes/routes";
 import {useNavigate} from "react-router-dom";
 import {Input} from "../atoms/Input.component";
 
-const LoginComponent = ()    => {
+const RegistrationComponent = ()=> {
     const navigate = useNavigate();
 
     const nav = (s: string) => {
@@ -15,9 +15,10 @@ const LoginComponent = ()    => {
         <MainContainer>
             E-Mail:<Input id={"email"} type={"text"}/>
             Password:<Input id={"password"} type={"password"}/>
-            <Button span={2} click={() => nav(APP_ROUTES.login)} text={"Login"} />
+            Password:<Input id={"password"} type={"password"}/>
+            <Button span={2} click={() => nav(APP_ROUTES.login)} text={"Register"} />
         </MainContainer>
     </>
 }
 
-export default LoginComponent;
+export default RegistrationComponent;

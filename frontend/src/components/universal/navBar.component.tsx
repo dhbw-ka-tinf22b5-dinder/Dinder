@@ -1,10 +1,17 @@
-import {Logo} from "../../styles/universal.styles";
-import {Outlet} from "react-router-dom";
+import {Header,Logo,Nav} from "../../styles/universal.styles";
+import {Outlet, useNavigate} from "react-router-dom";
 
 const NavBarComponent = () => {
+    const navigate = useNavigate();
 
+    const nav = () => {
+        navigate("/")
+    }
     return <>
-        <Logo>DINDER</Logo>
+        <Nav >
+            <Logo src={"./react.svg"} onClick={()=>nav()} />
+            <Header onClick={()=>nav()}>DINDER</Header>
+        </Nav>
         <Outlet />
     </>
 }
