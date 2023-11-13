@@ -1,10 +1,10 @@
 import {InputStyles} from "../../styles/input.styles";
 
-export const Input=({ id,type})=> {
+export const Input=({ type,name})=> {
     return (
         <InputStyles
-            id={id}
             type={type}
+            name={name}
         >
         </InputStyles>
     );

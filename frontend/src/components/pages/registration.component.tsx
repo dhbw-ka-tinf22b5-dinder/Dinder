@@ -1,24 +1,59 @@
-import {MainBackgroundImg, MainContainer} from "../../styles/mainPage.styles";
-import {Button} from "../atoms/Button.component";
-import {APP_ROUTES} from "../../routes/routes";
-import {useNavigate} from "react-router-dom";
+import {MainBackgroundImg} from "../../styles/mainPage.styles";
+import {ButtonSubmit} from "../atoms/Button.component";
 import {Input} from "../atoms/Input.component";
+/*import {APP_ROUTES} from "../../routes/routes";
+import {useNavigate} from "react-router-dom";
+import {useContext} from "react";
+import {HttpContext} from "../../App";*/
+import {MessageStyles} from "../../styles/Message.styles";
+import  {useState} from "react";
+import {Form} from "../atoms/Form.component";
+
+// eslint-disable-next-line react-hooks/rules-of-hooks
 
 const RegistrationComponent = ()=> {
+    /*
+    const register = useContext(HttpContext);
     const navigate = useNavigate();
-
     const nav = (s: string) => {
         navigate("/"+s)
+    }*/
+    const [state,setState]=useState({
+    isError:true,
+    isHidden:true,
+    message:"test"
+})
+const register=(e)=>{
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    if (formData.get("pwd")==formData.get("CtrlPwd")){
+    setState({
+        isError: false,
+        isHidden: false,
+        message: "erlaubt"
+    })}
+    else{
+     setState({
+        isError: true,
+        isHidden: false,
+        message: "Passwörter stimmen nicht überein"
+    })
     }
-    return<>
+
+}
+
+    return <>
         <MainBackgroundImg src={"./pictures/startBackground.png"}/>
-        <MainContainer>
-            E-Mail:<Input id={"email"} type={"text"}/>
-            Password:<Input id={"password"} type={"password"}/>
-            Password:<Input id={"password"} type={"password"}/>
-            <Button span={2} click={() => nav(APP_ROUTES.login)} text={"Register"} />
-        </MainContainer>
+        <MessageStyles $isError ={state.isError} $isHidden={state.isHidden}>{state.message}</MessageStyles>
+        <Form method="post" submit={register}>
+            E-Mail:<Input type={"text"} name={"email"}/>
+            Password:<Input  type={"password"} name={"pwd"}/>
+            Password:<Input  type={"password"} name={"CtrlPwd"}/>
+            <ButtonSubmit span={2}>Registrieren </ButtonSubmit>
+        </Form>
     </>
 }
+
 
 export default RegistrationComponent;
