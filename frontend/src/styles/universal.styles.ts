@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 export const Logo = styled.img`
   position: relative;
+  height: 100%;
+  margin: 10px;
 `
 export const Header = styled.header`
   position: relative;
@@ -14,9 +16,12 @@ export const Nav= styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 5%;
+  height: 6%;
   z-index: 1000;
   //background: red;
   display: flex;
+  padding: 19px;
+  background: gray;
+  opacity: 70%;
   align-items: center;
 `

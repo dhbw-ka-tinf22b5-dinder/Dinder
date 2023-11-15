@@ -9,7 +9,7 @@ const NavBarComponent = () => {
     }
     return <>
         <Nav >
-            <Logo src={"./react.svg"} onClick={()=>nav()} />
+            <Logo src={"./pictures/tools.png"} onClick={()=>nav()} />
             <Header onClick={()=>nav()}>DINDER</Header>
         </Nav>
         <Outlet />
