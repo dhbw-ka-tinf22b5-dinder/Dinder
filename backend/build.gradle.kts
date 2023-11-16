@@ -14,6 +14,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains:annotations:24.0.0")
     implementation("org.projectlombok:lombok:1.18.28")
     implementation("org.springframework:spring-web:6.0.6")
     implementation("org.springframework.boot:spring-boot-starter:3.0.4")
@@ -24,6 +25,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.0.4")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc:3.0.4")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.4")
+    implementation("org.postgresql:postgresql:42.6.0")
+    implementation("org.flywaydb:flyway-database-postgresql:10.0.1")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-gson:0.11.5")
+    implementation("com.google.code.gson:gson:2.10.1")
 
     annotationProcessor("org.projectlombok:lombok:1.18.28")
 
