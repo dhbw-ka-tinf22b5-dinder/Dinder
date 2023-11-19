@@ -1,5 +1,5 @@
 
-type User = {
-    mail: string,
-    password: string,
+export interface User{
+    id: any,
+    name: string
 }
