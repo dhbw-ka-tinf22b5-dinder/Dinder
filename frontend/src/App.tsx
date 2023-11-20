@@ -9,13 +9,11 @@ import {createContext} from "react";
 import HttpClient from "./clients/http-client";
 
 export const HttpContext= createContext(null)
-import {store} from "./redux/store"
 import {Provider} from "react-redux";
 
 function App() {
 
     return (
-        <Provider store={store}>
         <HttpContext.Provider value={new HttpClient()}>
         <Routes>
             <Route path={APP_ROUTES.home} element={<NavBarComponent/>}>
@@ -26,7 +24,6 @@ function App() {
             </Route>
         </Routes>
     </HttpContext.Provider>
-        </Provider>
     )
 }
 
