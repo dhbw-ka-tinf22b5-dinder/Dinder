@@ -23,7 +23,7 @@ CREATE TABLE advertisement
 
 CREATE TABLE chat
 (
-    id INT NOT NULL PRIMARY KEY,
+    id SERIAL NOT NULL PRIMARY KEY,
     advertisement_id INT          NOT NULL REFERENCES advertisement (advertisement_id) ON DELETE CASCADE ON UPDATE CASCADE,
     contractor_email VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE,
     UNIQUE(advertisement_id, contractor_email)
@@ -31,7 +31,7 @@ CREATE TABLE chat
 
 CREATE TABLE chat_messages
 (
-    message_id   INT          NOT NULL PRIMARY KEY,
+    message_id   SERIAL          NOT NULL PRIMARY KEY,
     message      VARCHAR(255) NULL,
     date_time    timestamp    NOT NULL,
     sender_email VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE

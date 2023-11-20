@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Backend" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-    <module name="Dinder.backend.main" />
+    <module name="de.dhbw.tinf22b5.Dinder.backend.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="de.dhbw.tinf22b5.dinder.DinderApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
