@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/Dinder.backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/Dinder.backend.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/Dinder.backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/Dinder.backend.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/backend/de.dhbw.tinf22b5.Dinder.backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/backend/de.dhbw.tinf22b5.Dinder.backend.main.iml" />
     </modules>
   </component>
 </project>

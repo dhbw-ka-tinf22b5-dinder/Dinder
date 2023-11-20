@@ -4,14 +4,14 @@ SET search_path TO dinder;
 CREATE TABLE users
 (
     email     VARCHAR(255) NOT NULL PRIMARY KEY,
-    user_name VARCHAR(255) NULL,
-    pwd_hash  VARCHAR(255) NULL
+    user_name VARCHAR(255) NOT NULL,
+    pwd_hash  VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE advertisement
 (
     advertisement_id SERIAL             NOT NULL PRIMARY KEY,
-    title            VARCHAR(255)       NULL,
+    title            VARCHAR(255)       NOT NULL,
     price            float8             NOT NULL,
     location         VARCHAR(255)       NULL,
     postal_code      INT                NOT NULL,
@@ -33,13 +33,13 @@ CREATE TABLE chat_messages
 (
     message_id   INT          NOT NULL PRIMARY KEY,
     message      VARCHAR(255) NULL,
-    date_time    timestamp    NULL,
+    date_time    timestamp    NOT NULL,
     sender_email VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE swipe_information
 (
-    swipe_time       timestamp    NULL,
+    swipe_time       timestamp    NOT NULL,
     users_email       VARCHAR(255) NOT NULL REFERENCES users (email),
     advertisement_id INT          NOT NULL REFERENCES advertisement (advertisement_id),
     PRIMARY KEY (users_email, advertisement_id)
