@@ -21,6 +21,7 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final SecurityService securityService;
+
     private final Map<String, String> users = Map.of("admin", "admin", "user", "password");
 
     public boolean login(LoginModel model) {
