@@ -19,8 +19,8 @@ public class Advertisement {
     @Column(name = "postal_code")
     private int plz;
     private String description;
-    @Column(length = 16384)
-    private String image;
+    @Column(length = 255)
+    private String imagePath;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

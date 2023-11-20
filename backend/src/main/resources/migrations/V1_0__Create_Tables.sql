@@ -16,7 +16,7 @@ CREATE TABLE advertisement
     location         VARCHAR(255)       NULL,
     postal_code      INT                NOT NULL,
     description      VARCHAR(255)       NULL,
-    image            VARCHAR(16384)     NULL,
+    image            VARCHAR(255)     NULL,
     creator_email    VARCHAR(255)       NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE,
     creation_time    timestamp          NULL
 );
