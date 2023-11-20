@@ -40,7 +40,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("de.dhbw.tinf22b5.dinder.App")
+    mainClass.set("de.dhbw.tinf22b5.dinder.DinderApplication")
 }
 
 java {
