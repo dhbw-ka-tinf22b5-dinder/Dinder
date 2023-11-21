@@ -1,7 +1,6 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
 
 import java.time.Instant;
 
@@ -15,7 +14,7 @@ public class SwipeInformation {
     @MapsId("userEmail")
     @ManyToOne
     @JoinColumn(name = "user_email", referencedColumnName = "email")
-    private User user;
+    private Users user;
 
     @MapsId("advertisementId")
     @ManyToOne
@@ -23,4 +22,28 @@ public class SwipeInformation {
     private Advertisement advertisement;
 
     private Instant swipeTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "advertisementid")
+    private Advertisement advertisementid;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contractoremail")
+    private Users contractoremail;
+
+    public Users getContractoremail() {
+        return contractoremail;
+    }
+
+    public void setContractoremail(Users contractoremail) {
+        this.contractoremail = contractoremail;
+    }
+
+    public Advertisement getAdvertisementid() {
+        return advertisementid;
+    }
+
+    public void setAdvertisementid(Advertisement advertisementid) {
+        this.advertisementid = advertisementid;
+    }
 }

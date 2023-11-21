@@ -2,6 +2,7 @@ package de.dhbw.tinf22b5.dinder.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,11 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity(name = "users")
 @Table(name = "users")
 @Getter
-public class User implements UserDetails {
+public class Users implements UserDetails {
     @Id
     private String email;
     private String userName;

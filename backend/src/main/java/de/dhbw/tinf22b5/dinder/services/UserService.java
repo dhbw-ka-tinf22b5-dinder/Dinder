@@ -1,6 +1,6 @@
 package de.dhbw.tinf22b5.dinder.services;
 
-import de.dhbw.tinf22b5.dinder.entities.User;
+import de.dhbw.tinf22b5.dinder.entities.Users;
 import de.dhbw.tinf22b5.dinder.models.LoginModel;
 import de.dhbw.tinf22b5.dinder.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
 
     public boolean login(LoginModel model) {
         return userRepository.findById(model.loginName())
-                .map(User::getPwdHash)
+                .map(Users::getPwdHash)
                 .filter(value -> passwordEncoder.matches(model.password(), value))
                 .isPresent();
     }
