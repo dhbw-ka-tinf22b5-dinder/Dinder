@@ -32,7 +32,7 @@ CREATE TABLE swipe_information
     UNIQUE (contractorEmail,advertisementId)
 );
 
-CREATE TABLE chat_message
+CREATE TABLE chat_messages
 (
     messageId   SERIAL       NOT NULL PRIMARY KEY,
     message     VARCHAR(255) NULL,

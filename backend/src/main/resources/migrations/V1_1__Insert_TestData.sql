@@ -13,7 +13,7 @@ INSERT INTO swipe_information(swipeTime, contractorEmail, advertisementId)
 VALUES('2023-11-13 08:09:10', 'test@yahoo.de', 2),
       ('2023-11-12 08:09:11', 'user123@user.de', 2);
 
-INSERT INTO chat_message(message, dateTime, swipeId, senderEmail)
+INSERT INTO chat_messages(message, dateTime, swipeId, senderEmail)
 VALUES ('Hi', '2023-11-12 08:09:11', 1, 'test@yahoo.de'),
        ('Moin', '2023-11-12 08:09:15', 2, 'mustermann@max.de'),
        ('Servus', '2023-11-12 08:09:17', 1, 'user123@user.de');
