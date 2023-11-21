@@ -10,6 +10,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 @EntityScan("de.dhbw.tinf22b5.dinder.")
 public class DinderApplication {
     public static void main(String[] args) {
+        if (System.getProperty("os.name").toLowerCase().contains("nix") || System.getProperty("os.name").toLowerCase().contains("nux")) {
+            System.err.println("Nein Jannis nein.");
+            System.exit(-1);
+        }
         SpringApplication.run(DinderApplication.class, args);
     }
 }

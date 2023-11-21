@@ -48,6 +48,7 @@ const register=(e)=>{
         <MessageStyles $isError ={state.isError} $isHidden={state.isHidden}>{state.message}</MessageStyles>
         <Form method="post" submit={register}>
             E-Mail:<Input type={"text"} name={"email"}/>
+            Username:<Input type={"text"} name={"username"}/>
             Password:<Input  type={"password"} name={"pwd"}/>
             Password:<Input  type={"password"} name={"CtrlPwd"}/>
             <ButtonSubmit span={2}>Registrieren </ButtonSubmit>

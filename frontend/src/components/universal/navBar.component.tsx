@@ -1,6 +1,6 @@
-import {Header,Logo,Nav} from "../../styles/universal.styles";
+import {Header,Nav} from "../../styles/universal.styles";
 import {Outlet, useNavigate} from "react-router-dom";
-
+import HandymanIcon from '@mui/icons-material/Handyman';
 const NavBarComponent = () => {
     const navigate = useNavigate();
 
@@ -9,7 +9,7 @@ const NavBarComponent = () => {
     }
     return <>
         <Nav >
-            <Logo src={"./pictures/tools.png"} onClick={()=>nav()} />
+            <HandymanIcon fontSize={"large"} onClick={()=>nav()}/>
             <Header onClick={()=>nav()}>DINDER</Header>
         </Nav>
         <Outlet />

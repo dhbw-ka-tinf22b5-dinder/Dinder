@@ -9,6 +9,8 @@ import {createContext} from "react";
 import HttpClient from "./clients/http-client";
 
 export const HttpContext= createContext(null)
+import {Provider} from "react-redux";
+
 function App() {
 
     return (

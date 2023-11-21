@@ -8,7 +8,7 @@ export const Logo = styled.img`
 `
 export const Header = styled.header`
   position: relative;
-  color: #535bf2;
+  color: white;
   font-size: 2rem;
 `
 export const Nav= styled.div`
