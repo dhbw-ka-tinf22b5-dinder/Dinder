@@ -11,14 +11,14 @@ public class SwipeInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int swipeId;
 
-    @MapsId("userEmail")
+
     @ManyToOne
-    @JoinColumn(name = "user_email", referencedColumnName = "email")
+    @JoinColumn(name = "user_email")
     private Users user;
 
-    @MapsId("advertisementId")
+
     @ManyToOne
-    @JoinColumn(name = "advertisement_id", referencedColumnName = "advertisement_id")
+    @JoinColumn(name = "advertisement_id")
     private Advertisement advertisement;
 
     private Instant swipeTime;
