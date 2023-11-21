@@ -25,7 +25,19 @@ public class Advertisement {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
-    private User creator;
+    private User advertiser;
+
+    @ManyToOne
+    @JoinColumn(name = "contractor_email")
+    private User contractor;
 
     private Instant creationTime;
+
+    public User getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(User contractor) {
+        this.contractor = contractor;
+    }
 }

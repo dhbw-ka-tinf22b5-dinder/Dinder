@@ -1,14 +1,16 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Primary;
 
 import java.time.Instant;
 
 @Entity
 @Table
 public class SwipeInformation {
-    @EmbeddedId
-    private SwipeInformationId swipeInformationId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int swipeId;
 
     @MapsId("userEmail")
     @ManyToOne

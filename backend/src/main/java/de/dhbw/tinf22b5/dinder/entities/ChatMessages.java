@@ -15,6 +15,8 @@ public class ChatMessages {
 
     private String message;
     private Instant dateTime;
+
+    private int SwipeInfomation;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
