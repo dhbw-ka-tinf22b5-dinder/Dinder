@@ -1,10 +1,9 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +15,8 @@ import java.util.Set;
 @Entity(name = "users")
 @Table(name = "users")
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Users implements UserDetails {
     @Id
     private String email;

@@ -2,8 +2,11 @@ package de.dhbw.tinf22b5.dinder.services;
 
 import de.dhbw.tinf22b5.dinder.entities.Users;
 import de.dhbw.tinf22b5.dinder.models.LoginModel;
+import de.dhbw.tinf22b5.dinder.models.RegisterModel;
 import de.dhbw.tinf22b5.dinder.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -23,10 +27,24 @@ public class UserService implements UserDetailsService {
     private final SecurityService securityService;
 
     public boolean login(LoginModel model) {
+        if(model.isValid())
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+
         return userRepository.findById(model.loginName())
                 .map(Users::getPwdHash)
                 .filter(value -> passwordEncoder.matches(model.password(), value))
                 .isPresent();
+    }
+
+    public boolean register(RegisterModel registerModel) {
+        if(registerModel.isValid())
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+
+        if(userRepository.findById(registerModel.email()).isPresent())
+            throw new HttpClientErrorException(HttpStatus.CONFLICT);
+
+        userRepository.save(new Users(registerModel.email(), registerModel.userName(), passwordEncoder.encode(registerModel.password())));
+        return true;
     }
 
     @Transactional
