@@ -34,6 +34,7 @@ CREATE TABLE chat_messages
     message_id   SERIAL          NOT NULL PRIMARY KEY,
     message      VARCHAR(255) NULL,
     date_time    timestamp    NOT NULL,
+    chatID       INT          NOT NULL REFERENCES chat (id) ON DELETE CASCADE  ON UPDATE CASCADE,
     sender_email VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
