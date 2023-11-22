@@ -1,6 +1,6 @@
 SET search_path TO dinder;
 
-INSERT INTO users(email, userName, pwdHash)
+INSERT INTO users(email, user_name, pwd_hash)
 VALUES('test@yahoo.de', 'userTest', '$2y$10$8wR8gYNArMJnPcVYXSAXAeUqMsh.tWe/nUFsgQ16ULrpka2urp45q'), --1234
       ('mustermann@max.de', 'maxMustermann', '$2y$10$ehTN4SlDUf6DPfVV7sFum.S.ubODwY1B47aRgyFm5GtKZerbFnApq'), --MAX
       ('user123@user.de', 'user123', '$2y$10$PDrtl0YGLHIkR91Pn8kJSutIDFr.5oiN5bOtvSQsZoLdxuQRqSbDe'); --user123

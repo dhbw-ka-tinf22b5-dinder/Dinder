@@ -1,6 +1,8 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Entity(name = "users")
-@Table(name = "users")
+@Table(name = "users", schema = "dinder")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

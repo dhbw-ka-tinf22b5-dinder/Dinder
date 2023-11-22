@@ -4,9 +4,9 @@ SET search_path TO dinder;
 CREATE TABLE users
 (
     email    VARCHAR(255) NOT NULL PRIMARY KEY,
-    userName VARCHAR(255) NOT NULL,
-    pwdHash  VARCHAR(255) NOT NULL,
-    UNIQUE (userName)
+    user_name VARCHAR(255) NOT NULL,
+    pwd_hash  VARCHAR(255) NOT NULL,
+    UNIQUE (user_name)
 );
 
 CREATE TABLE advertisement
