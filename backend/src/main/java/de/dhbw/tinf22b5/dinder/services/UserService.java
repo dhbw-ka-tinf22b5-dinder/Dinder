@@ -6,7 +6,6 @@ import de.dhbw.tinf22b5.dinder.models.RegisterModel;
 import de.dhbw.tinf22b5.dinder.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +26,7 @@ public class UserService implements UserDetailsService {
     private final SecurityService securityService;
 
     public boolean login(LoginModel model) {
-        if(model.isValid())
+        if(model.isInvalid())
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 
         return userRepository.findById(model.loginName())
@@ -37,7 +36,7 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean register(RegisterModel registerModel) {
-        if(registerModel.isValid())
+        if(registerModel.isInvalid())
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
 
         if(userRepository.findById(registerModel.email()).isPresent())
