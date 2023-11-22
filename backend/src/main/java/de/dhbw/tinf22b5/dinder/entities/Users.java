@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Entity(name = "users")
-@Table(name = "users", schema = "dinder")
+@Table(name = "users")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
