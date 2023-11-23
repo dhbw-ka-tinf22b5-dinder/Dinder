@@ -36,7 +36,7 @@ public class Advertisement {
     private Instant creationTime;
 
 
-    @OneToMany(mappedBy = "advertisementid")
+    @OneToMany(mappedBy = "advertisementId")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
 
     public Set<SwipeInformation> getSwipeInformations() {

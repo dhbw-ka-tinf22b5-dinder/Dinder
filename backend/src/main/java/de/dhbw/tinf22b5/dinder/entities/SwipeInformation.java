@@ -11,39 +11,29 @@ public class SwipeInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int swipeId;
 
-
-    @ManyToOne
-    @JoinColumn(name = "user_email")
-    private Users user;
-
-
-    @ManyToOne
-    @JoinColumn(name = "advertisement_id")
-    private Advertisement advertisement;
-
     private Instant swipeTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "advertisementid")
-    private Advertisement advertisementid;
+    @JoinColumn(name = "advertisement_id")
+    private Advertisement advertisementId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contractoremail")
-    private Users contractoremail;
+    @JoinColumn(name = "contractor_email")
+    private Users contractorEmail;
 
     public Users getContractoremail() {
-        return contractoremail;
+        return contractorEmail;
     }
 
     public void setContractoremail(Users contractoremail) {
-        this.contractoremail = contractoremail;
+        this.contractorEmail = contractoremail;
     }
 
     public Advertisement getAdvertisementid() {
-        return advertisementid;
+        return advertisementId;
     }
 
     public void setAdvertisementid(Advertisement advertisementid) {
-        this.advertisementid = advertisementid;
+        this.advertisementId = advertisementid;
     }
 }

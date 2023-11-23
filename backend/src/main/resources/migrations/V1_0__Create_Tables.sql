@@ -11,33 +11,33 @@ CREATE TABLE users
 
 CREATE TABLE advertisement
 (
-    advertisementId SERIAL       NOT NULL PRIMARY KEY,
-    title           VARCHAR(255) NOT NULL,
-    price           float8       NOT NULL,
-    location        VARCHAR(255) NULL,
-    postalCode      INT          NOT NULL,
-    description     VARCHAR(255) NULL,
-    image           VARCHAR(255) NULL,
-    advertiser      VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE,
-    contractor      VARCHAR(255) NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE,
-    creationTime    timestamp    NULL
+    advertisement_id SERIAL       NOT NULL PRIMARY KEY,
+    title            VARCHAR(255) NOT NULL,
+    price            float8       NOT NULL,
+    location         VARCHAR(255) NULL,
+    postal_code       INT          NOT NULL,
+    description      VARCHAR(255) NULL,
+    image            VARCHAR(255) NULL,
+    advertiser       VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE,
+    contractor       VARCHAR(255) NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE,
+    creation_time     timestamp    NULL
 );
 
 CREATE TABLE swipe_information
 (
-    swipeId         SERIAL       NOT NULL PRIMARY KEY,
-    swipeTime       timestamp    NOT NULL,
-    contractorEmail VARCHAR(255) NOT NULL REFERENCES users (email),
-    advertisementId INT          NOT NULL REFERENCES advertisement (advertisementId),
-    UNIQUE (contractorEmail,advertisementId)
+    swipe_id         SERIAL       NOT NULL PRIMARY KEY,
+    swipe_time       timestamp    NOT NULL,
+    contractor_email VARCHAR(255) NOT NULL REFERENCES users (email),
+    advertisement_id INT          NOT NULL REFERENCES advertisement (advertisement_id),
+    UNIQUE (contractor_email,advertisement_id)
 );
 
 CREATE TABLE chat_messages
 (
-    messageId   SERIAL       NOT NULL PRIMARY KEY,
-    message     VARCHAR(255) NULL,
-    dateTime    timestamp    NOT NULL,
-    swipeId     INT          NOT NULL REFERENCES swipe_information (swipeId) ON DELETE CASCADE  ON UPDATE CASCADE,
-    senderEmail VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE
+    message_id   SERIAL       NOT NULL PRIMARY KEY,
+    message      VARCHAR(255) NULL,
+    date_time    timestamp    NOT NULL,
+    swipe_id     INT          NOT NULL REFERENCES swipe_information (swipe_id) ON DELETE CASCADE  ON UPDATE CASCADE,
+    sender_email VARCHAR(255) NOT NULL REFERENCES users (email) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

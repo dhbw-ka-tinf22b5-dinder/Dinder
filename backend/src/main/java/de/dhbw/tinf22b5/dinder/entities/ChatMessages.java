@@ -16,28 +16,22 @@ public class ChatMessages {
     private String message;
     private Instant dateTime;
 
-    private int SwipeInfomation;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(nullable = false)
-    private Users sender;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "swipeid", nullable = false)
+    @JoinColumn(name = "swipe_id", nullable = false)
     private SwipeInformation swipeid;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "senderemail", nullable = false)
-    private Users senderemail;
+    @JoinColumn(name = "sender_email", nullable = false)
+    private Users senderEmail;
 
     public Users getSenderemail() {
-        return senderemail;
+        return senderEmail;
     }
 
     public void setSenderemail(Users senderemail) {
-        this.senderemail = senderemail;
+        this.senderEmail = senderemail;
     }
 
     public SwipeInformation getSwipeid() {
