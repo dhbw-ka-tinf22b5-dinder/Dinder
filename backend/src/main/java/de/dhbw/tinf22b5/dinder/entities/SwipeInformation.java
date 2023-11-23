@@ -1,11 +1,15 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class SwipeInformation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,20 +24,4 @@ public class SwipeInformation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contractor_email")
     private Users contractorEmail;
-
-    public Users getContractoremail() {
-        return contractorEmail;
-    }
-
-    public void setContractoremail(Users contractoremail) {
-        this.contractorEmail = contractoremail;
-    }
-
-    public Advertisement getAdvertisementid() {
-        return advertisementId;
-    }
-
-    public void setAdvertisementid(Advertisement advertisementid) {
-        this.advertisementId = advertisementid;
-    }
 }

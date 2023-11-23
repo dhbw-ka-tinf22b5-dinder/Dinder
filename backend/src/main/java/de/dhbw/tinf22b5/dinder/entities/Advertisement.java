@@ -1,6 +1,8 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -10,6 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,23 +39,6 @@ public class Advertisement {
 
     private Instant creationTime;
 
-
     @OneToMany(mappedBy = "advertisementId")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
-
-    public Set<SwipeInformation> getSwipeInformations() {
-        return swipeInformations;
-    }
-
-    public void setSwipeInformations(Set<SwipeInformation> swipeInformations) {
-        this.swipeInformations = swipeInformations;
-    }
-
-    public Users getContractor() {
-        return contractor;
-    }
-
-    public void setContractor(Users contractor) {
-        this.contractor = contractor;
-    }
 }
