@@ -32,6 +32,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-gson:0.11.5")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
 
     annotationProcessor("org.projectlombok:lombok:1.18.28")
 
