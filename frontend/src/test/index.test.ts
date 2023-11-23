@@ -1,15 +1,19 @@
-import {login,sum} from "../clients/http-client"
+import {login} from "../clients/http-client"
 import {describe, expect, it} from "vitest";
+import {UserLogin} from "../types/general.types";
 
-const testUser ={
-    email: "test@test.de",
-    pwd: "testPassword"
+const testUser:UserLogin={
+    loginName: "asdfas",
+    password: "1234"
 }
 describe("http-client", () => {
-    it("sum",()=>{
-        expect(sum(1,2)).toBe(3);
+    it("login",()=> {
+        console.log("test");
+        let result: Promise<boolean> = login(testUser);
+        result.then((value: boolean) => {
+            console.log(value);
+            expect(value).toBe(false);
+        });
+        console.log("test1");
     });
-    it("login",()=>{
-        expect(login()).toStrictEqual(testUser);
-    })
 });
