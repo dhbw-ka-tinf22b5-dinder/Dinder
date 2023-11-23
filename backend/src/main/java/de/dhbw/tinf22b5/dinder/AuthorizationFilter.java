@@ -24,18 +24,20 @@ public class AuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
-        Arrays.stream(request.getCookies())
-                .flatMap(cookie -> Optional.ofNullable(cookie.getAttribute("session-id")).stream())
-                .findFirst()
-                .ifPresent(sessionId -> {
-                    try {
-                        userService.validate(sessionId)
-                                .ifPresent(token -> SecurityContextHolder.getContext().setAuthentication(token));
-                    }
-                    catch (HttpClientErrorException httpClientErrorException) {
-                        response.setStatus(httpClientErrorException.getStatusCode().value());
-                    }
-                });
+        if(request.getCookies() != null) {
+            Arrays.stream(request.getCookies())
+                    .flatMap(cookie -> Optional.ofNullable(cookie.getAttribute("session-id")).stream())
+                    .findFirst()
+                    .ifPresent(sessionId -> {
+                        try {
+                            userService.validate(sessionId)
+                                    .ifPresent(token -> SecurityContextHolder.getContext().setAuthentication(token));
+                        }
+                        catch (HttpClientErrorException httpClientErrorException) {
+                            response.setStatus(httpClientErrorException.getStatusCode().value());
+                        }
+                    });
+        }
 
         filterChain.doFilter(request, response);
     }

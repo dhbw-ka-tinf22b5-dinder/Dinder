@@ -2,6 +2,7 @@ package de.dhbw.tinf22b5.dinder.controller;
 
 
 import de.dhbw.tinf22b5.dinder.models.LoginModel;
+import de.dhbw.tinf22b5.dinder.models.RegisterModel;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,8 +27,12 @@ public class UserController {
         return userService.login(loginModel);
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "Test";
+    @PostMapping("/register")
+    public boolean register(@RequestBody RegisterModel registerModel, HttpServletResponse response) {
+        Cookie sessionIdCookie = new Cookie("session-id", "nein");
+        sessionIdCookie.setHttpOnly(true);
+        response.addCookie(sessionIdCookie);
+
+        return userService.register(registerModel);
     }
 }
