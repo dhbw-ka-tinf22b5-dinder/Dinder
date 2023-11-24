@@ -1,6 +1,8 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -8,6 +10,8 @@ import java.time.Instant;
 
 @Entity
 @Table
+@Getter
+@Setter
 public class ChatMessages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,35 +20,13 @@ public class ChatMessages {
     private String message;
     private Instant dateTime;
 
-    private int SwipeInfomation;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(nullable = false)
-    private Users sender;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "swipeid", nullable = false)
-    private SwipeInformation swipeid;
+    @JoinColumn(name = "swipe_id", nullable = false)
+    private SwipeInformation swipeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "senderemail", nullable = false)
-    private Users senderemail;
-
-    public Users getSenderemail() {
-        return senderemail;
-    }
-
-    public void setSenderemail(Users senderemail) {
-        this.senderemail = senderemail;
-    }
-
-    public SwipeInformation getSwipeid() {
-        return swipeid;
-    }
-
-    public void setSwipeid(SwipeInformation swipeid) {
-        this.swipeid = swipeid;
-    }
+    @JoinColumn(name = "sender_email", nullable = false)
+    private Users senderEmail;
 }
