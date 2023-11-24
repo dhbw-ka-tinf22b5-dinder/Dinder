@@ -1,19 +1,27 @@
-import {login} from "../clients/http-client"
+import {login,register} from "../clients/http-client"
 import {describe, expect, it} from "vitest";
-import {UserLogin} from "../types/general.types";
+import {UserLogin,UserRegister} from "../types/general.types";
 
 const testUser:UserLogin={
-    loginName: "asdfas",
+    loginName: "fasdfas",
     password: "1234"
+}
+const testUser2:UserRegister={
+    email:"test1@test.de",
+    userName:"testt",
+    password:"1234"
 }
 describe("http-client", () => {
     it("login",()=> {
-        console.log("test");
-        let result: Promise<boolean> = login(testUser);
-        result.then((value: boolean) => {
+        return login(testUser).then((value: Response) => {
             console.log(value);
-            expect(value).toBe(false);
+            expect(value).toBe(200);
         });
-        console.log("test1");
+    });
+    it("register",()=> {
+        return register(testUser2).then((value: Response) => {
+            console.log(value);
+            expect(value).toBe(409)
+        });
     });
 });
