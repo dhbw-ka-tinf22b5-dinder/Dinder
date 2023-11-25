@@ -18,7 +18,6 @@ export const Nav= styled.div`
   width: 100%;
   height: 6%;
   z-index: 1000;
-  //background: red;
   display: flex;
   padding: 19px;
   background: gray;

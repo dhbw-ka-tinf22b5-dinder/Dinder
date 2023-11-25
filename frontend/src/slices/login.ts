@@ -2,7 +2,7 @@ import {PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {User,Error} from "../types/general.types";
 
 const initialState :User= {
-    userName: "test1",
+    userName: "",
 };
 export const loginSlice = createSlice({
     name: "login",
