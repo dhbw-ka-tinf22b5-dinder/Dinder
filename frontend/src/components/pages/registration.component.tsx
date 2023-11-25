@@ -8,44 +8,27 @@ import {HttpContext} from "../../App";*/
 import {MessageStyles} from "../../styles/Message.styles";
 import  {useState} from "react";
 import {Form} from "../atoms/Form.component";
+import {Error} from "../../types/general.types";
+import { useAppSelector } from "../../app/hooks";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 const RegistrationComponent = ()=> {
+    const valueError: Error = useAppSelector((state) => state.error);
     /*
     const register = useContext(HttpContext);
     const navigate = useNavigate();
     const nav = (s: string) => {
         navigate("/"+s)
     }*/
-    const [state,setState]=useState({
-    isError:true,
-    isHidden:true,
-    message:"test"
-})
 const register=(e)=>{
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    if (formData.get("pwd")==formData.get("CtrlPwd")){
-    setState({
-        isError: false,
-        isHidden: false,
-        message: "erlaubt"
-    })}
-    else{
-     setState({
-        isError: true,
-        isHidden: false,
-        message: "Passwörter stimmen nicht überein"
-    })
     }
-
-}
-
     return <>
         <MainBackgroundImg src={"./pictures/startBackground.png"}/>
-        <MessageStyles $isError ={state.isError} $isHidden={state.isHidden}>{state.message}</MessageStyles>
+        <MessageStyles $isError ={valueError.error} $isHidden={!valueError.error}>{valueError.errorMessage}</MessageStyles>
         <Form method="post" submit={register}>
             E-Mail:<Input type={"text"} name={"email"}/>
             Username:<Input type={"text"} name={"username"}/>
@@ -58,3 +41,4 @@ const register=(e)=>{
 
 
 export default RegistrationComponent;
+
