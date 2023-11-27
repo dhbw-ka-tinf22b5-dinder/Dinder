@@ -1,8 +1,8 @@
 package de.dhbw.tinf22b5.dinder.controller;
 
 
-import de.dhbw.tinf22b5.dinder.models.LoginModel;
-import de.dhbw.tinf22b5.dinder.models.RegisterModel;
+import de.dhbw.tinf22b5.dinder.models.request.LoginModel;
+import de.dhbw.tinf22b5.dinder.models.request.RegisterModel;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;

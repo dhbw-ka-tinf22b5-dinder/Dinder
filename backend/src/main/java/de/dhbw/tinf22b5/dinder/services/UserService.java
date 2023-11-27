@@ -1,8 +1,8 @@
 package de.dhbw.tinf22b5.dinder.services;
 
 import de.dhbw.tinf22b5.dinder.entities.Users;
-import de.dhbw.tinf22b5.dinder.models.LoginModel;
-import de.dhbw.tinf22b5.dinder.models.RegisterModel;
+import de.dhbw.tinf22b5.dinder.models.request.LoginModel;
+import de.dhbw.tinf22b5.dinder.models.request.RegisterModel;
 import de.dhbw.tinf22b5.dinder.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
