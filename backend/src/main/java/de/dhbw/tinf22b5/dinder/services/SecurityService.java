@@ -23,18 +23,20 @@ public class SecurityService {
         return new BCryptPasswordEncoder();
     }
 
+    public String getEmail(String token) {
+        return Jwts.parserBuilder()
+                //.setSigningKey(privateKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
+    }
+
     public Optional<UsernamePasswordAuthenticationToken> validate(String token, AuthorityFactory authorityFactory) {
         try {
-            String subject = Jwts.parserBuilder()
-                    //.setSigningKey(privateKey)
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
+            String email = getEmail(token);
 
-            long userId = Long.parseLong(subject);
-
-            return Optional.of(new UsernamePasswordAuthenticationToken(userId, null, authorityFactory.get(userId)));
+            return Optional.of(new UsernamePasswordAuthenticationToken(email, null, authorityFactory.get(email)));
         }
         catch (ExpiredJwtException expiredJwtException) {
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
