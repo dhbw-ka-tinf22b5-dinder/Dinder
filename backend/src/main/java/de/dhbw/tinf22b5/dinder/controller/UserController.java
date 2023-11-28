@@ -10,15 +10,22 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/v1")
 @AllArgsConstructor
 @Tag(name = "User-Controller", description = "Manages the access to the application and provides information about " +
         "users.")
 public class UserController {
 
     private UserService userService;
+
+    @PostMapping("/test/hello")
+    public String test() {
+        return "Hello mate!";
+    }
 
     @PostMapping("/login")
     public boolean login(@RequestBody LoginModel loginModel, HttpServletResponse response) {
