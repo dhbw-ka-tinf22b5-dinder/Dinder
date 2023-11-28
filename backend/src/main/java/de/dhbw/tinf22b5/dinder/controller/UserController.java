@@ -19,13 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "User-Controller", description = "Manages the access to the application and provides information about " +
         "users.")
 public class UserController {
-
     private UserService userService;
-
-    @PostMapping("/test/hello")
-    public String test() {
-        return "Hello mate!";
-    }
 
     @PostMapping("/login")
     public boolean login(@RequestBody LoginModel loginModel, HttpServletResponse response) {
