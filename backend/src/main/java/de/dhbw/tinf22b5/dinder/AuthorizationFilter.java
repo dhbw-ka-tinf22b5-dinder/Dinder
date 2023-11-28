@@ -30,7 +30,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                     .findFirst()
                     .ifPresent(sessionId -> {
                         try {
-                            userService.validate(sessionId)
+                            userService.validateToken(sessionId)
                                     .ifPresent(token -> SecurityContextHolder.getContext().setAuthentication(token));
                         }
                         catch (HttpClientErrorException httpClientErrorException) {

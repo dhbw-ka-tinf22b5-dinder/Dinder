@@ -47,7 +47,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public Optional<UsernamePasswordAuthenticationToken> validate(String token) {
+    public Optional<UsernamePasswordAuthenticationToken> validateToken(String token) {
         return securityService.validate(token, id -> new HashSet<>());
     }
 
