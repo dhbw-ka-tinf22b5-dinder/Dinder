@@ -1,0 +1,24 @@
+import styled from "styled-components";
+import {MainContainer} from "./mainPage.styles";
+
+
+export const Card= styled.div`
+  position: relative;
+  margin: auto;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto auto auto;
+  border-radius: 25px;
+  background: white;
+  color: black;
+  padding: 10px;
+  `
+export const Info =styled.div`
+  grid-column: span 3;
+`
+export const AdvertismentImage=styled.img`
+  width: 75%;
+  height: 100%;
+  border-radius: 25px;
+  grid-column: span 3;
+`

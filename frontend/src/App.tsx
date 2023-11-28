@@ -9,6 +9,7 @@ import {createContext} from "react";
 
 export const HttpContext= createContext(null)
 import {Provider} from "react-redux";
+import SwipePage from "./components/pages/SwipePage";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
                 <Route path={APP_ROUTES.login} element={<LoginComponent />} />
                 <Route path={APP_ROUTES.registration} element={<RegistrationComponent/>} />
                 <Route path={APP_ROUTES.error} element={<ErrorComponent />} />
+                <Route path={APP_ROUTES.swipepage} element={<SwipePage/>} />
             </Route>
         </Routes>
     )
