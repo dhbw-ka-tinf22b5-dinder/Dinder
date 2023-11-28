@@ -1,6 +1,8 @@
-// App.js
-import React, { useState } from 'react';
-import './App.css';
+// SwipePage.js
+import { useState } from 'react';
+//import './App.css';
+import {Button} from "../atoms/Button.component"
+import {AdvertismentImage, Card, Info} from "../../styles/swipecard.styles";
 
 const data = [
   {
@@ -33,7 +35,7 @@ const data = [
   },
 ];
 
-function App() {
+function SwipePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   //Next task advertisements
@@ -53,22 +55,25 @@ function App() {
   const currentItem = data[currentIndex];
 
   return (
-      <div className="app">
-        <div className="card">
-          <img src={currentItem.imageUrl} alt={currentItem.name} />
-          <div className="info">
+
+        <Card>
+          <AdvertismentImage src={currentItem.imageUrl} alt={currentItem.name} />
+          <Info>
             <h2>{currentItem.name}</h2>
             <p>{currentItem.date}</p>
             <p>{currentItem.place}</p>
-          </div>
-        </div>
-        <div className="buttons">
-          <button className="prevButton" onClick={handlePrev}>Previous</button>
-          <button className="acceptButton" onClick={handleAccept}>Accept</button>
-          <button className="nextButton" onClick={handleNext}>Next</button>
-        </div>
-      </div>
+          </Info>
+            <Button span={1} click={handlePrev} text={"Previous"}/>
+
+            <Button span={1} click={handleAccept} text={"Accept"}/>
+
+            <Button span={1} click={handleNext} text={"Next"}/>
+
+          </Card>
+
+
+
   );
 }
 
-export default App;
+export default SwipePage;

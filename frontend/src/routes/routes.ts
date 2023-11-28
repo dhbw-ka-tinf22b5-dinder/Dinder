@@ -3,4 +3,5 @@ export const APP_ROUTES = {
     login: "login",
     registration: "registration",
     error: "*",
+    swipepage: "swipepage",
 }

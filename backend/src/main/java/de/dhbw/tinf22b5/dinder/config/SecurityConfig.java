@@ -32,10 +32,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/index.html").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api-src").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers(HttpMethod.GET, "/api").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/index.html").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/source").permitAll()
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
                 .build();
