@@ -6,9 +6,7 @@
       <script value="build" />
     </scripts>
     <node-interpreter value="project" />
-    <envs>
-      <env name="BUILD_PATH" value="/../backend/src/main/resources/public" />
-    </envs>
+    <envs />
     <method v="2" />
   </configuration>
 </component>
