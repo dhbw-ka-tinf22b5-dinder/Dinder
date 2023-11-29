@@ -12,7 +12,7 @@ const MainPageComponent = () => {
     }
 
     return <>
-        <MainBackgroundImg src={"./pictures/startBackground.png"} onClick={()=>nav(APP_ROUTES.login)}/>
+        <MainBackgroundImg src={"./pictures/startBackground.png"} />
         <MainContainer $isMain>
             <Button span={1} click={() => nav(APP_ROUTES.login)} text={"Login"} />
             <Button span={1} click={() => nav(APP_ROUTES.registration)} text={"Registrierung"} />
