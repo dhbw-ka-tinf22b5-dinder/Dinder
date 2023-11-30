@@ -26,7 +26,8 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
         if(request.getCookies() != null) {
             Arrays.stream(request.getCookies())
-                    .flatMap(cookie -> Optional.ofNullable(cookie.getAttribute("session-id")).stream())
+                    .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
+                    .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                     .findFirst()
                     .ifPresent(sessionId -> {
                         try {

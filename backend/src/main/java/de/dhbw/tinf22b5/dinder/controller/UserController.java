@@ -31,7 +31,7 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody LoginModel loginModel, HttpServletResponse response) {
-        Cookie sessionIdCookie = new Cookie("session-id", "nein");
+        Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(/*TODO*/ "test@yahoo.de"));
         sessionIdCookie.setHttpOnly(true);
         response.addCookie(sessionIdCookie);
 
@@ -40,7 +40,7 @@ public class UserController {
 
     @PostMapping("/register")
     public boolean register(@RequestBody RegisterModel registerModel, HttpServletResponse response) {
-        Cookie sessionIdCookie = new Cookie("session-id", "nein");
+        Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(/*TODO*/ "test@yahoo.de"));
         sessionIdCookie.setHttpOnly(true);
         response.addCookie(sessionIdCookie);
 
@@ -55,7 +55,8 @@ public class UserController {
     @GetMapping("/user/me")
     public UserInformationModel getMyUserInfo(HttpServletRequest request) {
         String email = Arrays.stream(request.getCookies())
-                .flatMap(cookie -> Optional.ofNullable(cookie.getAttribute("session-id")).stream())
+                .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
+                .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                 .map(s -> securityService.getEmail(s))
                 .findFirst().orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST));
 

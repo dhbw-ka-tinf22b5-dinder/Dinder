@@ -30,8 +30,8 @@ public class SecurityConfig {
                 .addFilterBefore(new AuthorizationFilter(userService), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new StatusCodeFilter(), AuthorizationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/index.html").permitAll()
