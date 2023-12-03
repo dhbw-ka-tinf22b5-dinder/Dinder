@@ -1,27 +1,35 @@
-import {MainBackgroundImg, MainContainer} from "../../styles/mainPage.styles";
-import {Button, ButtonSubmit} from "../atoms/Button.component";
-import {APP_ROUTES} from "../../routes/routes";
+import {MainBackgroundImg} from "../../styles/mainPage.styles";
+import {ButtonSubmit} from "../atoms/Button.component";
 import {MessageStyles} from "../../styles/Message.styles";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import {useAppDispatch,useAppSelector} from "../../app/hooks";
 import {Input} from "../atoms/Input.component";
 import {loginThunk} from "../../thunks/loginAndRegistration";
 import {Form} from "../atoms/Form.component";
-import {UserLogin,Error,User} from "../../types/general.types";
+import {UserLogin,Error} from "../../types/general.types";
+import React, {useEffect} from "react";
 const LoginComponent = ()    => {
     const navigate = useNavigate();
     const valueError:Error= useAppSelector((state) => state.error)
+    const valueUser = useAppSelector((state) => state.login);
     const dispatch = useAppDispatch();
-    function handleClick(e) {
+    function handleClick(e:React.SyntheticEvent) {
         e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
+        const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
         const userLogin :UserLogin= {
-            loginName:formData.get("email").toString(),
-            password:formData.get("password").toString()
+            loginName:target.email.value,
+            password:target.password.value
         }
         dispatch(loginThunk(userLogin));
     }
+    useEffect(()=>{
+        if (valueUser.userName) {
+            nav("swipepage");
+        }
+    })
 
     const nav = (s: string) => {
         navigate("/"+s)
@@ -29,8 +37,8 @@ const LoginComponent = ()    => {
     return<>
         <MainBackgroundImg src={"./pictures/startBackground.png"}/>
         <MessageStyles $isError ={valueError.error} $isHidden={!valueError.error}>{valueError.errorMessage}</MessageStyles>
-        <Form method={"post"} submit={handleClick}>
-            E-Mail:<Input  name={"email"} type={"text"}/>
+        <Form method={"POST"} submit={handleClick}>
+            E-Mail:<Input name={"email"} type={"text"}/>
             Password:<Input name={"password"} type={"password"}/>
             <ButtonSubmit span={2}>Login</ButtonSubmit>
         </Form>

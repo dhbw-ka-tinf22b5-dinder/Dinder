@@ -1,10 +1,14 @@
 import {InputStyles} from "../../styles/input.styles";
+interface InputProps {
+    type: string;
+    name: string;
+}
 
-export const Input=({ type,name})=> {
+export const Input=(props:InputProps)=> {
     return (
         <InputStyles
-            type={type}
-            name={name}
+            type={props.type}
+            name={props.name}
         >
         </InputStyles>
     );

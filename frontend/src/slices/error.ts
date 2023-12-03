@@ -8,7 +8,7 @@ export const errorSlice = createSlice({
     name: "error",
     initialState,
     reducers:{
-        errorReducer :(state,action:PayloadAction<Error>)=>{
+        errorReducer :(_state,action:PayloadAction<Error>)=>{
             return action.payload;
         },
     },

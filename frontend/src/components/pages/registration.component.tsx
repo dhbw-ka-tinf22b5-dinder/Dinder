@@ -3,9 +3,8 @@ import {ButtonSubmit} from "../atoms/Button.component";
 import {Input} from "../atoms/Input.component";
 import {MessageStyles} from "../../styles/Message.styles";
 import {Form} from "../atoms/Form.component";
-import {Error} from "../../types/general.types";
+import {Error, UserRegisterConfirmation} from "../../types/general.types";
 import {useAppDispatch, useAppSelector } from "../../app/hooks";
-import {UserRegister} from "../../types/general.types";
 import {registerThunk} from "../../thunks/loginAndRegistration";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -13,28 +12,26 @@ import {registerThunk} from "../../thunks/loginAndRegistration";
 const RegistrationComponent = ()=> {
     const valueError: Error = useAppSelector((state) => state.error);
     const dispatch = useAppDispatch();
-    /*
-    const register = useContext(HttpContext);
-    const navigate = useNavigate();
-    const nav = (s: string) => {
-        navigate("/"+s)
-    }*/
-const register=(e)=> {
+const register=(e:React.SyntheticEvent)=> {
     e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
-    const user: UserRegister = {
-        email: formData.get("email").toString(),
-        userName: formData.get("username").toString(),
-        password: formData.get("pwd").toString(),
-        confirmPassword: formData.get("CtrlPwd").toString()
+    const form = e.target as typeof e.target & {
+        email: { value: string };
+        username: { value: string };
+        pwd: { value: string };
+        CtrlPwd: { value: string };
+    };
+    const user: UserRegisterConfirmation = {
+        email: form.email.value,
+        userName: form.username.value,
+        password: form.pwd.value,
+        confirmPassword: form.CtrlPwd.value
     }
     dispatch(registerThunk(user));
 }
     return <>
         <MainBackgroundImg src={"./pictures/startBackground.png"}/>
         <MessageStyles $isError ={valueError.error} $isHidden={!valueError.error}>{valueError.errorMessage}</MessageStyles>
-        <Form method="post" submit={register}>
+        <Form method="POST" submit={register}>
             E-Mail:<Input type={"text"} name={"email"}/>
             Username:<Input type={"text"} name={"username"}/>
             Password:<Input  type={"password"} name={"pwd"}/>

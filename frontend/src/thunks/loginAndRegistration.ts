@@ -1,11 +1,10 @@
 import { loginReducer } from '../slices/login';
 import {UserLogin, User, Error, UserRegister,UserRegisterConfirmation} from "../types/general.types";
-//import {login} from "../test/mockBackend";
-import {login,register} from "../test/mockBackend";
+import {login,register} from "../clients/http-client";
 import {errorReducer} from "../slices/error";
 import * as validator from 'email-validator';
 
-export const loginThunk= (userLogin:UserLogin)=> async dispatch=>{
+export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { payload: Error | User; type: "error/errorReducer" | "login/loginReducer"; }) => void)=>{
     if (!validator.validate(userLogin.loginName)) {
         //Error Message wird gesetzt
         const errorObject: Error = {
@@ -16,7 +15,7 @@ export const loginThunk= (userLogin:UserLogin)=> async dispatch=>{
         dispatch(errorReducer(errorObject));
         return;
     }
-    login(userLogin).then((response)=> {
+    login(userLogin).then(()=> {
         const user: User = {//User wird gesetzt
             userName: userLogin.loginName,
         }
@@ -37,7 +36,7 @@ export const loginThunk= (userLogin:UserLogin)=> async dispatch=>{
         dispatch(errorReducer(errorObject));
     });
 }
-export const registerThunk= (userRegister:UserRegisterConfirmation)=> async dispatch=>{
+export const registerThunk= (userRegister:UserRegisterConfirmation)=> async (dispatch: (arg0: { payload: Error; type: "error/errorReducer"; }) => void)=>{
     if (userRegister.password !== userRegister.confirmPassword) {
         const errorObject: Error = {
             error: true,
@@ -59,7 +58,7 @@ export const registerThunk= (userRegister:UserRegisterConfirmation)=> async disp
         userName: userRegister.userName,
         password: userRegister.password,
     }
-    register(userRegisterSend).then((response)=> {
+    register(userRegisterSend).then(()=> {
         const errorObject: Error = {
             error: false,
             errorMessage: "",

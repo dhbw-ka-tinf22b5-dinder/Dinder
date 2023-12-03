@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {MainContainer} from "./mainPage.styles";
 
 
 export const Card= styled.div`

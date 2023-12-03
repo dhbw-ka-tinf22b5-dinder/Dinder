@@ -1,13 +1,22 @@
 import { ButtonStyled} from "../../styles/buttons.styles";
+interface ButtonProps {
+    click: () => void;
+    text: string;
+    span: number;
+}
+interface ButtonSubmitProps {
+    span: number;
+    children: string;
+}
 
 //span ist ein sogenanntes Property also ein extra Attribut
-export const Button=({click,text,span})=>{
+export const Button=(props:ButtonProps)=>{
     return <>
-        <ButtonStyled $span={span} onClick={click}>{text}</ButtonStyled>
+        <ButtonStyled $span={props.span} onClick={props.click}>{props.text}</ButtonStyled>
     </>
 }
-export const ButtonSubmit=({span,children})=>{
+export const ButtonSubmit=(props:ButtonSubmitProps)=>{
     return <>
-        <ButtonStyled type="submit" $span={span} >{children}</ButtonStyled>
+        <ButtonStyled type="submit" $span={props.span} >{props.children}</ButtonStyled>
     </>
 }

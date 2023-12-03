@@ -1,8 +1,6 @@
 import {login,register} from "./mockBackend"
 import {describe, expect, it} from "vitest";
 import {UserLogin,UserRegister} from "../types/general.types";
-import {loginThunk} from "../thunks/loginAndRegistration";
-import {useAppDispatch,useAppSelector} from "../app/hooks";
 const testUser:UserLogin={
     loginName: "test1",
     password: "1234"
