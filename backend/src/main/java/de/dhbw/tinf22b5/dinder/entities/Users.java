@@ -1,5 +1,6 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
+import de.dhbw.tinf22b5.dinder.models.response.UserInformationModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -56,5 +57,9 @@ public class Users implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public UserInformationModel toInformationModel() {
+        return new UserInformationModel(userName);
     }
 }

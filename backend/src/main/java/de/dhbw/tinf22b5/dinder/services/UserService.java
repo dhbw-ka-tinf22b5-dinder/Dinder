@@ -3,6 +3,7 @@ package de.dhbw.tinf22b5.dinder.services;
 import de.dhbw.tinf22b5.dinder.entities.Users;
 import de.dhbw.tinf22b5.dinder.models.request.LoginModel;
 import de.dhbw.tinf22b5.dinder.models.request.RegisterModel;
+import de.dhbw.tinf22b5.dinder.models.response.UserInformationModel;
 import de.dhbw.tinf22b5.dinder.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -55,5 +56,9 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
+    }
+
+    public Optional<UserInformationModel> getUserInfo(String email) {
+        return userRepository.findById(email).map(Users::toInformationModel);
     }
 }
