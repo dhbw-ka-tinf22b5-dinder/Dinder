@@ -1,9 +1,10 @@
 import {UserLogin,UserRegister} from "../types/general.types";
 import axios from "axios";
 
-export function login(user:UserLogin):Promise<number>{// later this will be a json
+export function login(user:UserLogin):Promise<unknown>{// later this will be a json
     return axios.post('http://localhost:8080/login', user)
-        .then(res=> res.status)
+        .then(res=> res)
+
         .catch(error => error.status);
 }
 export function register(user:UserRegister):Promise<number> {// later this will be a json

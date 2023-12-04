@@ -15,7 +15,8 @@ export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { paylo
         dispatch(errorReducer(errorObject));
         return;
     }
-    login(userLogin).then(()=> {
+    login(userLogin).then((res)=> {
+        console.log(res);
         const user: User = {//User wird gesetzt
             userName: userLogin.loginName,
         }
