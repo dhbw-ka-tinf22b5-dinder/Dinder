@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -31,20 +30,28 @@ public class UserController {
 
     @PostMapping("/login")
     public boolean login(@RequestBody LoginModel loginModel, HttpServletResponse response) {
-        Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(/*TODO*/ "test@yahoo.de"));
-        sessionIdCookie.setHttpOnly(true);
-        response.addCookie(sessionIdCookie);
+        boolean loginSuccessful = userService.login(loginModel);
+        // TODO: besser machen
+        if(loginSuccessful) {
+            Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(loginModel.loginName()));
+            sessionIdCookie.setHttpOnly(true);
+            response.addCookie(sessionIdCookie);
+        }
 
-        return userService.login(loginModel);
+        return loginSuccessful;
     }
 
     @PostMapping("/register")
     public boolean register(@RequestBody RegisterModel registerModel, HttpServletResponse response) {
-        Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(/*TODO*/ "test@yahoo.de"));
-        sessionIdCookie.setHttpOnly(true);
-        response.addCookie(sessionIdCookie);
+        boolean registrationSuccessful = userService.register(registerModel);
+        // TODO: besser machen
+        if(registrationSuccessful) {
+            Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(registerModel.email()));
+            sessionIdCookie.setHttpOnly(true);
+            response.addCookie(sessionIdCookie);
+        }
 
-        return userService.register(registerModel);
+        return registrationSuccessful;
     }
 
     @GetMapping("/user/{email}")
