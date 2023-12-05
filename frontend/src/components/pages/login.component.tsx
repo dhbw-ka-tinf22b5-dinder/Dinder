@@ -16,9 +16,9 @@ const LoginComponent = ()    => {
     function handleClick(e:React.SyntheticEvent) {
         e.preventDefault();
         const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-    };
+            email: { value: string };
+            password: { value: string };
+        };
         const userLogin :UserLogin= {
             loginName:target.email.value,
             password:target.password.value

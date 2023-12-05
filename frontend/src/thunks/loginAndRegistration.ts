@@ -1,9 +1,38 @@
 import { loginReducer } from '../slices/login';
 import {UserLogin, User, Error, UserRegister,UserRegisterConfirmation} from "../types/general.types";
-import {login,register} from "../clients/http-client";
+import {login,register, getUserName} from "../clients/http-client";
 import {errorReducer} from "../slices/error";
 import * as validator from 'email-validator';
 
+interface LoginData{
+    user:User,
+    errorStatus:Error,
+}
+const wrongPassword:LoginData = {
+    user: {
+        userName: ""
+    },
+    errorStatus: {
+        error: true,
+        errorMessage: "E-Mail or password is wrong",
+    }
+}
+const successfulLogin=():Promise<LoginData>=>{
+    return getUserName().then((res)=> {
+        const user: User = {
+            userName: res,
+        }
+        const errorObject: Error = {
+            error: false,
+            errorMessage: "",
+        }
+        const loginData: LoginData = {
+            user: user,
+            errorStatus: errorObject,
+        }
+        return loginData;
+    })
+}
 export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { payload: Error | User; type: "error/errorReducer" | "login/loginReducer"; }) => void)=>{
     if (!validator.validate(userLogin.loginName)) {
         //Error Message wird gesetzt
@@ -16,17 +45,21 @@ export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { paylo
         return;
     }
     login(userLogin).then((res)=> {
-        console.log(res);
-        const user: User = {//User wird gesetzt
-            userName: userLogin.loginName,
+
+        let loginData:LoginData;
+        if (res){
+            successfulLogin().then((res)=>{
+                loginData=res;
+                dispatch(loginReducer(loginData.user));
+                dispatch(errorReducer(loginData.errorStatus));
+            });
         }
-        const errorObject: Error = {//Error Message wird zurückgesetzt
-            error: false,
-            errorMessage: "",
+        else{
+            loginData= wrongPassword;
+            dispatch(loginReducer(loginData.user));
+            dispatch(errorReducer(loginData.errorStatus));
         }
         //states werden geupdated
-        dispatch(loginReducer(user));
-        dispatch(errorReducer(errorObject));
     }).catch((errorValue) => {
         //Error Message wird gesetzt
         const errorObject: Error = {
@@ -35,6 +68,12 @@ export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { paylo
         }
         //states werden geupdated
         dispatch(errorReducer(errorObject));
+    });
+}
+export const loginByCookie=()=> async (dispatch: (arg0: { payload: Error | User; type: "error/errorReducer" | "login/loginReducer"; }) => void)=>{
+    successfulLogin().then((res)=>{
+        dispatch(loginReducer(res.user));
+        dispatch(errorReducer(res.errorStatus));
     });
 }
 export const registerThunk= (userRegister:UserRegisterConfirmation)=> async (dispatch: (arg0: { payload: Error; type: "error/errorReducer"; }) => void)=>{
