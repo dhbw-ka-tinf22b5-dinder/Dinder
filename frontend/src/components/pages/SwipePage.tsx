@@ -31,7 +31,7 @@ const data = [
     name: 'Holz tragen',
     date: 'Dezember 20, 2023',
     place: 'Stuttgart, Deutschland',
-    imageUrl: 'https://imgix.obi.de/api/disc/cms/public/dam/DE-AT-Assets/Aussenbereich/holz-stapeln/1_Holz-stapeln_01256989.jpg?crop=focalpoint&fit=crop&fp-x=0.346&fp-y=0.584&fp-z=1&w=1920&auto=format%2Ccompress&h=1079',
+    imageUrl: 'https://imgix.obi.de/api/disc/cms/public/dam/DE-AT-Assets/Aussenbereich/holz-stapeln/1_Holz-stapeln_01256989.jpg?crop=focalpoint&fit=crop&fp-x=0.346&fp-y=0.584&fp-z=1&w=480&auto=format%2Ccompress&h=270',
   },
 ];
 

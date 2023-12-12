@@ -16,8 +16,8 @@ export const Info =styled.div`
   grid-column: span 3;
 `
 export const AdvertismentImage=styled.img`
-  width: 75%;
-  height: 100%;
+  width: 480px;
+  height: 270px;
   border-radius: 25px;
   grid-column: span 3;
 `

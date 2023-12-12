@@ -5,8 +5,12 @@ import de.dhbw.tinf22b5.dinder.models.request.LoginModel;
 import de.dhbw.tinf22b5.dinder.models.request.RegisterModel;
 import de.dhbw.tinf22b5.dinder.models.response.UserInformationModel;
 import de.dhbw.tinf22b5.dinder.services.SecurityService;
-
 import de.dhbw.tinf22b5.dinder.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,11 +32,17 @@ public class UserController {
     private UserService userService;
     private SecurityService securityService;
 
+    @Operation(summary = "Log in using the credentials. The response will have a cookie attached, which contains the " +
+            "JWT token.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Logged in successfully.",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Boolean.class))})})
     @PostMapping("/login")
     public boolean login(@RequestBody LoginModel loginModel, HttpServletResponse response) {
         boolean loginSuccessful = userService.login(loginModel);
         // TODO: besser machen
-        if(loginSuccessful) {
+        if (loginSuccessful) {
             Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(loginModel.loginName()));
             sessionIdCookie.setHttpOnly(true);
             response.addCookie(sessionIdCookie);
@@ -45,7 +55,7 @@ public class UserController {
     public boolean register(@RequestBody RegisterModel registerModel, HttpServletResponse response) {
         boolean registrationSuccessful = userService.register(registerModel);
         // TODO: besser machen
-        if(registrationSuccessful) {
+        if (registrationSuccessful) {
             Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(registerModel.email()));
             sessionIdCookie.setHttpOnly(true);
             response.addCookie(sessionIdCookie);
