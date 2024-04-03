@@ -13,7 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,11 +33,6 @@ import java.util.Optional;
 @Slf4j
 public class SecurityService {
     private final RsaKeyProperties rsaKeys;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     public SecurityService() {
         try (InputStream publicKeyStream = getClass().getClassLoader().getResourceAsStream("certs/public.pem");
@@ -69,6 +64,11 @@ public class SecurityService {
         }
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     public String getEmail(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(rsaKeys.publicKey())
@@ -96,11 +96,11 @@ public class SecurityService {
             return Optional.of(new UsernamePasswordAuthenticationToken(email, null, authorityFactory.get(email)));
         }
         catch (ExpiredJwtException expiredJwtException) {
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
         }
         catch (SignatureException signatureException) {
             log.warn("Someone tried to authorize with a forged JWT.", signatureException);
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "This account is deactivated.");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "This account is deactivated.");
         }
     }
 }

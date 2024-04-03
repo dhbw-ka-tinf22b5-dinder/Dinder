@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -32,7 +32,8 @@ public class UserController {
     private UserService userService;
     private SecurityService securityService;
 
-    @Operation(description = "Log in using the credentials. The response will have a cookie attached, which contains the " +
+    @Operation(description = "Log in using the credentials. The response will have a cookie attached, which contains " +
+            "the " +
             "JWT token.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Logged in successfully.",
@@ -66,7 +67,7 @@ public class UserController {
 
     @GetMapping("/user/{email}")
     public UserInformationModel getUserInfo(@PathVariable String email) {
-        return userService.getUserInfo(email).orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+        return userService.getUserInfo(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
     @GetMapping("/user/me")
@@ -75,8 +76,8 @@ public class UserController {
                 .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
                 .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                 .map(s -> securityService.getEmail(s))
-                .findFirst().orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+                .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-        return userService.getUserInfo(email).orElseThrow(() -> new HttpClientErrorException(HttpStatus.BAD_REQUEST));
+        return userService.getUserInfo(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 }
