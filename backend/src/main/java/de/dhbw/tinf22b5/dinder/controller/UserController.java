@@ -32,7 +32,7 @@ public class UserController {
     private UserService userService;
     private SecurityService securityService;
 
-    @Operation(summary = "Log in using the credentials. The response will have a cookie attached, which contains the " +
+    @Operation(description = "Log in using the credentials. The response will have a cookie attached, which contains the " +
             "JWT token.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Logged in successfully.",

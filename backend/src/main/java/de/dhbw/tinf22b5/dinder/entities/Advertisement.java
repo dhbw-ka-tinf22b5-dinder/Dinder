@@ -25,7 +25,7 @@ public class Advertisement {
     @Column(name = "postal_code")
     private int plz;
     private String description;
-    @Column(length = 255)
+    @Column
     private String imagePath;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
