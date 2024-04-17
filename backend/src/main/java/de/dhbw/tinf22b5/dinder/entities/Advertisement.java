@@ -17,7 +17,7 @@ import java.util.Set;
 public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "advertisement_id")
+    @Column
     private int advertisementId;
     private String title;
     private double price;
@@ -25,16 +25,16 @@ public class Advertisement {
     @Column(name = "postal_code")
     private int plz;
     private String description;
-    @Column
+    @Column(name = "image")
     private String imagePath;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "advertiser", nullable = false)
     private Users advertiser;
 
     @ManyToOne
-    @JoinColumn(name = "contractor_email")
+    @JoinColumn(name = "contractor")
     private Users contractor;
 
     private Instant creationTime;
