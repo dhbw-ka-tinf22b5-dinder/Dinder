@@ -20,6 +20,6 @@ public class AdvertisementService {
     }
 
     public Optional<AdvertisementInformationModel> getAdvertisementFromId(int id) {
-        return advertisementRepository.findById(id).map(Advertisement::toInformationModel);
+        return advertisementRepository.findById(id).filter(e -> e.getContractor() == null).map(Advertisement::toInformationModel);
     }
 }
