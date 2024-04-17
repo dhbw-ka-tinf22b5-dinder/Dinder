@@ -1,5 +1,6 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
+import de.dhbw.tinf22b5.dinder.models.response.AdvertisementInformationModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,4 +42,8 @@ public class Advertisement {
 
     @OneToMany(mappedBy = "advertisementId")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
+
+    public AdvertisementInformationModel toInformationModel() {
+        return new AdvertisementInformationModel(title, price, location, plz, description, imagePath, advertiser.toInformationModel(), creationTime);
+    }
 }
