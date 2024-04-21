@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -27,8 +27,8 @@ public class UserService implements UserDetailsService {
     private final SecurityService securityService;
 
     public boolean login(LoginModel model) {
-        if(model.isInvalid())
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        if (model.isInvalid())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
         return userRepository.findById(model.loginName())
                 .map(Users::getPwdHash)
@@ -37,13 +37,14 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean register(RegisterModel registerModel) {
-        if(registerModel.isInvalid())
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST);
+        if (registerModel.isInvalid())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 
-        if(userRepository.findById(registerModel.email()).isPresent())
-            throw new HttpClientErrorException(HttpStatus.CONFLICT);
+        if (userRepository.findById(registerModel.email()).isPresent())
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
 
-        userRepository.save(new Users(registerModel.email(), registerModel.userName(), passwordEncoder.encode(registerModel.password())));
+        userRepository.save(new Users(registerModel.email(), registerModel.userName(),
+                passwordEncoder.encode(registerModel.password())));
         return true;
     }
 

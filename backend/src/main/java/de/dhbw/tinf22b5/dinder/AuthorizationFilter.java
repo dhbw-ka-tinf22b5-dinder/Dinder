@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -24,20 +23,13 @@ public class AuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NotNull HttpServletResponse response,
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
-        if(request.getCookies() != null) {
+        if (request.getCookies() != null) {
             Arrays.stream(request.getCookies())
                     .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
                     .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                     .findFirst()
-                    .ifPresent(sessionId -> {
-                        try {
-                            userService.validateToken(sessionId)
-                                    .ifPresent(token -> SecurityContextHolder.getContext().setAuthentication(token));
-                        }
-                        catch (HttpClientErrorException httpClientErrorException) {
-                            response.setStatus(httpClientErrorException.getStatusCode().value());
-                        }
-                    });
+                    .flatMap(userService::validateToken)
+                    .ifPresent(token -> SecurityContextHolder.getContext().setAuthentication(token));
         }
 
         filterChain.doFilter(request, response);

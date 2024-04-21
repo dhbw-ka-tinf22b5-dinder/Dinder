@@ -1,7 +1,6 @@
 package de.dhbw.tinf22b5.dinder.config;
 
 import de.dhbw.tinf22b5.dinder.AuthorizationFilter;
-import de.dhbw.tinf22b5.dinder.StatusCodeFilter;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -28,7 +27,6 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new AuthorizationFilter(userService), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new StatusCodeFilter(), AuthorizationFilter.class)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/register").permitAll()

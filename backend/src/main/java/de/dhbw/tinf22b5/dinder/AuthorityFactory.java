@@ -6,5 +6,5 @@ import java.util.Set;
 
 @FunctionalInterface
 public interface AuthorityFactory {
-    Set<? extends GrantedAuthority> get(String email);
+    Set<GrantedAuthority> get(String email);
 }
