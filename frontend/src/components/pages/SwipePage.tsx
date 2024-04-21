@@ -1,8 +1,11 @@
 // SwipePage.js
 import { useState } from 'react';
+
 //import './App.css';
 import {Button} from "../atoms/Button.component"
 import {AdvertismentImage, Card, Info} from "../../styles/swipecard.styles";
+import {getAllAdvertisements} from "../../clients/http-client";
+import {useAppDispatch,useAppSelector} from "../../app/hooks";
 
 const data = [
   {
@@ -53,7 +56,10 @@ function SwipePage() {
   };
 
   const currentItem = data[currentIndex];
-
+  const dispatch = useAppDispatch();
+  dispatch(getAllAdvertisements);
+  const valueSwipes = useAppSelector((state) => state.swipe);
+  console.log(valueSwipes);
   return (
 
         <Card>

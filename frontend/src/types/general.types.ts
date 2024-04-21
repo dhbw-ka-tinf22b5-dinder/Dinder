@@ -21,3 +21,16 @@ export interface Error{
     error:boolean;
     errorMessage:string;
 }
+export interface Advertiser{
+    userName:string;
+}
+export interface Advertisement{
+    title:string;
+    price:number;
+    location:string;
+    plz:number;
+    description:string;
+    imagePath:string;
+    advertiser:Advertiser;
+    creationTime:string;
+}

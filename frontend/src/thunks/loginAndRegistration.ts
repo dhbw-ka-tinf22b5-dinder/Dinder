@@ -34,6 +34,7 @@ const successfulLogin=():Promise<LoginData>=>{
     })
 }
 export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { payload: Error | User; type: "error/errorReducer" | "login/loginReducer"; }) => void)=>{
+    //validations
     if (!validator.validate(userLogin.loginName)) {
         //Error Message wird gesetzt
         const errorObject: Error = {
@@ -44,6 +45,7 @@ export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { paylo
         dispatch(errorReducer(errorObject));
         return;
     }
+    //eigentlicher login
     login(userLogin).then((res)=> {
 
         let loginData:LoginData;
@@ -70,12 +72,7 @@ export const loginThunk= (userLogin:UserLogin)=> async (dispatch: (arg0: { paylo
         dispatch(errorReducer(errorObject));
     });
 }
-export const loginByCookie=()=> async (dispatch: (arg0: { payload: Error | User; type: "error/errorReducer" | "login/loginReducer"; }) => void)=>{
-    successfulLogin().then((res)=>{
-        dispatch(loginReducer(res.user));
-        dispatch(errorReducer(res.errorStatus));
-    });
-}
+
 export const registerThunk= (userRegister:UserRegisterConfirmation)=> async (dispatch: (arg0: { payload: Error; type: "error/errorReducer"; }) => void)=>{
     if (userRegister.password !== userRegister.confirmPassword) {
         const errorObject: Error = {
