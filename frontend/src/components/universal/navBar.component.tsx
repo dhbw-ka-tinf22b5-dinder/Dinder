@@ -4,6 +4,7 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {resetError} from "../../thunks/resetErrorThunk";
 import {User} from "../../types/general.types";
+import {Button} from "../atoms/Button.component";
 const NavBarComponent = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -13,13 +14,15 @@ const NavBarComponent = () => {
         dispatch(resetError());
     }
     return <>
-        <Nav >
-            <HandymanIcon fontSize={"large"} onClick={()=>nav()}/>
-            <Header onClick={()=>nav()}>DINDER</Header>
-            {valueUser.userName}
-        </Nav>
-        <Outlet />
+            <Nav>
+                <HandymanIcon fontSize={"large"} onClick={() => nav()}/>
+                <Header onClick={() => nav()}>DINDER</Header>
+                {valueUser.userName}
+                <Button span={1} text={"create"} click={()=>navigate("/create")} />
+            </Nav>
+            <Outlet/>
     </>
+
 }
 
 export default NavBarComponent;
