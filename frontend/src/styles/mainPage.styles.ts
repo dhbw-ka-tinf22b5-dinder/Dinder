@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div<{$isMain?:boolean;}>`
+export const MainContainer = styled.div<{ $isMain?: boolean }>`
     position: relative;
     margin: auto;
     display: grid;
     gap: 60px;
     grid-template-columns: auto auto;
-    background: ${props => props.$isMain ?"none":"white"};
+    background: ${(props) => (props.$isMain ? "none" : "white")};
     border-radius: 25px;
     color: black;
     padding: 10px;
-`
+`;
 
 export const MainBackgroundImg = styled.img`
   position: absolute;
@@ -20,4 +20,4 @@ export const MainBackgroundImg = styled.img`
   min-width: 100%;
   max-height: 100%;
   object-fit: cover;
-`
+`;

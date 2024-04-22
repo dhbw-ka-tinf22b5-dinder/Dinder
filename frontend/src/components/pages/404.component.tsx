@@ -1,9 +1,5 @@
-
-
 const ErrorComponent = () => {
-
-    return<>
-    Something went wrong</>
-}
+	return <>Something went wrong</>;
+};
 
 export default ErrorComponent;

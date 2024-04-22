@@ -6,4 +6,4 @@ export const InputStyles = styled.input`
   border-radius: 25px;
   background: white;
   color: black;
-`
+`;

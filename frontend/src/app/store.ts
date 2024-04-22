@@ -1,11 +1,11 @@
-import {configureStore} from '@reduxjs/toolkit';
-import loginReducer from '../slices/login';
-import  errorReducer from '../slices/error';
+import { configureStore } from "@reduxjs/toolkit";
+import loginReducer from "../slices/login";
+import errorReducer from "../slices/error";
 export const store = configureStore({
-  reducer: {
-    login: loginReducer,
-    error: errorReducer,
-  },
+	reducer: {
+		login: loginReducer,
+		error: errorReducer,
+	},
 });
 
 export type AppDispatch = typeof store.dispatch;

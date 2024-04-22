@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   // RESETTER
@@ -52,6 +52,6 @@ const GlobalStyle = createGlobalStyle`
   }
   
   //RESETTER ENDE
-`
+`;
 
 export default GlobalStyle;

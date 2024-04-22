@@ -9,4 +9,4 @@ export const FormStyles = styled.form`
     background: white;
     border-radius: 25px;
     color: black;
-    padding: 10px;`
+    padding: 10px;`;

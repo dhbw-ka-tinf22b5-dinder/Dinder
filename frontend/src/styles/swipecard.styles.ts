@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-
-export const Card= styled.div`
+export const Card = styled.div`
   position: relative;
   margin: auto;
   display: grid;
@@ -11,13 +10,13 @@ export const Card= styled.div`
   background: white;
   color: black;
   padding: 10px;
-  `
-export const Info =styled.div`
+  `;
+export const Info = styled.div`
   grid-column: span 3;
-`
-export const AdvertismentImage=styled.img`
+`;
+export const AdvertismentImage = styled.img`
   width: 480px;
   height: 270px;
   border-radius: 25px;
   grid-column: span 3;
-`
+`;
