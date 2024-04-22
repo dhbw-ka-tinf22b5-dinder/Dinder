@@ -5,6 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Set;
 
 @FunctionalInterface
-public interface AuthorityFactory {
+public interface AuthoritySupplier {
     Set<GrantedAuthority> get(String email);
 }

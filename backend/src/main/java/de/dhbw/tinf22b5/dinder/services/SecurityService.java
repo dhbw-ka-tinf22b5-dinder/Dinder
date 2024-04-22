@@ -1,6 +1,6 @@
 package de.dhbw.tinf22b5.dinder.services;
 
-import de.dhbw.tinf22b5.dinder.AuthorityFactory;
+import de.dhbw.tinf22b5.dinder.AuthoritySupplier;
 import de.dhbw.tinf22b5.dinder.RsaKeyProperties;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -89,11 +89,11 @@ public class SecurityService {
                 .compact();
     }
 
-    public Optional<UsernamePasswordAuthenticationToken> validate(String token, AuthorityFactory authorityFactory) {
+    public Optional<UsernamePasswordAuthenticationToken> validate(String token, AuthoritySupplier authoritySupplier) {
         try {
             String email = getEmail(token);
 
-            return Optional.of(new UsernamePasswordAuthenticationToken(email, null, authorityFactory.get(email)));
+            return Optional.of(new UsernamePasswordAuthenticationToken(email, null, authoritySupplier.get(email)));
         }
         catch (ExpiredJwtException expiredJwtException) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
