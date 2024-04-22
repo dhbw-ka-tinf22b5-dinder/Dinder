@@ -1,5 +1,5 @@
+import type { ReactNode } from "react";
 import { FormStyles } from "../../styles/form.styles";
-import { ReactNode } from "react";
 interface FormProps {
 	method: "POST" | "GET";
 	submit: (e: React.SyntheticEvent) => void;

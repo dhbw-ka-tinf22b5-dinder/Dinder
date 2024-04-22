@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import MainPageComponent from "./components/pages/mainPage.component";
-import NavBarComponent from "./components/universal/navBar.component";
-import LoginComponent from "./components/pages/login.component";
-import ErrorComponent from "./components/pages/404.component";
-import { APP_ROUTES } from "./routes/routes";
-import RegistrationComponent from "./components/pages/registration.component";
 import PrivateRoutes from "./PrivateRoutes";
+import ErrorComponent from "./components/pages/404.component";
+import LoginComponent from "./components/pages/login.component";
+import MainPageComponent from "./components/pages/mainPage.component";
+import RegistrationComponent from "./components/pages/registration.component";
+import NavBarComponent from "./components/universal/navBar.component";
+import { APP_ROUTES } from "./routes/routes";
 
 import SwipePage from "./components/pages/SwipePage";
 

@@ -1,11 +1,14 @@
-import { MainBackgroundImg } from "../../styles/mainPage.styles";
-import { ButtonSubmit } from "../atoms/Button.component";
-import { Input } from "../atoms/Input.component";
-import { MessageStyles } from "../../styles/Message.styles";
-import { Form } from "../atoms/Form.component";
-import { Error, UserRegisterConfirmation } from "../../types/general.types";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { MessageStyles } from "../../styles/Message.styles";
+import { MainBackgroundImg } from "../../styles/mainPage.styles";
 import { registerThunk } from "../../thunks/loginAndRegistration";
+import type {
+	Error,
+	UserRegisterConfirmation,
+} from "../../types/general.types";
+import { ButtonSubmit } from "../atoms/Button.component";
+import { Form } from "../atoms/Form.component";
+import { Input } from "../atoms/Input.component";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 

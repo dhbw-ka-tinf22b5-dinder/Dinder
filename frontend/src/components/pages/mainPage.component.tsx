@@ -1,6 +1,6 @@
-import { MainBackgroundImg, MainContainer } from "../../styles/mainPage.styles";
 import { useNavigate } from "react-router-dom";
 import { APP_ROUTES } from "../../routes/routes";
+import { MainBackgroundImg, MainContainer } from "../../styles/mainPage.styles";
 import { Button } from "../atoms/Button.component";
 
 const MainPageComponent = () => {

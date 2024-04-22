@@ -1,13 +1,14 @@
-import { MainBackgroundImg } from "../../styles/mainPage.styles";
-import { ButtonSubmit } from "../atoms/Button.component";
-import { MessageStyles } from "../../styles/Message.styles";
+import type React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Input } from "../atoms/Input.component";
+import { MessageStyles } from "../../styles/Message.styles";
+import { MainBackgroundImg } from "../../styles/mainPage.styles";
 import { loginThunk } from "../../thunks/loginAndRegistration";
+import type { Error, UserLogin } from "../../types/general.types";
+import { ButtonSubmit } from "../atoms/Button.component";
 import { Form } from "../atoms/Form.component";
-import { UserLogin, Error } from "../../types/general.types";
-import React, { useEffect } from "react";
+import { Input } from "../atoms/Input.component";
 const LoginComponent = () => {
 	const navigate = useNavigate();
 	const valueError: Error = useAppSelector((state) => state.error);

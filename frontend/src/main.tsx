@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
+import { store } from "./app/store";
 import "./index.css";
 import GlobalStyle from "./styles/GlobalStyles.styles.ts";
-import { BrowserRouter } from "react-router-dom";
-import { store } from "./app/store";
-import { Provider } from "react-redux";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error

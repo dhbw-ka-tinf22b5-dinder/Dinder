@@ -1,5 +1,5 @@
 import { errorReducer } from "../slices/error";
-import { Error } from "../types/general.types";
+import type { Error } from "../types/general.types";
 export const resetError =
 	() =>
 	(

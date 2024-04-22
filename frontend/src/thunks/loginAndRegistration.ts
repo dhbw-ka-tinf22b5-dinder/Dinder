@@ -1,14 +1,14 @@
+import * as validator from "email-validator";
+import { getUserName, login, register } from "../clients/http-client";
+import { errorReducer } from "../slices/error";
 import { loginReducer } from "../slices/login";
-import {
-	UserLogin,
-	User,
+import type {
 	Error,
+	User,
+	UserLogin,
 	UserRegister,
 	UserRegisterConfirmation,
 } from "../types/general.types";
-import { login, register, getUserName } from "../clients/http-client";
-import { errorReducer } from "../slices/error";
-import * as validator from "email-validator";
 
 interface LoginData {
 	user: User;

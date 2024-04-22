@@ -1,4 +1,4 @@
-import { UserLogin, UserRegister } from "../types/general.types";
+import type { UserLogin, UserRegister } from "../types/general.types";
 export function login(user: UserLogin): Promise<number> {
 	return new Promise((resolve, reject) => {
 		sleep(1000);

@@ -1,5 +1,5 @@
-import { UserLogin, UserRegister } from "../types/general.types";
 import axios from "axios";
+import type { UserLogin, UserRegister } from "../types/general.types";
 
 export function login(user: UserLogin): Promise<boolean> {
 	// later this will be a json

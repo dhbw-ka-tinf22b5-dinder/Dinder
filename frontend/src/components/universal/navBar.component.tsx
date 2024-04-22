@@ -1,9 +1,9 @@
-import { Header, Nav } from "../../styles/universal.styles";
-import { Outlet, useNavigate } from "react-router-dom";
 import HandymanIcon from "@mui/icons-material/Handyman";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Header, Nav } from "../../styles/universal.styles";
 import { resetError } from "../../thunks/resetErrorThunk";
-import { User } from "../../types/general.types";
+import type { User } from "../../types/general.types";
 const NavBarComponent = () => {
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();

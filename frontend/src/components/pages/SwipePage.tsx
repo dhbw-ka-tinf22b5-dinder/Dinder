@@ -1,8 +1,8 @@
 // SwipePage.js
 import { useState } from "react";
+import { AdvertismentImage, Card, Info } from "../../styles/swipecard.styles";
 //import './App.css';
 import { Button } from "../atoms/Button.component";
-import { AdvertismentImage, Card, Info } from "../../styles/swipecard.styles";
 
 const data = [
 	{

@@ -1,6 +1,6 @@
-import { login, register } from "./mockBackend";
 import { describe, expect, it } from "vitest";
-import { UserLogin, UserRegister } from "../types/general.types";
+import type { UserLogin, UserRegister } from "../types/general.types";
+import { login, register } from "./mockBackend";
 const testUser: UserLogin = {
 	loginName: "test1",
 	password: "1234",

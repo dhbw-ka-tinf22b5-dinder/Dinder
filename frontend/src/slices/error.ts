@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Error } from "../types/general.types";
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
+import type { Error } from "../types/general.types";
 const initialState: Error = {
 	error: false,
 	errorMessage: "",
