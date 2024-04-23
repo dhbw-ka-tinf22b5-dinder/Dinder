@@ -26,7 +26,7 @@ public class AdvertisementController {
     }
 
     @GetMapping("/advertisement/{id}")
-    public AdvertisementInformationModel getAdvertisementById(@PathVariable("id") int id) {
+    public AdvertisementInformationModel getAdvertisementById(@PathVariable int id) {
         return advertisementService.getAdvertisementFromId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 }
