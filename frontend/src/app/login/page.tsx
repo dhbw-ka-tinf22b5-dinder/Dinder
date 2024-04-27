@@ -1,20 +1,19 @@
-import type React from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { MessageStyles } from "../../styles/Message.styles";
-import { MainBackgroundImg } from "../../styles/mainPage.styles";
-import { loginThunk } from "../../thunks/loginAndRegistration";
-import type { Error, UserLogin } from "../../types/general.types";
-import { ButtonSubmit } from "../atoms/Button.component";
-import { Form } from "../atoms/Form.component";
-import { Input } from "../atoms/Input.component";
-const LoginComponent = () => {
-	const navigate = useNavigate();
+'use client'
+import { useAppDispatch, useAppSelector } from "../../lib/hooks.ts";
+import { MessageStyles } from "@/styles/Message.styles.ts";
+import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
+import { loginThunk } from "@/lib/thunks/loginAndRegistration.ts";
+import type { Error, UserLogin } from "@/types/general.types.ts";
+import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
+import { Form } from "@/components/atoms/Form.component.tsx";
+import { Input } from "@/components/atoms/Input.component.tsx";
+import {useRouter} from "next/navigation";
+const Page = () => {
+	const router = useRouter();
 	const valueError: Error = useAppSelector((state) => state.error);
 	const valueUser = useAppSelector((state) => state.login);
 	const dispatch = useAppDispatch();
-	function handleClick(e: React.SyntheticEvent) {
+	function handleClick(e) {
 		e.preventDefault();
 		const target = e.target as typeof e.target & {
 			email: { value: string };
@@ -26,14 +25,14 @@ const LoginComponent = () => {
 		};
 		dispatch(loginThunk(userLogin));
 	}
-	useEffect(() => {
+
 		if (valueUser.userName) {
-			nav("swipepage");
+			router.push("swipepage");
 		}
-	});
+
 
 	const nav = (s: string) => {
-		navigate("/" + s);
+		router.push(s);
 	};
 	return (
 		<>
@@ -52,4 +51,4 @@ const LoginComponent = () => {
 	);
 };
 
-export default LoginComponent;
+export default Page;

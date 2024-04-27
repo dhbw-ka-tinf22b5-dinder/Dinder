@@ -1,21 +1,22 @@
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { MessageStyles } from "../../styles/Message.styles";
-import { MainBackgroundImg } from "../../styles/mainPage.styles";
-import { registerThunk } from "../../thunks/loginAndRegistration";
+'use client'
+import { useAppDispatch, useAppSelector } from "../../lib/hooks.ts";
+import { MessageStyles } from "@/styles/Message.styles.ts";
+import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
+import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
 import type {
 	Error,
 	UserRegisterConfirmation,
-} from "../../types/general.types";
-import { ButtonSubmit } from "../atoms/Button.component";
-import { Form } from "../atoms/Form.component";
-import { Input } from "../atoms/Input.component";
+} from "@/types/general.types.ts";
+import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
+import { Form } from "@/components/atoms/Form.component.tsx";
+import { Input } from "@/components/atoms/Input.component.tsx";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
-const RegistrationComponent = () => {
+const Page = () => {
 	const valueError: Error = useAppSelector((state) => state.error);
 	const dispatch = useAppDispatch();
-	const register = (e: React.SyntheticEvent) => {
+	const register = (e: { preventDefault: () => void; target: any; }) => {
 		e.preventDefault();
 		const form = e.target as typeof e.target & {
 			email: { value: string };
@@ -52,4 +53,4 @@ const RegistrationComponent = () => {
 	);
 };
 
-export default RegistrationComponent;
+export default Page;
