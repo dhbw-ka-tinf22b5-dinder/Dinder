@@ -1,5 +1,5 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "../../lib/hooks.ts";
+import { useSelector } from 'react-redux';
 import { MessageStyles } from "@/styles/Message.styles.ts";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { loginThunk } from "@/lib/thunks/loginAndRegistration.ts";
@@ -7,13 +7,14 @@ import type { Error, UserLogin } from "@/types/general.types.ts";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
 import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
+
+import {RootState} from "@/lib/store.ts";
 import {useRouter} from "next/navigation";
 const Page = () => {
-	const router = useRouter();
-	const valueError: Error = useAppSelector((state) => state.error);
-	const valueUser = useAppSelector((state) => state.login);
-	const dispatch = useAppDispatch();
-	function handleClick(e) {
+	const valueError: Error = useSelector((state:RootState) => state.error);
+	const valueUser = useSelector((state:RootState) => state.login);
+	const {push} = useRouter();
+	function handleClick(e:React.SyntheticEvent){
 		e.preventDefault();
 		const target = e.target as typeof e.target & {
 			email: { value: string };
@@ -23,18 +24,15 @@ const Page = () => {
 			loginName: target.email.value,
 			password: target.password.value,
 		};
-		dispatch(loginThunk(userLogin));
+		loginThunk(userLogin);
 	}
-
+	console.log("User "+valueUser);
+	console.log("Error "+valueError);
 		if (valueUser.userName) {
-			router.push("swipepage");
+			push("/");
 		}
 
-
-	const nav = (s: string) => {
-		router.push(s);
-	};
-	return (
+		return (
 		<>
 			<MainBackgroundImg src={"./pictures/startBackground.png"} />
 			<MessageStyles $isError={valueError.error} $isHidden={!valueError.error}>

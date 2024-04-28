@@ -1,5 +1,5 @@
 import * as validator from "email-validator";
-import { getUserName, login, register } from "../../clients/http-client.ts";
+import { getUserName, login, register } from "@/clients/http-client.ts";
 import { errorReducer } from "@/lib/slices/error.ts";
 import { loginReducer } from "@/lib/slices/login.ts";
 import type {
@@ -8,7 +8,7 @@ import type {
 	UserLogin,
 	UserRegister,
 	UserRegisterConfirmation,
-} from "../../types/general.types.ts";
+} from "@/types/general.types.ts";
 
 interface LoginData {
 	user: User;
@@ -39,8 +39,7 @@ const successfulLogin = (): Promise<LoginData> => {
 		return loginData;
 	});
 };
-export const loginThunk =
-	(userLogin: UserLogin) =>
+export const loginThunk =(userLogin: UserLogin) =>
 	async (
 		dispatch: (arg0: {
 			payload: Error | User;

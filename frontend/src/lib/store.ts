@@ -1,13 +1,12 @@
+'use client'
 import { configureStore } from "@reduxjs/toolkit";
 import errorReducer from "@/lib/slices/error.ts";
 import loginReducer from "@/lib/slices/login.ts";
-export const makeStore =() =>{
-	return configureStore({
+export const store = configureStore({
 	reducer: {
 		login: loginReducer,
 		error: errorReducer,
 	},
-})};
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppDispatch = AppStore['dispatch'];
-export type RootState = ReturnType<AppStore['getState']>;
+});
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
