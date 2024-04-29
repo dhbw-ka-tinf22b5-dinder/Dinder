@@ -1,5 +1,5 @@
 'use client'
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import { MessageStyles } from "@/styles/Message.styles.ts";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { loginThunk } from "@/lib/thunks/loginAndRegistration.ts";
@@ -7,12 +7,13 @@ import type { Error, UserLogin } from "@/types/general.types.ts";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
 import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
+import {store} from "@/lib/store.ts";
 
 import {RootState} from "@/lib/store.ts";
 import {useRouter} from "next/navigation";
 const Page = () => {
 	const valueError: Error = useSelector((state:RootState) => state.error);
-	const dispatch = useDispatch();
+
 	const valueUser = useSelector((state:RootState) => state.login);
 	const {push} = useRouter();
 	function handleClick(e:React.SyntheticEvent){
@@ -26,7 +27,7 @@ const Page = () => {
 			password: target.password.value,
 		};
 		console.log("before thunk")
-		dispatch(loginThunk(userLogin));
+		store.dispatch(loginThunk(userLogin));
 	}
 	console.log("User "+valueUser);
 	console.log("Error "+valueError);

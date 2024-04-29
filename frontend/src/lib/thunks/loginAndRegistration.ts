@@ -23,6 +23,19 @@ const wrongPassword: LoginData = {
 		errorMessage: "E-Mail or password is wrong",
 	},
 };
+function parseErrorToLoginData(errorValue: string): LoginData {
+	const errorObject: Error = {
+		error: true,
+		errorMessage: errorValue,
+	};
+	const loginData: LoginData = {
+		user: {
+			userName: "",
+		},
+		errorStatus: errorObject,
+	};
+	return loginData;
+}
 const successfulLogin = (): Promise<LoginData> => {
 	return getUserName().then((res) => {
 		const user: User = {
@@ -37,8 +50,19 @@ const successfulLogin = (): Promise<LoginData> => {
 			errorStatus: errorObject,
 		};
 		return loginData;
-	});
+	}).catch((errorValue) => parseErrorToLoginData(errorValue)	);
 };
+
+function loginHandler(userLogin: UserLogin): Promise<LoginData> {
+	return login(userLogin).then((res) => {
+		if (res) {
+			return successfulLogin();
+		} else {
+			return wrongPassword;
+		}
+	}).catch((errorValue) => parseErrorToLoginData(errorValue));
+
+}
 export const loginThunk =(userLogin: UserLogin) =>
 	async (
 		dispatch: (arg0: {
@@ -46,94 +70,59 @@ export const loginThunk =(userLogin: UserLogin) =>
 			type: "error/errorReducer" | "login/loginReducer";
 		}) => void,
 	) => {
-	console.log(userLogin);
 		if (!validator.validate(userLogin.loginName)) {
-			//Error Message wird gesetzt
-			const errorObject: Error = {
-				error: true,
-				errorMessage: "Invalid email",
-			};
+			const errorMessage: string = "Invalid email";
 			//states werden geupdated
-			return errorReducer(errorObject);
+			dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
+			return;
 		}
-		login(userLogin)
-			.then((res) => {
-				let loginData: LoginData;
-				if (res) {
-					successfulLogin().then((res) => {
-						loginData = res;
-						//dispatch(loginReducer(loginData.user));
-						return errorReducer(loginData.errorStatus);
-					});
-				} else {
-					loginData = wrongPassword;
-					//dispatch(loginReducer(loginData.user));
-					return errorReducer(loginData.errorStatus);
-				}
-				//states werden geupdated
-			})
-			.catch((errorValue) => {
-				//Error Message wird gesetzt
-				const errorObject: Error = {
-					error: true,
-					errorMessage: errorValue,
-				};
-				//states werden geupdated
-				return errorReducer(errorObject);
-			});
-	};
-export const loginByCookie =
-	() =>
-	async (
-		dispatch: (arg0: {
-			payload: Error | User;
-			type: "error/errorReducer" | "login/loginReducer";
-		}) => void,
-	) => {
-		successfulLogin().then((res) => {
+		loginHandler(userLogin).then((res) => {
 			dispatch(loginReducer(res.user));
 			dispatch(errorReducer(res.errorStatus));
 		});
+
 	};
+// export const loginByCookie =
+// 	() =>
+// 	async (
+// 		dispatch: (arg0: {
+// 			payload: Error | User;
+// 			type: "error/errorReducer" | "login/loginReducer";
+// 		}) => void,
+// 	) => {
+// 		successfulLogin().then((res) => {
+// 			dispatch(loginReducer(res.user));
+// 			dispatch(errorReducer(res.errorStatus));
+// 		});
+// 	};
+
+function registerHandler(userRegister: UserRegister): Promise<Error> {
+	return register(userRegister).then(() =>  parseErrorToLoginData("").errorStatus)
+		.catch((errorValue) => parseErrorToLoginData(errorValue).errorStatus);
+}
 export const registerThunk =
 	(userRegister: UserRegisterConfirmation) =>
 	async (
 		dispatch: (arg0: { payload: Error; type: "error/errorReducer" }) => void,
 	) => {
-		if (userRegister.password !== userRegister.confirmPassword) {
-			const errorObject: Error = {
-				error: true,
-				errorMessage: "Passwords do not match",
-			};
-			dispatch(errorReducer(errorObject));
-			return;
-		}
-		if (!validator.validate(userRegister.email)) {
-			const errorObject: Error = {
-				error: true,
-				errorMessage: "Invalid email",
-			};
-			dispatch(errorReducer(errorObject));
-			return;
-		}
-		const userRegisterSend: UserRegister = {
-			email: userRegister.email,
-			userName: userRegister.userName,
-			password: userRegister.password,
-		};
-		register(userRegisterSend)
-			.then(() => {
-				const errorObject: Error = {
-					error: false,
-					errorMessage: "",
-				};
-				dispatch(errorReducer(errorObject));
-			})
-			.catch((errorValue) => {
-				const errorObject: Error = {
-					error: true,
-					errorMessage: errorValue,
-				};
-				dispatch(errorReducer(errorObject));
-			});
+	if (userRegister.password !== userRegister.confirmPassword) {
+
+	const errorMessage:string= "Passwords do not match";
+	dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
+	return;
+	}
+	if (!validator.validate(userRegister.email)) {
+		const errorMessage: string = "Invalid email";
+		//states werden geupdated
+		dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
+		return;
+	}
+	const userRegisterSend: UserRegister = {
+		email: userRegister.email,
+		userName: userRegister.userName,
+		password: userRegister.password,
 	};
+	registerHandler(userRegisterSend).then((res) => {
+		dispatch(errorReducer(res));
+	});
+};

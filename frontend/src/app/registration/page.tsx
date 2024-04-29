@@ -1,8 +1,9 @@
 'use client'
-import {useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import { MessageStyles } from "@/styles/Message.styles.ts";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
+import {store} from "@/lib/store.ts";
 import type { RootState } from '@/lib/store';
 import type {
 	Error,
@@ -15,7 +16,7 @@ import { Input } from "@/components/atoms/Input.component.tsx";
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 const Page = () => {
-	const dispatch = useDispatch();
+
 	const valueError: Error = useSelector((state:RootState) => state.error);
 	const register = (e: React.SyntheticEvent) => {
 		e.preventDefault();
@@ -31,7 +32,7 @@ const Page = () => {
 			password: form.pwd.value,
 			confirmPassword: form.CtrlPwd.value,
 		};
-		dispatch(registerThunk(user));
+		store.dispatch(registerThunk(user));
 	};
 	return (
 		<>
