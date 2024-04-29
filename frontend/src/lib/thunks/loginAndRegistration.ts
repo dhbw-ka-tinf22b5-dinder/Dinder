@@ -46,6 +46,7 @@ export const loginThunk =(userLogin: UserLogin) =>
 			type: "error/errorReducer" | "login/loginReducer";
 		}) => void,
 	) => {
+	console.log(userLogin);
 		if (!validator.validate(userLogin.loginName)) {
 			//Error Message wird gesetzt
 			const errorObject: Error = {
@@ -53,8 +54,7 @@ export const loginThunk =(userLogin: UserLogin) =>
 				errorMessage: "Invalid email",
 			};
 			//states werden geupdated
-			dispatch(errorReducer(errorObject));
-			return;
+			return errorReducer(errorObject);
 		}
 		login(userLogin)
 			.then((res) => {
@@ -62,13 +62,13 @@ export const loginThunk =(userLogin: UserLogin) =>
 				if (res) {
 					successfulLogin().then((res) => {
 						loginData = res;
-						dispatch(loginReducer(loginData.user));
-						dispatch(errorReducer(loginData.errorStatus));
+						//dispatch(loginReducer(loginData.user));
+						return errorReducer(loginData.errorStatus);
 					});
 				} else {
 					loginData = wrongPassword;
-					dispatch(loginReducer(loginData.user));
-					dispatch(errorReducer(loginData.errorStatus));
+					//dispatch(loginReducer(loginData.user));
+					return errorReducer(loginData.errorStatus);
 				}
 				//states werden geupdated
 			})
@@ -79,7 +79,7 @@ export const loginThunk =(userLogin: UserLogin) =>
 					errorMessage: errorValue,
 				};
 				//states werden geupdated
-				dispatch(errorReducer(errorObject));
+				return errorReducer(errorObject);
 			});
 	};
 export const loginByCookie =
