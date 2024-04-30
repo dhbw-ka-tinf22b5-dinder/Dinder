@@ -1,16 +1,18 @@
 package de.dhbw.tinf22b5.dinder.controller;
 
 import de.dhbw.tinf22b5.dinder.entities.Advertisement;
+import de.dhbw.tinf22b5.dinder.models.request.AddAdvertisementModel;
 import de.dhbw.tinf22b5.dinder.models.response.AdvertisementInformationModel;
 import de.dhbw.tinf22b5.dinder.services.AdvertisementService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -29,4 +31,20 @@ public class AdvertisementController {
     public AdvertisementInformationModel getAdvertisementById(@PathVariable int id) {
         return advertisementService.getAdvertisementFromId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
+
+    @PostMapping("/advertisement/image")
+    @ResponseBody
+    public boolean handleAdvertisementImage(@RequestPart("file") MultipartFile file, @RequestPart("json") AddAdvertisementModel model) {
+        try {
+            Files.write(Path.of("C:\\Users\\schae\\Desktop\\test.png"), file.getBytes());
+        } catch (IOException e) {
+            return false;
+        }
+
+        System.out.println(model.name());
+        System.out.println(model.description());
+
+        return true;
+    }
+
 }
