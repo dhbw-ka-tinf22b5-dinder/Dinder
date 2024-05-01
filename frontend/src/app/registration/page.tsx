@@ -1,6 +1,5 @@
 'use client'
 import { useSelector} from 'react-redux';
-import { MessageStyles } from "@/styles/Message.styles.ts";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
 import {store} from "@/lib/store.ts";
@@ -33,22 +32,23 @@ const Page = () => {
 			confirmPassword: form.CtrlPwd.value,
 		};
 		store.dispatch(registerThunk(user));
+		console.log(valueError);
 	};
+	const isPassword:boolean = valueError.errorMessage.includes("Password");
+	const isEmail:boolean = valueError.errorMessage.includes("email");
 	return (
 		<>
 			<MainBackgroundImg src={"./pictures/startBackground.png"} />
-			<MessageStyles $isError={valueError.error} $isHidden={!valueError.error}>
-				{valueError.errorMessage}
-			</MessageStyles>
+
 			<Form method="POST" submit={register}>
 				E-Mail:
-				<Input type={"text"} name={"email"} />
+				<Input type={"text"} name={"email"} error={(isEmail) ? valueError.errorMessage:""} />
 				Username:
 				<Input type={"text"} name={"username"} />
 				Password:
-				<Input type={"password"} name={"pwd"} />
+				<Input type={"password"} name={"pwd"} error={isPassword ? valueError.errorMessage:""} />
 				Password:
-				<Input type={"password"} name={"CtrlPwd"} />
+				<Input type={"password"} name={"CtrlPwd"} error={isPassword ? valueError.errorMessage:""}/>
 				<ButtonSubmit span={2}>Registrieren </ButtonSubmit>
 			</Form>
 		</>
