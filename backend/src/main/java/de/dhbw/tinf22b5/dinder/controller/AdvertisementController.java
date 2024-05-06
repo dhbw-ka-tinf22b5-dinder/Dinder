@@ -5,9 +5,9 @@ import de.dhbw.tinf22b5.dinder.models.request.AddAdvertisementModel;
 import de.dhbw.tinf22b5.dinder.models.response.AdvertisementInformationModel;
 import de.dhbw.tinf22b5.dinder.services.AdvertisementService;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
@@ -33,11 +33,12 @@ public class AdvertisementController {
     }
 
     @PostMapping("/advertisement/image")
-    @ResponseBody
-    public boolean handleAdvertisementImage(@RequestPart("file") MultipartFile file, @RequestPart("json") AddAdvertisementModel model) {
+    public boolean handleAdvertisementImage(@RequestPart("file") Resource file,
+                                            @RequestPart("json") AddAdvertisementModel model) {
         try {
-            Files.write(Path.of("C:\\Users\\schae\\Desktop\\test.png"), file.getBytes());
-        } catch (IOException e) {
+            Files.write(Path.of("C:\\Users\\schae\\Desktop\\test.png"), file.getContentAsByteArray());
+        }
+        catch (IOException e) {
             return false;
         }
 
