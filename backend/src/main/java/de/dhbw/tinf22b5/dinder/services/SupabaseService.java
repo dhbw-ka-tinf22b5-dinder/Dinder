@@ -8,13 +8,15 @@ import io.github.jan.supabase.storage.Storage;
 import io.github.jan.supabase.storage.StorageKt;
 import kotlin.Unit;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CompletableFuture;
 
+@Service
 public class SupabaseService {
     private final SupabaseClient supabaseClient;
 
-    public SupabaseService(@Value("supabase.url") String url, @Value("supabase.key") String key) {
+    public SupabaseService(@Value("${supabase.url}") String url, @Value("${supabase.key}") String key) {
         this.supabaseClient = SupabaseClientBuilderKt.createSupabaseClient(url, key, supabaseClientBuilder -> {
             supabaseClientBuilder.install(Storage.Companion, config -> Unit.INSTANCE);
             return Unit.INSTANCE;
