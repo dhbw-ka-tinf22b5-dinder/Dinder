@@ -38,6 +38,7 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp:2.3.10")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
     implementation(kotlin("stdlib-jdk8"))
+    implementation("org.apache.tika:tika-core:2.9.0")
 
     annotationProcessor("org.projectlombok:lombok:1.18.28")
 
