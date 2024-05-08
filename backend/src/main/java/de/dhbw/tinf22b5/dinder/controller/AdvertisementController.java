@@ -62,6 +62,7 @@ public class AdvertisementController {
             throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
 
+        //Change quicktime into mp4 because Apple
         if (fileExtension.equalsIgnoreCase(".qt")) {
             fileExtension = ".mp4";
         }
