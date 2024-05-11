@@ -1,25 +1,16 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import { MainBackgroundImg, MainContainer } from "../styles/mainPage.styles";
-import { Button } from "../components/atoms/Button.component";
+import StartPage from "@/components/pages/startPage.tsx";
+import SwipePage from "@/components/pages/SwipePage.tsx";
+import type {User} from "@/types/general.types.ts";
+import {useSelector} from "react-redux";
+import {RootState} from "@/lib/store.ts";
 
-const MainPageComponent = () => {
-
-  const {push} = useRouter();
-
-  return (
-      <>
-        <MainBackgroundImg src={"./pictures/startBackground.png"} />
-        <MainContainer $isMain>
-          <Button span={1} click={() => push('/login')} text={"Login"} />
-          <Button
-              span={1}
-              click={() => push("/registration")}
-              text={"Registrierung"}
-          />
-        </MainContainer>
-      </>
-  );
-};
-
-export default MainPageComponent;
+const MainPage = () => {
+    const valueUser: User = useSelector((state:RootState) => state.login);
+    return (
+        <>
+            {valueUser.userName ? <SwipePage /> : <StartPage />}
+        </>
+    );
+}
+export default MainPage;

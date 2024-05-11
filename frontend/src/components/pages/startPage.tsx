@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation'
-import { MainBackgroundImg, MainContainer } from "../../styles/mainPage.styles";
-import { Button } from "../atoms/Button.component";
+import { MainBackgroundImg, MainContainer } from "@/styles/mainPage.styles";
+import { Button } from "@/components/atoms/Button.component";
 
-const MainPageComponent = () => {
+const StartPage = () => {
 
 	const router = useRouter();
 
@@ -20,4 +20,4 @@ const MainPageComponent = () => {
 		</>
 	);
 };
-export default MainPageComponent;
+export default StartPage;
