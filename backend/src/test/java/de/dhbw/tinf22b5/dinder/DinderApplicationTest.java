@@ -7,8 +7,4 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class DinderApplicationTest {
-    @Test void appHasAGreeting() {
-        DinderApplication classUnderTest = new DinderApplication();
-        Assertions.assertNotNull("app should have a greeting", classUnderTest.getGreeting());
-    }
 }
