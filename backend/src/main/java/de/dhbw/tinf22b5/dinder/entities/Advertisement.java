@@ -1,5 +1,6 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
+import de.dhbw.tinf22b5.dinder.models.request.AddAdvertisementModel;
 import de.dhbw.tinf22b5.dinder.models.response.AdvertisementInformationModel;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -43,7 +44,31 @@ public class Advertisement {
     @OneToMany(mappedBy = "advertisementId")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
 
+    public static Advertisement fromModel(AddAdvertisementModel addAdvertisementModel, Users advertiser, String image) {
+        Advertisement advertisement = fromModel(addAdvertisementModel, advertiser);
+        advertisement.setImagePath(image);
+        return advertisement;
+    }
+
+    public static Advertisement fromModel(AddAdvertisementModel addAdvertisementModel, Users advertiser) {
+        Advertisement advertisement = fromModel(addAdvertisementModel);
+        advertisement.setAdvertiser(advertiser);
+        return advertisement;
+    }
+
+    public static Advertisement fromModel(AddAdvertisementModel addAdvertisementModel) {
+        Advertisement advertisement = new Advertisement();
+        advertisement.setTitle(addAdvertisementModel.title());
+        advertisement.setPrice(addAdvertisementModel.price());
+        advertisement.setLocation(addAdvertisementModel.location());
+        advertisement.setPlz(addAdvertisementModel.postalCode());
+        advertisement.setDescription(addAdvertisementModel.description());
+        advertisement.setCreationTime(Instant.now());
+        return advertisement;
+    }
+
     public AdvertisementInformationModel toInformationModel() {
-        return new AdvertisementInformationModel(title, price, location, plz, description, imagePath, advertiser.toInformationModel(), creationTime);
+        return new AdvertisementInformationModel(title, price, location, plz, description, imagePath,
+                advertiser.toInformationModel(), creationTime);
     }
 }

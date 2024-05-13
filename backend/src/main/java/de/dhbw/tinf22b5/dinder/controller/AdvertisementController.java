@@ -1,10 +1,12 @@
 package de.dhbw.tinf22b5.dinder.controller;
 
 import de.dhbw.tinf22b5.dinder.entities.Advertisement;
+import de.dhbw.tinf22b5.dinder.entities.Users;
 import de.dhbw.tinf22b5.dinder.models.request.AddAdvertisementModel;
 import de.dhbw.tinf22b5.dinder.models.response.AdvertisementInformationModel;
 import de.dhbw.tinf22b5.dinder.services.AdvertisementService;
 import de.dhbw.tinf22b5.dinder.services.SupabaseService;
+import de.dhbw.tinf22b5.dinder.services.UserService;
 import lombok.AllArgsConstructor;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
@@ -18,15 +20,17 @@ import org.springframework.web.server.ResponseStatusException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Principal;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1")
 @AllArgsConstructor
 public class AdvertisementController {
-
-    private AdvertisementService advertisementService;
-    private SupabaseService supabaseService;
+    private final UserService userService;
+    private final AdvertisementService advertisementService;
+    private final SupabaseService supabaseService;
 
     @GetMapping("advertisement/all")
     public List<Integer> getAllAdvertisements() {
@@ -47,28 +51,37 @@ public class AdvertisementController {
         return config.getMimeRepository().forName(mediaType.toString());
     }
 
-    @PostMapping("advertisement/image")
-    public String handleAdvertisementImage(@RequestPart("file") MultipartFile file,
-                                           @RequestPart("json") AddAdvertisementModel model) throws IOException {
-        String fileExtension;
+    @PostMapping("advertisement")
+    public Advertisement createAdvertisement(@RequestPart("json") AddAdvertisementModel model,
+                                             @RequestPart(value = "file", required = false) MultipartFile file,
+                                             Principal principal) throws IOException {
+        String fileExtension = null;
         try {
-            fileExtension = getMimeType(new ByteArrayInputStream(file.getBytes())).getExtension();
+            if (file != null) {
+                fileExtension = getMimeType(new ByteArrayInputStream(file.getBytes())).getExtension();
+            }
         }
         catch (MimeTypeException mimeTypeException) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if (fileExtension == null || fileExtension.isBlank()) {
+        if (file != null && (fileExtension == null || fileExtension.isBlank())) {
             throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
 
         //Change quicktime into mp4 because Apple
-        if (fileExtension.equalsIgnoreCase(".qt")) {
+        if (fileExtension != null && fileExtension.equalsIgnoreCase(".qt")) {
             fileExtension = ".mp4";
         }
 
-        return supabaseService.uploadFile(supabaseService.getBucket("advertisement"), file.getBytes(),
-                "123/testname" + fileExtension).join();
-    }
+        Users user = userService.loadUserByUsername(principal.getName());
+        String filePath = fileExtension == null ? "" : supabaseService.uploadFile(supabaseService.getBucket(
+                "advertisement"), file.getBytes(),
+                user.getUsername() + "/" + UUID.randomUUID() + fileExtension).join();
 
+        //TODO return advertisement information model?? -> there are some fields missing in it
+        return filePath != null
+                ? advertisementService.createAdvertisement(model, user, filePath)
+                : advertisementService.createAdvertisement(model, user);
+    }
 }
