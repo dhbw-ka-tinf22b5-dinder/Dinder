@@ -1,16 +1,18 @@
+'use client'
 import HandymanIcon from "@mui/icons-material/Handyman";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Header, Nav } from "../../styles/universal.styles";
-import { resetError } from "../../thunks/resetErrorThunk";
-import type { User } from "../../types/general.types";
+import { Header, Nav } from "@/styles/universal.styles";
+import { resetError } from "@/lib/thunks/resetErrorThunk";
+import type { User } from "@/types/general.types";
+import {RootState, store} from "@/lib/store.ts";
+import {useSelector} from "react-redux";
+import {useRouter} from "next/navigation";
 const NavBarComponent = () => {
-	const navigate = useNavigate();
-	const dispatch = useAppDispatch();
-	const valueUser: User = useAppSelector((state) => state.login);
+	const {push} = useRouter();
+
+	const valueUser: User = useSelector((state:RootState) => state.login);
 	const nav = () => {
-		navigate("/");
-		dispatch(resetError());
+		push("/");
+		store.dispatch(resetError());
 	};
 	return (
 		<>
@@ -19,7 +21,7 @@ const NavBarComponent = () => {
 				<Header onClick={() => nav()}>DINDER</Header>
 				{valueUser.userName}
 			</Nav>
-			<Outlet />
+
 		</>
 	);
 };
