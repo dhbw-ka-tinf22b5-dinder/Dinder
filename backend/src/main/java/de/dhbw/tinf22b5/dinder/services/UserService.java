@@ -53,8 +53,15 @@ public class UserService implements UserDetailsService {
         return securityService.validate(token, id -> new HashSet<>());
     }
 
+    /**
+     * Loads the user by email.
+     *
+     * @param username The email of the user.
+     * @return The user corresponding to the email address given in the parameter.
+     * @throws UsernameNotFoundException if the user is not found.
+     */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public Users loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findById(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
     }
