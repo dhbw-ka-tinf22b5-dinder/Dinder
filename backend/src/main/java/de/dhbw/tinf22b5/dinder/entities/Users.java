@@ -1,5 +1,6 @@
 package de.dhbw.tinf22b5.dinder.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.dhbw.tinf22b5.dinder.models.response.UserInformationModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,13 +23,16 @@ public class Users implements UserDetails {
     @Id
     private String email;
     private String userName;
+    @JsonIgnore
     private String pwdHash;
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new HashSet<>();
     }
 
+    @JsonIgnore
     @Override
     public String getPassword() {
         return pwdHash;
@@ -39,16 +43,19 @@ public class Users implements UserDetails {
         return email;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;

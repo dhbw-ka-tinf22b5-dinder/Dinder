@@ -2,6 +2,7 @@ plugins {
     `java-library`
     application
     eclipse
+    kotlin("jvm")
 }
 
 group = "de.dhbw.tinf22b5"
@@ -33,9 +34,19 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-gson:0.11.5")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0")
+    implementation("io.github.jan-tennert.supabase:storage-kt:2.3.1")
+    implementation("io.ktor:ktor-client-okhttp:2.3.10")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.apache.tika:tika-core:2.9.0")
 
     annotationProcessor("org.projectlombok:lombok:1.18.28")
 
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+    testImplementation("io.rest-assured:spring-mock-mvc:5.4.0")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers:3.2.4")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
+    testImplementation("org.testcontainers:junit-jupiter:1.19.8")
     testImplementation("junit:junit:4.13.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
@@ -59,4 +70,7 @@ tasks.withType<Javadoc> {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(17)
 }
