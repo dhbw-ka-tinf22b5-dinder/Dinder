@@ -10,8 +10,6 @@ import kotlinx.coroutines.future.future
 import kotlinx.coroutines.runBlocking
 import java.util.concurrent.CompletableFuture
 
-class SupabaseStorage
-
 fun BucketApi.uploadAsync(path: String, data: ByteArray, upsert: Boolean = false): CompletableFuture<String> {
     return runBlocking {
         future {
