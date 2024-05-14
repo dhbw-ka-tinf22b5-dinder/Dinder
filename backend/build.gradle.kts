@@ -42,6 +42,11 @@ dependencies {
 
     annotationProcessor("org.projectlombok:lombok:1.18.28")
 
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+    testImplementation("io.rest-assured:spring-mock-mvc:5.4.0")
+    testImplementation("org.springframework.boot:spring-boot-testcontainers:3.2.4")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
+    testImplementation("org.testcontainers:junit-jupiter:1.19.8")
     testImplementation("junit:junit:4.13.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 }
