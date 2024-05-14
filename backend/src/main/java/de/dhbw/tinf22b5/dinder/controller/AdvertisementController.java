@@ -8,11 +8,14 @@ import de.dhbw.tinf22b5.dinder.services.AdvertisementService;
 import de.dhbw.tinf22b5.dinder.services.SupabaseService;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import lombok.AllArgsConstructor;
+import org.apache.tika.Tika;
 import org.apache.tika.config.TikaConfig;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.mime.MimeType;
 import org.apache.tika.mime.MimeTypeException;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,7 +25,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -40,6 +45,39 @@ public class AdvertisementController {
     @GetMapping("advertisement/{id}")
     public AdvertisementInformationModel getAdvertisementById(@PathVariable int id) {
         return advertisementService.getAdvertisementFromId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    }
+
+    public HttpHeaders getHeadersForResource(String file) {
+        ContentDisposition contentDisposition = ContentDisposition.builder("inline").filename(file).build();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentDisposition(contentDisposition);
+
+        return headers;
+    }
+
+    @GetMapping("advertisement/{id}/image")
+    public ResponseEntity<Resource> getAdvertisementImageById(@PathVariable int id) {
+        Advertisement advertisement =
+                advertisementService.getAdvertisementById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Optional<byte[]> content = supabaseService.getImage(advertisement).map(CompletableFuture::join);
+
+        if (content.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        ByteArrayResource image = new ByteArrayResource(content.get());
+
+        Tika tika = new Tika();
+        String mimeType = tika.detect(content.get());
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .headers(getHeadersForResource(advertisement.getFileName()))
+                .contentLength(image.contentLength())
+                .contentType(MediaType.parseMediaType(mimeType))
+                .body(image);
     }
 
     public MimeType getMimeType(InputStream inputStream) throws IOException, MimeTypeException {
@@ -76,7 +114,7 @@ public class AdvertisementController {
 
         Users user = userService.loadUserByUsername(principal.getName());
         String filePath = fileExtension == null ? "" : supabaseService.uploadFile(supabaseService.getBucket(
-                "advertisement"), file.getBytes(),
+                        "advertisement"), file.getBytes(),
                 user.getUsername() + "/" + UUID.randomUUID() + fileExtension).join();
 
         //TODO return advertisement information model?? -> there are some fields missing in it

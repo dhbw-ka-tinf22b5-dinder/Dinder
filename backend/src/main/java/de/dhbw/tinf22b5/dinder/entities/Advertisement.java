@@ -44,6 +44,15 @@ public class Advertisement {
     @OneToMany(mappedBy = "advertisementId")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
 
+    public String getFileName() {
+        try {
+            String path = getImagePath().substring(getImagePath().indexOf("/") + 1);
+            return path.substring(path.indexOf("/") + 1);
+        } catch (StringIndexOutOfBoundsException e) {
+            return "image";
+        }
+    }
+
     public static Advertisement fromModel(AddAdvertisementModel addAdvertisementModel, Users advertiser, String image) {
         Advertisement advertisement = fromModel(addAdvertisementModel, advertiser);
         advertisement.setImagePath(image);

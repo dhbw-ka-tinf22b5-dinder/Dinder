@@ -21,6 +21,10 @@ public class AdvertisementService {
         return advertisementRepository.findAll().stream().filter(e -> e.getContractor() == null).toList();
     }
 
+    public Optional<Advertisement> getAdvertisementById(int id) {
+        return advertisementRepository.findById(id).filter(e -> e.getContractor() == null);
+    }
+
     public Optional<AdvertisementInformationModel> getAdvertisementFromId(int id) {
         return advertisementRepository.findById(id).filter(e -> e.getContractor() == null).map(Advertisement::toInformationModel);
     }
