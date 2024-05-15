@@ -15,14 +15,11 @@ const NavBarComponent = () => {
 		store.dispatch(resetError());
 	};
 	return (
-		<>
-			<Nav>
-				<HandymanIcon fontSize={"large"} onClick={() => nav()} />
-				<Header onClick={() => nav()}>DINDER</Header>
-				{valueUser.userName}
-			</Nav>
-
-		</>
+		<Nav>
+			<HandymanIcon fontSize={"large"} onClick={() => nav()}/>
+			<Header onClick={() => nav()}>DINDER</Header>
+			{valueUser.userName}
+		</Nav>
 	);
 };
 

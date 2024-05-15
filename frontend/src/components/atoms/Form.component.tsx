@@ -8,10 +8,8 @@ interface FormProps {
 
 export const Form = (props: FormProps) => {
 	return (
-		<>
-			<FormStyles method={props.method} onSubmit={props.submit}>
-				{props.children}
-			</FormStyles>
-		</>
+		<FormStyles method={props.method} onSubmit={props.submit}>
+			{props.children}
+		</FormStyles>
 	);
 };
