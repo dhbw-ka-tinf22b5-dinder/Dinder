@@ -19,3 +19,5 @@ jobs:
       - name: Run Formatter
         if: always()
         run: biome format --write frontend/src
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
