@@ -14,5 +14,7 @@ jobs:
         uses: biomejs/setup-biome@v2
         with:
           version: latest
+      - name: Run Formatter
+        run: biome format --write frontend/src
       - name: Run Biome
         run: biome ci frontend
