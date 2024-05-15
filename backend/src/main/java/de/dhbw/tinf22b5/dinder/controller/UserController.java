@@ -29,6 +29,7 @@ import java.util.Optional;
 @Tag(name = "User-Controller", description = "Manages the access to the application and provides information about " +
         "users.")
 public class UserController {
+    public static final String SESSION_ID_COOKIE = "session-id";
     private UserService userService;
     private SecurityService securityService;
 
@@ -44,7 +45,7 @@ public class UserController {
         boolean loginSuccessful = userService.login(loginModel);
         // TODO: besser machen
         if (loginSuccessful) {
-            Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(loginModel.loginName()));
+            Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, securityService.generateKey(loginModel.loginName()));
             sessionIdCookie.setHttpOnly(true);
             response.addCookie(sessionIdCookie);
         }
@@ -57,7 +58,7 @@ public class UserController {
         boolean registrationSuccessful = userService.register(registerModel);
         // TODO: besser machen
         if (registrationSuccessful) {
-            Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(registerModel.email()));
+            Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, securityService.generateKey(registerModel.email()));
             sessionIdCookie.setHttpOnly(true);
             response.addCookie(sessionIdCookie);
         }
@@ -73,7 +74,7 @@ public class UserController {
     @GetMapping("/user/me")
     public UserInformationModel getMyUserInfo(HttpServletRequest request) {
         String email = Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
+                .filter(cookie -> cookie.getName().equalsIgnoreCase(SESSION_ID_COOKIE))
                 .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                 .map(s -> securityService.getEmail(s))
                 .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
