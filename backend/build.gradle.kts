@@ -3,6 +3,14 @@ plugins {
     application
     eclipse
     kotlin("jvm")
+
+    id("jacoco")
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
 
 group = "de.dhbw.tinf22b5"
@@ -70,7 +78,9 @@ tasks.withType<Javadoc> {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
 }
+
 kotlin {
     jvmToolchain(17)
 }
