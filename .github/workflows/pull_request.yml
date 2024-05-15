@@ -16,3 +16,5 @@ jobs:
           version: latest
       - name: Run Linter
         run: biome ci frontend/src
+      - name: Run Formatter
+        run: biome format --write frontend/src
