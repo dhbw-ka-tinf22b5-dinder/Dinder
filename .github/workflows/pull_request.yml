@@ -17,4 +17,5 @@ jobs:
       - name: Run Linter
         run: biome ci frontend/src
       - name: Run Formatter
+        if: always()
         run: biome format --write frontend/src
