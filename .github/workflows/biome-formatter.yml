@@ -1,4 +1,4 @@
-name: Biome - linting and formatting
+name: Biome - formatting
 on:
   push:
     branches:
