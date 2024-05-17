@@ -9,6 +9,21 @@ export const Header = styled.header`
   position: relative;
   color: white;
   font-size: 2rem;
+  margin-left: 1rem;
+  margin-right: auto;
+`;
+export const HeaderSubpages = styled.header`
+  position: relative;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 2.5rem;
+`;
+export const HeaderLogout = styled.header`
+  position: relative;
+  color: white;
+  font-size: 1.5rem;
+  margin-left: auto;
+  margin-right: 2.5rem;
 `;
 export const Nav = styled.div`
   position: absolute;
