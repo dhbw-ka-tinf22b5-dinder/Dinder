@@ -2,7 +2,7 @@
   <configuration default="false" name="Backend Dev" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" value="dev" />
     <option name="ALTERNATIVE_JRE_PATH" value="corretto-19" />
-    <module name="Dinder" />
+    <module name="Dinder.backend.main" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="de.dhbw.tinf22b5.dinder.DinderApplication" />
     <method v="2">
       <option name="Make" enabled="true" />

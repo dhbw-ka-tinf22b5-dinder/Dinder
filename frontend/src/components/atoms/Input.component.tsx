@@ -6,9 +6,8 @@ export const Input = ({
 	name="input",
 	error=""
 }) => {
-	console.log(name+" "+error);
 	return <div>
-		<InputStyles type={type} name={name} $isError={error != ""}></InputStyles>
+		<InputStyles type={type} name={name} $isError={error !== ""}/>
 		<ErrorMessageStyles>{error}</ErrorMessageStyles>
 		</div>;
 };

@@ -3,7 +3,7 @@ import { getUserName, login, register } from "@/clients/http-client.ts";
 import { errorReducer } from "@/lib/slices/error.ts";
 import { loginReducer } from "@/lib/slices/login.ts";
 import type {
-	Error,
+	FrontendError,
 	User,
 	UserLogin,
 	UserRegister,
@@ -12,7 +12,7 @@ import type {
 
 interface LoginData {
 	user: User;
-	errorStatus: Error;
+	errorStatus: FrontendError;
 }
 const wrongPassword: LoginData = {
 	user: {
@@ -24,7 +24,7 @@ const wrongPassword: LoginData = {
 	},
 };
 function parseErrorToLoginData(errorValue: string): LoginData {
-	const errorObject: Error = {
+	const errorObject: FrontendError = {
 		error: true,
 		errorMessage: errorValue,
 	};
@@ -41,7 +41,7 @@ const successfulLogin = (): Promise<LoginData> => {
 		const user: User = {
 			userName: res,
 		};
-		const errorObject: Error = {
+		const errorObject: FrontendError = {
 			error: false,
 			errorMessage: "",
 		};
@@ -66,7 +66,7 @@ function loginHandler(userLogin: UserLogin): Promise<LoginData> {
 export const loginThunk =(userLogin: UserLogin) =>
 	async (
 		dispatch: (arg0: {
-			payload: Error | User;
+			payload: FrontendError | User;
 			type: "error/errorReducer" | "login/loginReducer";
 		}) => void,
 	) => {
@@ -96,14 +96,14 @@ export const loginThunk =(userLogin: UserLogin) =>
 // 		});
 // 	};
 
-function registerHandler(userRegister: UserRegister): Promise<Error> {
+function registerHandler(userRegister: UserRegister): Promise<FrontendError> {
 	return register(userRegister).then(() =>  parseErrorToLoginData("").errorStatus)
 		.catch((errorValue) => parseErrorToLoginData(errorValue).errorStatus);
 }
 export const registerThunk =
 	(userRegister: UserRegisterConfirmation) =>
 	async (
-		dispatch: (arg0: { payload: Error; type: "error/errorReducer" }) => void,
+		dispatch: (arg0: { payload: FrontendError; type: "error/errorReducer" }) => void,
 	) => {
 	if (userRegister.password !== userRegister.confirmPassword) {
 
