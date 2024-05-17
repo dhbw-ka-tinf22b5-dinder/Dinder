@@ -19,7 +19,7 @@ export default function NewAdvertisement(){
                         location:
                         <input type="text" name="location"/>
                         postal code:
-                        <input type="number" name="postalCode"/>
+                        <input type="text" name="postalCode"/>
                     </label>
                     <label>
                         picture:
