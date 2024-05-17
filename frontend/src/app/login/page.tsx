@@ -2,14 +2,16 @@
 import { useSelector } from "react-redux";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { loginThunk } from "@/lib/thunks/loginAndRegistration.ts";
-import type { Error, UserLogin } from "@/types/general.types.ts";
+import type { FrontendError, UserLogin } from "@/types/general.types.ts";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
 import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
-import { store, RootState } from "@/lib/store.ts";
+import { store, type RootState } from "@/lib/store.ts";
 import { useRouter } from "next/navigation";
 const Page = () => {
-	const valueError: Error = useSelector((state: RootState) => state.error);
+	const valueError: FrontendError = useSelector(
+		(state: RootState) => state.error,
+	);
 
 	const valueUser = useSelector((state: RootState) => state.login);
 	const { push } = useRouter();
