@@ -16,7 +16,7 @@ export interface UserRegister {
 export interface User {
 	userName: string;
 }
-export interface Error {
+export interface FrontendError {
 	error: boolean;
 	errorMessage: string;
 }
