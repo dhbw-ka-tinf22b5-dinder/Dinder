@@ -6,7 +6,7 @@ export function login(user: UserLogin): Promise<boolean> {
 	return axios
 		.post("http://localhost:8080/api/v1/login", user)
 		.then((res) => {
-			console.log("Hallo "+res);
+			console.log("Hallo " + res);
 			return res.data;
 		})
 
