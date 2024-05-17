@@ -37,33 +37,37 @@ function parseErrorToLoginData(errorValue: string): LoginData {
 	return loginData;
 }
 const successfulLogin = (): Promise<LoginData> => {
-	return getUserName().then((res) => {
-		const user: User = {
-			userName: res,
-		};
-		const errorObject: FrontendError = {
-			error: false,
-			errorMessage: "",
-		};
-		const loginData: LoginData = {
-			user: user,
-			errorStatus: errorObject,
-		};
-		return loginData;
-	}).catch((errorValue) => parseErrorToLoginData(errorValue)	);
+	return getUserName()
+		.then((res) => {
+			const user: User = {
+				userName: res,
+			};
+			const errorObject: FrontendError = {
+				error: false,
+				errorMessage: "",
+			};
+			const loginData: LoginData = {
+				user: user,
+				errorStatus: errorObject,
+			};
+			return loginData;
+		})
+		.catch((errorValue) => parseErrorToLoginData(errorValue));
 };
 
 function loginHandler(userLogin: UserLogin): Promise<LoginData> {
-	return login(userLogin).then((res) => {
-		if (res) {
-			return successfulLogin();
-		} else {
-			return wrongPassword;
-		}
-	}).catch((errorValue) => parseErrorToLoginData(errorValue));
-
+	return login(userLogin)
+		.then((res) => {
+			if (res) {
+				return successfulLogin();
+			} else {
+				return wrongPassword;
+			}
+		})
+		.catch((errorValue) => parseErrorToLoginData(errorValue));
 }
-export const loginThunk =(userLogin: UserLogin) =>
+export const loginThunk =
+	(userLogin: UserLogin) =>
 	async (
 		dispatch: (arg0: {
 			payload: FrontendError | User;
@@ -80,7 +84,6 @@ export const loginThunk =(userLogin: UserLogin) =>
 			dispatch(loginReducer(res.user));
 			dispatch(errorReducer(res.errorStatus));
 		});
-
 	};
 // export const loginByCookie =
 // 	() =>
@@ -97,32 +100,35 @@ export const loginThunk =(userLogin: UserLogin) =>
 // 	};
 
 function registerHandler(userRegister: UserRegister): Promise<FrontendError> {
-	return register(userRegister).then(() =>  parseErrorToLoginData("").errorStatus)
+	return register(userRegister)
+		.then(() => parseErrorToLoginData("").errorStatus)
 		.catch((errorValue) => parseErrorToLoginData(errorValue).errorStatus);
 }
 export const registerThunk =
 	(userRegister: UserRegisterConfirmation) =>
 	async (
-		dispatch: (arg0: { payload: FrontendError; type: "error/errorReducer" }) => void,
+		dispatch: (arg0: {
+			payload: FrontendError;
+			type: "error/errorReducer";
+		}) => void,
 	) => {
-	if (userRegister.password !== userRegister.confirmPassword) {
-
-	const errorMessage:string= "Passwords do not match";
-	dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
-	return;
-	}
-	if (!validator.validate(userRegister.email)) {
-		const errorMessage: string = "Invalid email";
-		//states werden geupdated
-		dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
-		return;
-	}
-	const userRegisterSend: UserRegister = {
-		email: userRegister.email,
-		userName: userRegister.userName,
-		password: userRegister.password,
+		if (userRegister.password !== userRegister.confirmPassword) {
+			const errorMessage: string = "Passwords do not match";
+			dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
+			return;
+		}
+		if (!validator.validate(userRegister.email)) {
+			const errorMessage: string = "Invalid email";
+			//states werden geupdated
+			dispatch(errorReducer(parseErrorToLoginData(errorMessage).errorStatus));
+			return;
+		}
+		const userRegisterSend: UserRegister = {
+			email: userRegister.email,
+			userName: userRegister.userName,
+			password: userRegister.password,
+		};
+		registerHandler(userRegisterSend).then((res) => {
+			dispatch(errorReducer(res));
+		});
 	};
-	registerHandler(userRegisterSend).then((res) => {
-		dispatch(errorReducer(res));
-	});
-};

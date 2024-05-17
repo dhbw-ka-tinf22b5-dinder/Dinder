@@ -1,9 +1,9 @@
-'use client'
-import { useSelector} from 'react-redux';
+"use client";
+import { useSelector } from "react-redux";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
-import {store} from "@/lib/store.ts";
-import type { RootState } from '@/lib/store';
+import { store } from "@/lib/store.ts";
+import type { RootState } from "@/lib/store";
 import type {
 	FrontendError,
 	UserRegisterConfirmation,
@@ -15,8 +15,9 @@ import { Input } from "@/components/atoms/Input.component.tsx";
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
 const Page = () => {
-
-	const valueError: FrontendError = useSelector((state:RootState) => state.error);
+	const valueError: FrontendError = useSelector(
+		(state: RootState) => state.error,
+	);
 	const register = (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		const form = e.target as typeof e.target & {
@@ -34,21 +35,33 @@ const Page = () => {
 		store.dispatch(registerThunk(user));
 		console.log(valueError);
 	};
-	const isPassword:boolean = valueError.errorMessage.includes("Password");
-	const isEmail:boolean = valueError.errorMessage.includes("email");
+	const isPassword: boolean = valueError.errorMessage.includes("Password");
+	const isEmail: boolean = valueError.errorMessage.includes("email");
 	return (
 		<>
 			<MainBackgroundImg src={"./pictures/startBackground.png"} />
 
 			<Form method="POST" submit={register}>
 				E-Mail:
-				<Input type={"text"} name={"email"} error={(isEmail) ? valueError.errorMessage:""} />
+				<Input
+					type={"text"}
+					name={"email"}
+					error={isEmail ? valueError.errorMessage : ""}
+				/>
 				Username:
 				<Input type={"text"} name={"username"} />
 				Password:
-				<Input type={"password"} name={"pwd"} error={isPassword ? valueError.errorMessage:""} />
+				<Input
+					type={"password"}
+					name={"pwd"}
+					error={isPassword ? valueError.errorMessage : ""}
+				/>
 				Password:
-				<Input type={"password"} name={"CtrlPwd"} error={isPassword ? valueError.errorMessage:""}/>
+				<Input
+					type={"password"}
+					name={"CtrlPwd"}
+					error={isPassword ? valueError.errorMessage : ""}
+				/>
 				<ButtonSubmit span={2}>Registrieren </ButtonSubmit>
 			</Form>
 		</>
