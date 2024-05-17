@@ -6,7 +6,7 @@ export const MainContainer = styled.div<{ $isMain?: boolean }>`
     display: grid;
     gap: 60px;
     grid-template-columns: auto auto;
-    background: ${(props) => (props.$isMain ? "none" : "white")};
+    background: ${(props) => (props.$isMain ? "grey" : "white")};
     border-radius: 25px;
     color: black;
     padding: 10px;
