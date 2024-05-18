@@ -24,7 +24,7 @@ const NavBarComponent = () => {
 			<HeaderSubpages onClick={() => nav("/swiped_advertisements")}>
 				swiped advertisements
 			</HeaderSubpages>
-			<HeaderSubpages onClick={() => nav("/new_advertisements")}>
+			<HeaderSubpages onClick={() => nav("/new_advertisement")}>
 				new advertisement
 			</HeaderSubpages>
 			<HeaderLogout onClick={() => nav("/")}>logout</HeaderLogout>
