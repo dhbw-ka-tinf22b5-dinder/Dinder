@@ -5,7 +5,7 @@ import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
 import {store} from "@/lib/store.ts";
 import type { RootState } from '@/lib/store';
 import type {
-	Error,
+	FrontendError,
 	UserRegisterConfirmation,
 } from "@/types/general.types.ts";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
@@ -16,7 +16,7 @@ import { Input } from "@/components/atoms/Input.component.tsx";
 
 const Page = () => {
 
-	const valueError: Error = useSelector((state:RootState) => state.error);
+	const valueError: FrontendError = useSelector((state:RootState) => state.error);
 	const register = (e: React.SyntheticEvent) => {
 		e.preventDefault();
 		const form = e.target as typeof e.target & {

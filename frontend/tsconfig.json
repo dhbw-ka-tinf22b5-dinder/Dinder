@@ -42,7 +42,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../backend/src/main/resources/public/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
