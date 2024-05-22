@@ -12,7 +12,7 @@ import type {RootState} from "@/lib/store.ts";
 import {useRouter} from "next/navigation";
 const Page = () => {
 	const valueError: FrontendError = useSelector((state:RootState) => state.error);
-
+	console.log("test")
 	const valueUser = useSelector((state:RootState) => state.login);
 	const {push} = useRouter();
 	function handleClick(e:React.SyntheticEvent){

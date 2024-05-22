@@ -1,6 +1,9 @@
 // SwipePage.js
 
 import { AdvertismentImage, Card, Info } from "@/styles/swipecard.styles";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PersonIcon from '@mui/icons-material/Person';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 //import './App.css';
 import { Button } from "../atoms/Button.component";
 import {advertisementThunk} from "@/lib/thunks/AdvertisementThunk.ts";
@@ -8,7 +11,7 @@ import {RootState, store} from "@/lib/store.ts";
 import {useSelector} from "react-redux";
 import {decrementDisplay, incrementDisplay} from "@/lib/slices/advertisement.ts";
 
-const data = [
+/*const data = [
 	{
 		imageUrl:
 			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwfqFhXDTDDPNU_4T8migaRz1T7Uc-XCFU3mYONa_4hw&s",
@@ -25,13 +28,16 @@ const data = [
 		imageUrl:
 			"https://imgix.obi.de/api/disc/cms/public/dam/DE-AT-Assets/Aussenbereich/holz-stapeln/1_Holz-stapeln_01256989.jpg?crop=focalpoint&fit=crop&fp-x=0.346&fp-y=0.584&fp-z=1&w=480&auto=format%2Ccompress&h=270",
 	},
-];
+];*/
 
 function SwipePage() {
 
-	store.dispatch(advertisementThunk());
+
 	const advertisements = useSelector((state:RootState )=> state.advertisement.Advertisement);
 	const currentAdvertisement = useSelector((state:RootState) => state.advertisement.displayedAdvertisement);
+	if(advertisements.length == 0) {
+		store.dispatch(advertisementThunk());
+	}
 	//Next task advertisements
 	const handleNext = () => {
 		store.dispatch(incrementDisplay());
@@ -45,21 +51,22 @@ function SwipePage() {
 		// Add logic for accepting the active box
 		console.log(advertisements[currentAdvertisement]);
 	};
-	console.log(advertisements);
 	if (advertisements.length === 0){
 		return <h1>loading</h1>;
 	}
+	console.log("test Seite")
 	const currentItem = advertisements[currentAdvertisement];
-
 	return (
 		<Card>
-			<AdvertismentImage src={data[currentAdvertisement].imageUrl} alt={currentItem.title} />
+			<AdvertismentImage src={currentItem.image} alt={currentItem.title} />
 			<Info>
 				<h2>{currentItem.title}</h2>
-				<p>{currentItem.description}</p>
-				<p>{currentItem.price}</p>
-				<p>{currentItem.image}</p>
-				<p>{currentItem.creationTime.toISOString()}</p>
+				<p><b>Beschreibung</b> {currentItem.description}</p>
+				<p><b>Preis</b> {currentItem.price}</p>
+				<p><LocationOnIcon/> {currentItem.plz} {currentItem.location}</p>
+				<p><CalendarMonthIcon/>{currentItem.creationTime.toLocaleDateString()}</p>
+				<p><PersonIcon/> {currentItem.advertiser.userName}</p>
+
 			</Info>
 			<Button span={1} click={handlePrev} text={"Previous"} />
 

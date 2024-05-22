@@ -58,20 +58,12 @@ export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 
 		.then((res) =>{
 			const rawAdvertisement : advertisementFromServer = res.data;
-			return fetchImageForAdvertisement(id,rawAdvertisement);
+			return parseToAdvertisement(rawAdvertisement, id);
 		} )
 		.catch((error) => error.status);
 }
-function fetchImageForAdvertisement(id: number, rawAdvertisement: advertisementFromServer): Promise<Advertisement> {
-	return axios
-		.get(url+"advertisement/"+id+"/image")
-		.then((res) =>{
-			const image :string = res.data;
-			return parseToAdvertisement(rawAdvertisement, id, image);
-		})
-		.catch((error) => parseToAdvertisement(rawAdvertisement, id, error.status));
-}
-function parseToAdvertisement(data: advertisementFromServer,id: number,image: string): Advertisement {
+
+function parseToAdvertisement(data: advertisementFromServer,id: number): Advertisement {
 	return {
 		id: id,
 		title: data.title,
@@ -79,7 +71,7 @@ function parseToAdvertisement(data: advertisementFromServer,id: number,image: st
 		location: data.location,
 		plz: data.plz,
 		description: data.description,
-		image: image,
+		image: `${url}advertisement/${id}/image`,
 		advertiser: data.advertiser,
 
 		creationTime: new Date(data.creationTime)
