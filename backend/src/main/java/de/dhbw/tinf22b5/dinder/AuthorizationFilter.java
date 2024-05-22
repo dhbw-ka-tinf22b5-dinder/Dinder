@@ -1,5 +1,6 @@
 package de.dhbw.tinf22b5.dinder;
 
+import de.dhbw.tinf22b5.dinder.controller.UserController;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -25,7 +26,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                                     @NotNull FilterChain filterChain) throws ServletException, IOException {
         if (request.getCookies() != null) {
             Arrays.stream(request.getCookies())
-                    .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
+                    .filter(cookie -> cookie.getName().equalsIgnoreCase(UserController.SESSION_ID_COOKIE))
                     .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                     .findFirst()
                     .flatMap(userService::validateToken)

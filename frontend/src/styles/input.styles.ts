@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const InputStyles = styled.input<{
-  $isError: boolean;
+	$isError: boolean;
 }>`
   padding-left: 5px;
   border-color: ${(props) => (props.$isError ? "red" : "black")};;

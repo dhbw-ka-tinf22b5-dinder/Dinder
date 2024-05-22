@@ -29,8 +29,16 @@ import java.util.Optional;
 @Tag(name = "User-Controller", description = "Manages the access to the application and provides information about " +
         "users.")
 public class UserController {
+    public static final String SESSION_ID_COOKIE = "session-id";
     private UserService userService;
     private SecurityService securityService;
+
+    private Cookie generateSessionIDCookie(String email) {
+        Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, securityService.generateKey(email));
+        sessionIdCookie.setHttpOnly(true);
+        sessionIdCookie.setSecure(true);
+        return sessionIdCookie;
+    }
 
     @Operation(description = "Log in using the credentials. The response will have a cookie attached, which contains " +
             "the " +
@@ -42,12 +50,9 @@ public class UserController {
     @PostMapping("/login")
     public boolean login(@RequestBody LoginModel loginModel, HttpServletResponse response) {
         boolean loginSuccessful = userService.login(loginModel);
-        // TODO: besser machen
-        if (loginSuccessful) {
-            Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(loginModel.loginName()));
-            sessionIdCookie.setHttpOnly(true);
-            response.addCookie(sessionIdCookie);
-        }
+
+        if (loginSuccessful)
+            response.addCookie(generateSessionIDCookie(loginModel.loginName()));
 
         return loginSuccessful;
     }
@@ -55,12 +60,9 @@ public class UserController {
     @PostMapping("/register")
     public boolean register(@RequestBody RegisterModel registerModel, HttpServletResponse response) {
         boolean registrationSuccessful = userService.register(registerModel);
-        // TODO: besser machen
-        if (registrationSuccessful) {
-            Cookie sessionIdCookie = new Cookie("session-id", securityService.generateKey(registerModel.email()));
-            sessionIdCookie.setHttpOnly(true);
-            response.addCookie(sessionIdCookie);
-        }
+
+        if (registrationSuccessful)
+            response.addCookie(generateSessionIDCookie(registerModel.email()));
 
         return registrationSuccessful;
     }
@@ -73,7 +75,7 @@ public class UserController {
     @GetMapping("/user/me")
     public UserInformationModel getMyUserInfo(HttpServletRequest request) {
         String email = Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equalsIgnoreCase("session-id"))
+                .filter(cookie -> cookie.getName().equalsIgnoreCase(SESSION_ID_COOKIE))
                 .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
                 .map(s -> securityService.getEmail(s))
                 .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyFactory;
@@ -34,11 +35,11 @@ import java.util.Optional;
 public class SecurityService {
     private final RsaKeyProperties rsaKeys;
 
-    public SecurityService() {
+    public SecurityService() throws InvalidKeySpecException, NoSuchAlgorithmException, IOException {
         try (InputStream publicKeyStream = getClass().getClassLoader().getResourceAsStream("certs/public.pem");
              InputStream privateKeyStream = getClass().getClassLoader().getResourceAsStream("certs/private.pem")) {
             if (publicKeyStream == null || privateKeyStream == null) {
-                throw new RuntimeException("Key files are missing!");
+                throw new FileNotFoundException("Key files are missing!");
             }
 
             String publicKey = new String(publicKeyStream.readAllBytes())
@@ -58,9 +59,6 @@ public class SecurityService {
 
             this.rsaKeys = new RsaKeyProperties((RSAPublicKey) keyFactory.generatePublic(publicKeySpec),
                     (RSAPrivateKey) keyFactory.generatePrivate(spec));
-        }
-        catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException exception) {
-            throw new RuntimeException(exception);
         }
     }
 

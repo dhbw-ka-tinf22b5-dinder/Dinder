@@ -22,7 +22,7 @@ export function login(user: UserLogin): Promise<boolean> {
 	return axios
 		.post(url+"login", user)
 		.then((res) => {
-			console.log("Hallo "+res);
+			console.log("Hallo " + res);
 			return res.data;
 		})
 
