@@ -59,12 +59,26 @@ public class AdvertisementController {
     @GetMapping("advertisement/{id}/image")
     public ResponseEntity<Resource> getAdvertisementImageById(@PathVariable int id) {
         Advertisement advertisement =
-                advertisementService.getAdvertisementById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                advertisementService.getAdvertisementById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         Optional<byte[]> content = supabaseService.getImage(advertisement).map(CompletableFuture::join);
 
         if (content.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("assets/no-image.jpg")) {
+                if (inputStream != null) {
+                    ByteArrayResource image = new ByteArrayResource(inputStream.readAllBytes());
+                    return ResponseEntity
+                            .status(HttpStatus.NOT_FOUND)
+                            .headers(getHeadersForResource("no-image.jpg"))
+                            .contentLength(image.contentLength())
+                            .contentType(MediaType.IMAGE_JPEG)
+                            .body(image);
+                }
+            }
+            catch (IOException ignored) {
+                //both the else case and this catch should throw the following exception, meaning this saves redundancy
+            }
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         ByteArrayResource image = new ByteArrayResource(content.get());
