@@ -17,6 +17,8 @@ export const HeaderSubpages = styled.header`
   color: white;
   font-size: 1.5rem;
   margin-left: 2.5rem;
+    user-select: none;
+    cursor: pointer;
 `;
 export const HeaderLogout = styled.header`
   position: relative;
