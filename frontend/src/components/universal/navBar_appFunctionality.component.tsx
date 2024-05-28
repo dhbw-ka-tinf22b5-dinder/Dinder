@@ -7,7 +7,7 @@ import {
 	Nav,
 } from "@/styles/universal.styles";
 import { useRouter } from "next/navigation";
-const NavBarComponent = () => {
+const NavBarAppFunctionalityComponent = () => {
 	const { push } = useRouter();
 	const nav = (href: string) => {
 		push(href);
@@ -17,7 +17,7 @@ const NavBarComponent = () => {
 		<Nav>
 			<HandymanIcon fontSize={"large"} onClick={() => nav("/")} />
 			<Header onClick={() => nav("/")}>DINDER</Header>
-			<HeaderSubpages onClick={() => nav("/")}>SWIPE</HeaderSubpages>
+			<HeaderSubpages onClick={() => nav("/swipe")}>SWIPE</HeaderSubpages>
 			<HeaderSubpages onClick={() => nav("/published_advertisements")}>
 				published advertisements
 			</HeaderSubpages>
@@ -32,4 +32,4 @@ const NavBarComponent = () => {
 	);
 };
 
-export default NavBarComponent;
+export default NavBarAppFunctionalityComponent;
