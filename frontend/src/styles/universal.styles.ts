@@ -26,6 +26,8 @@ export const HeaderLogout = styled.header`
   font-size: 1.5rem;
   margin-left: auto;
   margin-right: 2.5rem;
+    user-select: none;
+    cursor: pointer;
 `;
 export const Nav = styled.div`
   position: absolute;
