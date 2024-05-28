@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Package
-          path: backend/build/libs
+          path: backend/build/distributions
