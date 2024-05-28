@@ -7,6 +7,6 @@ import LogInSwipe from "@/components/atoms/LogInSwipe.component.tsx";
 
 const MainPage = () => {
 	const valueUser: User = useSelector((state: RootState) => state.login);
-	return <>{valueUser.userName ? <LogInSwipe/> : <StartPage />}</>;
+	return <>{valueUser.userName ? <LogInSwipe /> : <StartPage />}</>;
 };
 export default MainPage;
