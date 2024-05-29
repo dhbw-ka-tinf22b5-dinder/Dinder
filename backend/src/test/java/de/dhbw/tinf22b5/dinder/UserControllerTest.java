@@ -4,7 +4,6 @@ import de.dhbw.tinf22b5.dinder.controller.UserController;
 import de.dhbw.tinf22b5.dinder.services.SecurityService;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import io.restassured.RestAssured;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,10 +79,5 @@ class UserControllerTest {
         when().get("/api/v1/user/not@registerd.user").
         then().
                 statusCode(HttpStatus.BAD_REQUEST.value());
-    }
-
-    @Test
-    void failingTest() {
-        Assertions.assertEquals(0, 1);
     }
 }
