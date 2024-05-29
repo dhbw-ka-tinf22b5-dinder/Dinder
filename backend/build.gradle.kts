@@ -85,6 +85,10 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
+tasks.withType<CreateStartScripts> {
+    classpath = files("lib/*")
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
     options.compilerArgs = options.compilerArgs + "-parameters"
