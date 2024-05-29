@@ -1,4 +1,4 @@
-package de.dhbw.tinf22b5.dinder;
+package de.dhbw.tinf22b5.dinder.usercontroller;
 
 import de.dhbw.tinf22b5.dinder.controller.UserController;
 import de.dhbw.tinf22b5.dinder.services.SecurityService;
@@ -21,7 +21,8 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("dev")
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
-class UserControllerTest {
+class InfoTest {
+
     @Autowired
     UserService userService;
 
@@ -38,28 +39,9 @@ class UserControllerTest {
 
     @Test
     void shouldGive401Unauthorized() {
-        when().get("/api/v1/user/me").then().statusCode(401);
-    }
-
-    @Test
-    void shouldGive409Conflict() {
-        given().
-                body("{\"email\":\"test@yahoo.de\",\"userName\":\"1234\",\"password\":\"123\"}").
-                contentType("application/json").
-        when().post("/api/v1/register").
+        when().get("/api/v1/user/me").
         then().
-                statusCode(HttpStatus.CONFLICT.value());
-    }
-
-    @Test
-    void registerSuccessTest() {
-        given().
-                body("{\"email\":\"newUser@yahoo.de\",\"userName\":\"newUser\",\"password\":\"123\"}").
-                contentType("application/json").
-        when().post("/api/v1/register").
-        then().
-                statusCode(HttpStatus.OK.value()).
-                cookie(UserController.SESSION_ID_COOKIE);
+                statusCode(401);
     }
 
     @Test
@@ -80,4 +62,5 @@ class UserControllerTest {
         then().
                 statusCode(HttpStatus.BAD_REQUEST.value());
     }
+
 }
