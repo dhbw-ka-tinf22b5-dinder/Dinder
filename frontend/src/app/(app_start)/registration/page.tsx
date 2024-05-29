@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
 import { store } from "@/lib/store.ts";
-import type { RootState } from "@/lib/store";
+import type { RootState } from "@/lib/store.ts";
 import type {
 	FrontendError,
 	UserRegisterConfirmation,
