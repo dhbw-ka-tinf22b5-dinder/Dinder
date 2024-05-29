@@ -11,8 +11,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<>
-            <NavBarStartComponent/>
-            {children}
-        </>
+			<NavBarStartComponent />
+			{children}
+		</>
 	);
 }

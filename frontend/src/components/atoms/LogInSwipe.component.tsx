@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 const LogInSwipe = () => {
-    useRouter().push("/swipe");
+	useRouter().push("/swipe");
 
-    return <></>;
+	return <></>;
 };
 
 export default LogInSwipe;
