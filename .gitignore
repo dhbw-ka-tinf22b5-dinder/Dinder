@@ -32,3 +32,6 @@ build
 
 # Ignore Eclipse
 .metadata
+
+# Ignore backend ressources public
+backend/src/main/resources/public
