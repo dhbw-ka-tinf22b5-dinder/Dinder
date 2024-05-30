@@ -9,23 +9,24 @@ export default function NewAdvertisement() {
 	};
 
 	return (
-            <>
-                <Form method={"POST"} submit={addAdvertisement}>
-                    <h3>Create new advertisement</h3><h3></h3>
-                    title
-                    <Input type={"text"} name={"title"}/>
-                    description
-                    <Input type={"text"} name={"description"}/>
-                    price
-                    <Input type={"text"} name={"price"}/>
-                    location
-                    <Input type={"text"} name={"location"}/>
-                    postal code
-                    <Input type={"text"} name={"postalCode"}/>
-                    picture
-                    <Input type={"text"} name={"picture"}/>
-                    <ButtonSubmit span={2}>Create</ButtonSubmit>
-                </Form>
-            </>
-    );
+		<>
+			<Form method={"POST"} submit={addAdvertisement}>
+				<h3>Create new advertisement</h3>
+				<h3></h3>
+				title
+				<Input type={"text"} name={"title"} />
+				description
+				<Input type={"text"} name={"description"} />
+				price
+				<Input type={"text"} name={"price"} />
+				location
+				<Input type={"text"} name={"location"} />
+				postal code
+				<Input type={"text"} name={"postalCode"} />
+				picture
+				<Input type={"text"} name={"picture"} />
+				<ButtonSubmit span={2}>Create</ButtonSubmit>
+			</Form>
+		</>
+	);
 }
