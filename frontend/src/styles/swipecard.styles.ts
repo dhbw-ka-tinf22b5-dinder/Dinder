@@ -19,4 +19,5 @@ export const AdvertismentImage = styled.img`
   height: 270px;
   border-radius: 25px;
   grid-column: span 3;
+  border: 1px solid darkgray;
 `;
