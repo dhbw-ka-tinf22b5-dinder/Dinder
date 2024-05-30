@@ -6,13 +6,15 @@ import type { FrontendError, UserLogin } from "@/types/general.types.ts";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
 import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
-import { store, type RootState } from "@/lib/store.ts";
+import { store } from "@/lib/store.ts";
+
+import type { RootState } from "@/lib/store.ts";
 import { useRouter } from "next/navigation";
 const Page = () => {
 	const valueError: FrontendError = useSelector(
 		(state: RootState) => state.error,
 	);
-
+	console.log("test");
 	const valueUser = useSelector((state: RootState) => state.login);
 	const { push } = useRouter();
 	function handleClick(e: React.SyntheticEvent) {
