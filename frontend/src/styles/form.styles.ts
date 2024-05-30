@@ -10,4 +10,3 @@ export const FormStyles = styled.form`
     border-radius: 1rem;
     color: black;
     padding: 1.5rem;`;
-
