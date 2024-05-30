@@ -20,7 +20,7 @@ export interface FrontendError {
 	error: boolean;
 	errorMessage: string;
 }
-export interface Advertiser{
+export interface Advertiser {
 	userName: string;
 }
 export interface Advertisement {

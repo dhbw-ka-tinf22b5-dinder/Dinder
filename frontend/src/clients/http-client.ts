@@ -1,10 +1,13 @@
 import axios from "axios";
-import type {Advertisement, UserLogin, UserRegister} from "../types/general.types";
+import type {
+	Advertisement,
+	UserLogin,
+	UserRegister,
+} from "../types/general.types";
 
 const url = "http://localhost:8080/api/v1/";
 
-interface advertisementFromServer{
-
+interface advertisementFromServer {
 	title: string;
 	price: number;
 	location: string;
@@ -14,13 +17,12 @@ interface advertisementFromServer{
 		userName: string;
 	};
 	creationTime: string;
-
 }
 
 export function login(user: UserLogin): Promise<boolean> {
 	// later this will be a json
 	return axios
-		.post(url+"login", user)
+		.post(url + "login", user)
 		.then((res) => {
 			console.log("Hallo " + res);
 			return res.data;
@@ -31,13 +33,13 @@ export function login(user: UserLogin): Promise<boolean> {
 export function register(user: UserRegister): Promise<number> {
 	// later this will be a json
 	return axios
-		.post(url+"register", user)
+		.post(url + "register", user)
 		.then((res) => res.status)
 		.catch((error) => error.status);
 }
 export function getUserName(): Promise<string> {
 	return axios
-		.get(url+"user/me")
+		.get(url + "user/me")
 		.then((res) => {
 			console.log(res);
 			return res.data.userName;
@@ -47,23 +49,26 @@ export function getUserName(): Promise<string> {
 export function fetchListOfAdvertisements(): Promise<number[]> {
 	// later this will be a json
 	return axios
-		.get(url+"advertisement/all")
+		.get(url + "advertisement/all")
 		.then((res) => res.data)
 		.catch((error) => error.status);
 }
 export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 	// later this will be a json
 	return axios
-		.get(url+"advertisement/"+id)
+		.get(url + "advertisement/" + id)
 
-		.then((res) =>{
-			const rawAdvertisement : advertisementFromServer = res.data;
+		.then((res) => {
+			const rawAdvertisement: advertisementFromServer = res.data;
 			return parseToAdvertisement(rawAdvertisement, id);
-		} )
+		})
 		.catch((error) => error.status);
 }
 
-function parseToAdvertisement(data: advertisementFromServer,id: number): Advertisement {
+function parseToAdvertisement(
+	data: advertisementFromServer,
+	id: number,
+): Advertisement {
 	return {
 		id: id,
 		title: data.title,
@@ -74,6 +79,6 @@ function parseToAdvertisement(data: advertisementFromServer,id: number): Adverti
 		image: `${url}advertisement/${id}/image`,
 		advertiser: data.advertiser,
 
-		creationTime: new Date(data.creationTime)
+		creationTime: new Date(data.creationTime),
 	};
 }
