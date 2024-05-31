@@ -8,7 +8,7 @@
 		"build": "next build && npm run build-api",
 		"build-api": "node src/build-api.js",
 		"start": "next start",
-		"lint": "next lint"
+		"lint": "npx @biomejs/biome ci src"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.1",
