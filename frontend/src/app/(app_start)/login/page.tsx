@@ -15,7 +15,7 @@ const Page = () => {
 		(state: RootState) => state.error,
 	);
 	const valueUser = useSelector((state: RootState) => state.login);
-	const { push } = useRouter();
+	const  router = useRouter();
 	function handleClick(e: React.SyntheticEvent) {
 		e.preventDefault();
 		const target = e.target as typeof e.target & {
@@ -30,7 +30,7 @@ const Page = () => {
 		store.dispatch(loginThunk(userLogin));
 	}
 	if (valueUser.userName) {
-		push("/");
+		router.push("/");
 	}
 	const isPassword: boolean = valueError.errorMessage.includes("password");
 	return (

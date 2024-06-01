@@ -29,16 +29,3 @@ export const HeaderLogout = styled.header`
     user-select: none;
     cursor: pointer;
 `;
-export const Nav = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6%;
-  z-index: 1000;
-  display: flex;
-  padding: 19px;
-  background: gray;
-  opacity: 70%;
-  align-items: center;
-`;

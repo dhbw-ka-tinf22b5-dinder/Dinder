@@ -4,7 +4,6 @@ import { AdvertismentImage, Card, Info } from "@/styles/swipecard.styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-//import './App.css';
 import { Button } from "../atoms/Button.component";
 import { advertisementThunk } from "@/lib/thunks/AdvertisementThunk.ts";
 import { type RootState, store } from "@/lib/store.ts";
@@ -13,6 +12,7 @@ import {
 	decrementDisplay,
 	incrementDisplay,
 } from "@/lib/slices/advertisement.ts";
+
 
 function SwipePage() {
 	const advertisements = useSelector(

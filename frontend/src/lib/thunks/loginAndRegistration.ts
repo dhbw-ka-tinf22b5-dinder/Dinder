@@ -59,7 +59,7 @@ function loginHandler(userLogin: UserLogin): Promise<LoginData> {
 	return login(userLogin)
 		.then((res) => {
 			if (res) {
-                localStorage.setItem("isLoggedIn","1");
+                sessionStorage.setItem("isLoggedIn","1");
 				return successfulLogin();
 			}
 			return wrongPassword;
@@ -90,7 +90,6 @@ export const loginByCookie =() =>async (
         payload: FrontendError | User;
         type: "error/errorReducer" | "login/loginReducer";
     }) => void,	) => {
-    console.log("test")
     successfulLogin().then((res) => {
         dispatch(loginReducer(res.user));
         dispatch(errorReducer(res.errorStatus));

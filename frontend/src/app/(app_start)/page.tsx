@@ -1,21 +1,21 @@
 "use client";
 import StartPage from "@/components/pages/startPage.tsx";
-import type { User } from "@/types/general.types.ts";
-import { useSelector } from "react-redux";
-import {type RootState, store} from "@/lib/store.ts";
-import LogInSwipe from "@/components/atoms/LogInSwipe.component.tsx";
-import { useEffect} from "react";
-import {loginByCookie} from "@/lib/thunks/loginAndRegistration.ts";
+import {useEffect, useState} from "react";
+import SwipePage from "@/components/pages/SwipePage.tsx";
 
 const MainPage = () => {
+    const [loggedIn,setLoggedIn] = useState(0)
     useEffect(() => {
-        if (window.localStorage.getItem("isLoggedIn")==="1"){
-            console.log("is logged in");
-            store.dispatch(loginByCookie())
-        }
+            const status = window.sessionStorage.getItem("isLoggedIn");
+            if (status==="1"){
+                setLoggedIn(1)
+            }
+            else setLoggedIn(2)
+
     }, []);
-	const valueUser: User = useSelector((state: RootState) => state.login);
-    console.log(valueUser)
-	return <>{valueUser.userName ? <LogInSwipe /> : <StartPage />}</>;
+    if (loggedIn===0){
+        return <h1>Loading</h1>
+    }
+	return <>{loggedIn===1 ? <SwipePage /> : <StartPage />}</>;
 };
 export default MainPage;

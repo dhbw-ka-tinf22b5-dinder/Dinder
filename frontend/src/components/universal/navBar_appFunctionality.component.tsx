@@ -3,8 +3,7 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import {
 	Header,
 	HeaderLogout,
-	HeaderSubpages,
-	Nav,
+	HeaderSubpages
 } from "@/styles/universal.styles";
 import { useRouter } from "next/navigation";
 const NavBarAppFunctionalityComponent = () => {
@@ -14,7 +13,7 @@ const NavBarAppFunctionalityComponent = () => {
 	};
 
 	return (
-		<Nav>
+		<div className={"NavBar"}>
 			<HandymanIcon fontSize={"large"} onClick={() => nav("/")} />
 			<Header onClick={() => nav("/")}>DINDER</Header>
 			<HeaderSubpages onClick={() => nav("/swipe")}>SWIPE</HeaderSubpages>
@@ -28,7 +27,7 @@ const NavBarAppFunctionalityComponent = () => {
 				new advertisement
 			</HeaderSubpages>
 			<HeaderLogout onClick={() => nav("/")}>logout</HeaderLogout>
-		</Nav>
+		</div>
 	);
 };
 
