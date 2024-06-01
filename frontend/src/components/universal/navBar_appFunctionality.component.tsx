@@ -3,7 +3,7 @@ import HandymanIcon from "@mui/icons-material/Handyman";
 import {
 	Header,
 	HeaderLogout,
-	HeaderSubpages
+	HeaderSubpages,
 } from "@/styles/universal.styles";
 import { useRouter } from "next/navigation";
 const NavBarAppFunctionalityComponent = () => {

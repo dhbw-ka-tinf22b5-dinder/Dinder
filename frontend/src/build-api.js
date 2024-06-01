@@ -11,8 +11,8 @@ function main() {
 
 	fs.mkdir(`${prefix}public/api`, errCallback);
 	fs.copyFile(
-     `${prefix}api-docs/index.html`,
-	`${prefix}public/api/index.html`,
+		`${prefix}api-docs/index.html`,
+		`${prefix}public/api/index.html`,
 		errCallback,
 	);
 }

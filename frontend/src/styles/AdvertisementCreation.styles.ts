@@ -5,4 +5,4 @@ export const AdvertisementCreationStyled = styled.div`
     width: 33%;
     vertical-align: center;
     margin: auto;
-`
+`;
