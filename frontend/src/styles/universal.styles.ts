@@ -34,7 +34,7 @@ export const Nav = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 6%;
+  height: 2.5rem;
   z-index: 1000;
   display: flex;
   padding: 19px;
