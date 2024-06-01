@@ -41,7 +41,7 @@ class InfoTest {
     void shouldGive401Unauthorized() {
         when().get("/api/v1/user/me").
         then().
-                statusCode(401);
+                statusCode(HttpStatus.UNAUTHORIZED.value());
     }
 
     @Test
