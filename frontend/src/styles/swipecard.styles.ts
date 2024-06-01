@@ -7,9 +7,9 @@ export const Card = styled.div`
   gap: 10px;
   grid-template-columns: auto auto auto;
   border-radius: 25px;
-  background: white;
+  background: lightgray;
   color: black;
-  padding: 10px;
+  padding: 2rem;
   `;
 export const Info = styled.div`
   grid-column: span 3;
@@ -19,4 +19,5 @@ export const AdvertismentImage = styled.img`
   height: 270px;
   border-radius: 25px;
   grid-column: span 3;
+  border: 1px solid darkgray;
 `;

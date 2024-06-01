@@ -20,3 +20,17 @@ export interface FrontendError {
 	error: boolean;
 	errorMessage: string;
 }
+export interface Advertiser {
+	userName: string;
+}
+export interface Advertisement {
+	id: number;
+	title: string;
+	price: number;
+	location: string;
+	plz: number;
+	description: string;
+	advertiser: Advertiser;
+	image: string;
+	creationTime: Date;
+}

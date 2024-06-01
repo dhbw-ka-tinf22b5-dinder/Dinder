@@ -4,9 +4,9 @@ export const FormStyles = styled.form`
     position: relative;
     margin: auto;
     display: grid;
-    gap: 60px;
+    gap: 2rem;
     grid-template-columns: auto auto;
-    background: white;
-    border-radius: 25px;
+    background: lightgray;
+    border-radius: 1rem;
     color: black;
-    padding: 10px;`;
+    padding: 1.5rem;`;
