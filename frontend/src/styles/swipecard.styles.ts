@@ -12,7 +12,6 @@ export const Card = styled.div`
   padding: 2rem;
   `;
 
-
 export const Info = styled.div`
   grid-column: span 3;
 `;
