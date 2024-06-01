@@ -44,17 +44,16 @@ function SwipePage() {
 			<Info>
 				<h2>{currentItem.title}</h2>
 				<p>
-					<b>Beschreibung</b> {currentItem.description}
+					<b>Description</b> {currentItem.description}
 				</p>
 				<p>
-					<b>Preis</b> {currentItem.price}
+					<b>Price</b> {currentItem.price} €
 				</p>
 				<p>
 					<LocationOnIcon /> {currentItem.plz} {currentItem.location}
 				</p>
 				<p>
-					<CalendarMonthIcon />
-					{currentItem.creationTime.toLocaleDateString()}
+					<CalendarMonthIcon /> {currentItem.creationTime.toLocaleDateString()}
 				</p>
 				<p>
 					<PersonIcon /> {currentItem.advertiser.userName}
