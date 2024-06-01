@@ -1,3 +1,3 @@
 export default function SwipedAdvertisements() {
-	return <div/>;
+	return <div />;
 }

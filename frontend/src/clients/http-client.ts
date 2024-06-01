@@ -1,8 +1,9 @@
 import axios from "axios";
 import type {
-    Advertisement, CreateAdvertisementPayload,
-    UserLogin,
-    UserRegister,
+	Advertisement,
+	CreateAdvertisementPayload,
+	UserLogin,
+	UserRegister,
 } from "../types/general.types";
 
 const url = "http://localhost:8080/api/v1/";
@@ -54,7 +55,7 @@ export function fetchListOfAdvertisements(): Promise<number[]> {
 export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 	// later this will be a json
 	return axios
-		.get(`${url}advertisement/${id}` )
+		.get(`${url}advertisement/${id}`)
 
 		.then((res) => {
 			const rawAdvertisement: advertisementFromServer = res.data;
@@ -80,15 +81,19 @@ function parseToAdvertisement(
 		creationTime: new Date(data.creationTime),
 	};
 }
-export function publishAdvertisement(payload : CreateAdvertisementPayload){
-    const formdata = new FormData()
-    formdata.append("json",`${JSON.stringify(payload.json)};type=application/json`);
-    formdata.append("file",`${JSON.stringify(payload.file)};type=image/png`);
-    return axios
-        .post(`${url}advertisement`,formdata,{
-            headers:{
-                'Content-Type':'multipart/form-data'
-            }})
-        .then((res) => console.log(res))
-        .catch((res)=>console.log(res))
+export function publishAdvertisement(payload: CreateAdvertisementPayload) {
+	const formdata = new FormData();
+	formdata.append(
+		"json",
+		`${JSON.stringify(payload.json)};type=application/json`,
+	);
+	formdata.append("file", `${JSON.stringify(payload.file)};type=image/png`);
+	return axios
+		.post(`${url}advertisement`, formdata, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		})
+		.then((res) => console.log(res))
+		.catch((res) => console.log(res));
 }

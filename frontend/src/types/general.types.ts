@@ -34,13 +34,13 @@ export interface Advertisement {
 	image: string;
 	creationTime: Date;
 }
-export interface CreateAdvertisementPayload{
-    json:{
-        title: string,
-        price: number,
-        location: string,
-        postalCode: number,
-        description: string
-    }
-    file? : File
+export interface CreateAdvertisementPayload {
+	json: {
+		title: string;
+		price: number;
+		location: string;
+		postalCode: number;
+		description: string;
+	};
+	file?: File;
 }

@@ -1,3 +1,3 @@
 export default function PublishedAdvertisements() {
-	return <div/>;
+	return <div />;
 }

@@ -13,7 +13,6 @@ import {
 	incrementDisplay,
 } from "@/lib/slices/advertisement.ts";
 
-
 function SwipePage() {
 	const advertisements = useSelector(
 		(state: RootState) => state.advertisement.Advertisement,
@@ -22,8 +21,8 @@ function SwipePage() {
 		(state: RootState) => state.advertisement.displayedAdvertisement,
 	);
 	if (advertisements.length === 0) {
-        store.dispatch(advertisementThunk());
-        return <h1>loading</h1>;
+		store.dispatch(advertisementThunk());
+		return <h1>loading</h1>;
 	}
 	//Next task advertisements
 	const handleNext = () => {

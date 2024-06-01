@@ -15,7 +15,7 @@ const Page = () => {
 		(state: RootState) => state.error,
 	);
 	const valueUser = useSelector((state: RootState) => state.login);
-	const  router = useRouter();
+	const router = useRouter();
 	function handleClick(e: React.SyntheticEvent) {
 		e.preventDefault();
 		const target = e.target as typeof e.target & {

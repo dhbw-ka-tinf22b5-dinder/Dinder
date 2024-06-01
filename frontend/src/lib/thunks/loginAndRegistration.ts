@@ -59,7 +59,7 @@ function loginHandler(userLogin: UserLogin): Promise<LoginData> {
 	return login(userLogin)
 		.then((res) => {
 			if (res) {
-                sessionStorage.setItem("isLoggedIn","1");
+				sessionStorage.setItem("isLoggedIn", "1");
 				return successfulLogin();
 			}
 			return wrongPassword;
@@ -85,16 +85,19 @@ export const loginThunk =
 			dispatch(errorReducer(res.errorStatus));
 		});
 	};
-export const loginByCookie =() =>async (
-    dispatch: (arg0: {
-        payload: FrontendError | User;
-        type: "error/errorReducer" | "login/loginReducer";
-    }) => void,	) => {
-    successfulLogin().then((res) => {
-        dispatch(loginReducer(res.user));
-        dispatch(errorReducer(res.errorStatus));
-    });
-};
+export const loginByCookie =
+	() =>
+	async (
+		dispatch: (arg0: {
+			payload: FrontendError | User;
+			type: "error/errorReducer" | "login/loginReducer";
+		}) => void,
+	) => {
+		successfulLogin().then((res) => {
+			dispatch(loginReducer(res.user));
+			dispatch(errorReducer(res.errorStatus));
+		});
+	};
 
 function registerHandler(userRegister: UserRegister): Promise<FrontendError> {
 	return register(userRegister)

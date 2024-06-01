@@ -7,7 +7,7 @@ const StartPage = () => {
 
 	return (
 		<>
-            <MainBackgroundImg src={"./pictures/startBackground.png"} />
+			<MainBackgroundImg src={"./pictures/startBackground.png"} />
 			<MainContainer $isMain>
 				<Button span={1} click={() => router.push("/login")} text={"Login"} />
 				<Button
