@@ -2,6 +2,8 @@
 import StartPage from "@/components/pages/startPage.tsx";
 import {useEffect, useState} from "react";
 import SwipePage from "@/components/pages/SwipePage.tsx";
+import {loginByCookie} from "@/lib/thunks/loginAndRegistration.ts";
+import {store} from "@/lib/store.ts";
 
 const MainPage = () => {
     const [loggedIn,setLoggedIn] = useState(0)
@@ -9,6 +11,7 @@ const MainPage = () => {
             const status = window.sessionStorage.getItem("isLoggedIn");
             if (status==="1"){
                 setLoggedIn(1)
+                store.dispatch(loginByCookie())
             }
             else setLoggedIn(2)
 
