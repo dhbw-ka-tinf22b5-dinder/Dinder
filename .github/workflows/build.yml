@@ -40,6 +40,7 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+      - run: npm --prefix frontend ci
       - name: Build Frontend
         run: npm --prefix frontend run build
       - name: Build and analyze
