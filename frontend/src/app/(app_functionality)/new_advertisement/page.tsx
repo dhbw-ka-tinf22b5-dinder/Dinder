@@ -2,17 +2,38 @@
 import { Input } from "@/components/atoms/Input.component.tsx";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
 import { Form } from "@/components/atoms/Form.component.tsx";
+import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
+import { publishAdvertisement } from "@/clients/http-client.ts";
+import { AdvertisementCreationStyled } from "@/styles/AdvertisementCreation.styles.ts";
 
 export default function NewAdvertisement() {
-	const addAdvertisement = (e: React.SyntheticEvent) => {
+	function addAdvertisement(e: React.SyntheticEvent) {
 		e.preventDefault();
-	};
+		const target = e.target as typeof e.target & {
+			title: { value: string };
+			price: { value: number };
+			location: { value: string };
+			postalCode: { value: number };
+			description: { value: string };
+			picture: { value: File };
+		};
+		const AdvertisementPayload: CreateAdvertisementPayload = {
+			json: {
+				title: target.title.value,
+				price: target.price.value,
+				location: target.location.value,
+				postalCode: target.postalCode.value,
+				description: target.description.value,
+			},
+			file: target.picture.value,
+		};
+		publishAdvertisement(AdvertisementPayload);
+	}
 
 	return (
-		<>
+		<AdvertisementCreationStyled>
+			<h3>Create new advertisement</h3>
 			<Form method={"POST"} submit={addAdvertisement}>
-				<h3>Create new advertisement</h3>
-				<h3></h3>
 				title
 				<Input type={"text"} name={"title"} />
 				description
@@ -24,9 +45,9 @@ export default function NewAdvertisement() {
 				postal code
 				<Input type={"text"} name={"postalCode"} />
 				picture
-				<Input type={"text"} name={"picture"} />
+				<Input type={"file"} name={"picture"} />
 				<ButtonSubmit span={2}>Create</ButtonSubmit>
 			</Form>
-		</>
+		</AdvertisementCreationStyled>
 	);
 }
