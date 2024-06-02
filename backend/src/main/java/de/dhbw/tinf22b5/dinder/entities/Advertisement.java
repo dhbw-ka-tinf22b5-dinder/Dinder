@@ -41,7 +41,7 @@ public class Advertisement {
 
     private Instant creationTime;
 
-    @OneToMany(mappedBy = "advertisementId")
+    @OneToMany(mappedBy = "advertisement")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
 
     public String getFileName() {
