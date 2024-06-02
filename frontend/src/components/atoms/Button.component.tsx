@@ -1,4 +1,4 @@
-import { ButtonStyled } from "../../styles/buttons.styles";
+import { ButtonStyled } from "@/styles/buttons.styles";
 interface ButtonProps {
 	click: () => void;
 	text: string;

@@ -1,0 +1,21 @@
+.grid {
+    margin: 0.5rem auto 2rem auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 2rem;
+}
+
+.state{
+    grid-column: span 3;
+    background-color: chocolate; /*rot oder grün*/
+    padding: 8px 24px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.delete{
+    background-color: red;
+}

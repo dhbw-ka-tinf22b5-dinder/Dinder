@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface AdvertisementRepository extends JpaRepository<Advertisement, Integer> {
-    List<Advertisement> findAllByContractorIsNotNull();
+    List<Advertisement> findAllByContractorIsNull();
 }

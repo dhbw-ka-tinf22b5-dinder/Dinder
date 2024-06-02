@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Card = styled.div`
   position: relative;
-  margin: auto;
+  margin: 100px auto 20px auto;
   display: grid;
   gap: 10px;
   grid-template-columns: auto auto auto;
@@ -11,12 +11,14 @@ export const Card = styled.div`
   color: black;
   padding: 2rem;
   `;
+
 export const Info = styled.div`
   grid-column: span 3;
 `;
+
 export const AdvertismentImage = styled.img`
-  width: 480px;
-  height: 270px;
+  width: 100%;
+  height: 25vh;
   border-radius: 25px;
   grid-column: span 3;
   border: 1px solid darkgray;

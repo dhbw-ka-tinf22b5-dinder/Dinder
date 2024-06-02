@@ -1,18 +1,18 @@
-import fs from "fs";
+import fs from "node:fs";
 
 main();
 
 function main() {
 	const prefix = "../backend/src/main/resources/";
 
-	let errCallback = (err) => {
+	const errCallback = (err) => {
 		if (err) return console.log(err);
 	};
 
-	fs.mkdir(prefix + "public/api", errCallback);
+	fs.mkdir(`${prefix}public/api`, errCallback);
 	fs.copyFile(
-		prefix + "api-docs/index.html",
-		prefix + "public/api/index.html",
+		`${prefix}api-docs/index.html`,
+		`${prefix}public/api/index.html`,
 		errCallback,
 	);
 }
