@@ -35,6 +35,10 @@ public class AdvertisementService {
         return advertisementRepository.save(advertisement);
     }
 
+    public Advertisement updateAdvertisement(Advertisement advertisement) {
+        return advertisementRepository.save(advertisement);
+    }
+
     public Advertisement createAdvertisement(AddAdvertisementModel model, Users user) {
         Advertisement advertisement = Advertisement.fromModel(model, user);
 
