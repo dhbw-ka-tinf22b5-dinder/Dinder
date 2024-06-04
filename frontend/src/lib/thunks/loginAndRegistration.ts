@@ -1,14 +1,8 @@
-import { getUserName, login, register } from "@/clients/http-client.ts";
-import { errorReducer } from "@/lib/slices/error.ts";
-import { loginReducer } from "@/lib/slices/login.ts";
+import {getUserName, login, register} from "@/clients/http-client.ts";
+import {errorReducer} from "@/lib/slices/error.ts";
+import {loginReducer} from "@/lib/slices/login.ts";
+import type {FrontendError, User, UserLogin, UserRegister, UserRegisterConfirmation,} from "@/types/general.types.ts";
 import * as validator from "email-validator";
-import type {
-	FrontendError,
-	User,
-	UserLogin,
-	UserRegister,
-	UserRegisterConfirmation,
-} from "@/types/general.types.ts";
 
 interface LoginData {
 	user: User;
