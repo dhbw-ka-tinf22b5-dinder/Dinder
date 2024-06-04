@@ -6,14 +6,15 @@ VALUES('test@yahoo.de', 'userTest', '$2y$10$8wR8gYNArMJnPcVYXSAXAeUqMsh.tWe/nUFs
       ('user123@user.de', 'user123', '$2y$10$PDrtl0YGLHIkR91Pn8kJSutIDFr.5oiN5bOtvSQsZoLdxuQRqSbDe'); --user123
 
 INSERT INTO advertisement(title, price, location, postal_code, description, image, advertiser, contractor, creation_time)
-VALUES ('Rasenmähen', 13.5, 'Karlsruhe', 12345, 'description', null, 'test@yahoo.de', null, '2023-11-12 04:05:06'),
-       ('Haus bauen', 17.5, 'Karlsruhe', 12345, 'description123', null, 'mustermann@max.de', null, '2023-11-12 08:09:10');
+VALUES ('Rasenmähen', 13.5, 'Karlsruhe', 12345, 'description', null, 'test@yahoo.de', null, '2023-11-12 04:05:06Z') ,
+('Haus bauen', 17.5, 'Karlsruhe', 12345, 'description123', null, 'mustermann@max.de', null, '2023-11-12 08:09:10Z');
 
 INSERT INTO swipe_information(swipe_time, contractor_email, advertisement_id)
 VALUES ('2023-11-13 08:09:10Z', 'test@yahoo.de', 2) ,
     ('2023-11-12 08:09:11Z', 'user123@user.de', 2);
 
 INSERT INTO chat_messages(message, date_time, swipe_id, sender_email)
-VALUES ('Hi', '2023-11-12 08:09:11', 1, 'test@yahoo.de'),
-       ('Moin', '2023-11-12 08:09:15', 2, 'mustermann@max.de'),
-       ('Servus', '2023-11-12 08:09:17', 1, 'user123@user.de');
+VALUES ('Hi', '2023-11-12 08:09:11Z', 1, 'test@yahoo.de') ,
+    ('Moin', '2023-11-12 08:09:15Z', 2, 'mustermann@max.de')
+    ,
+    ('Servus', '2023-11-12 08:09:17Z', 1, 'user123@user.de');
