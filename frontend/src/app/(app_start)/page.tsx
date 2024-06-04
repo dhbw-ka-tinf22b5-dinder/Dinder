@@ -1,9 +1,9 @@
 "use client";
-import StartPage from "@/components/pages/startPage.tsx";
-import { useEffect, useState } from "react";
 import SwipePage from "@/components/pages/SwipePage.tsx";
-import { loginByCookie } from "@/lib/thunks/loginAndRegistration.ts";
-import { store } from "@/lib/store.ts";
+import StartPage from "@/components/pages/startPage.tsx";
+import {store} from "@/lib/store.ts";
+import {loginByCookie} from "@/lib/thunks/loginAndRegistration.ts";
+import {useEffect, useState} from "react";
 
 const MainPage = () => {
 	const [loggedIn, setLoggedIn] = useState(0);

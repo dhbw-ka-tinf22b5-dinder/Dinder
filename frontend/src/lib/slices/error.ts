@@ -1,5 +1,6 @@
-import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
-import type { FrontendError } from "@/types/general.types.ts";
+import type {FrontendError} from "@/types/general.types.ts";
+import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+
 const initialState: FrontendError = {
 	error: false,
 	errorMessage: "",

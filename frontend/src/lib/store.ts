@@ -1,8 +1,9 @@
 "use client";
-import { configureStore } from "@reduxjs/toolkit";
+import advertisementReducer from "@/lib/slices/advertisement.ts";
 import errorReducer from "@/lib/slices/error.ts";
 import loginReducer from "@/lib/slices/login.ts";
-import advertisementReducer from "@/lib/slices/advertisement.ts";
+import {configureStore} from "@reduxjs/toolkit";
+
 export const store = configureStore({
 	reducer: {
 		login: loginReducer,

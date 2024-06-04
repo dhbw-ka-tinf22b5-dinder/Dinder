@@ -1,17 +1,13 @@
 "use client";
-import style from "../Advertisement.module.css";
-import { Info } from "@/styles/swipecard.styles.ts";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import {Button} from "@/components/atoms/Button.component.tsx";
+import {CardGrid, CardGridItem, InformationImage,} from "@/styles/advertisementManagement.styles.ts";
+import {Info} from "@/styles/swipecard.styles.ts";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { Button } from "@/components/atoms/Button.component.tsx";
-import {
-	CardGrid,
-	CardGridItem,
-	InformationImage,
-} from "@/styles/advertisementManagement.styles.ts";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import style from "../Advertisement.module.css";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-const advertisements = [
+const advertisements: AdvertisementData[] = [
 	{
 		id: 1,
 		title: "Rasenmähen",
@@ -113,7 +109,29 @@ export default function SwipedAdvertisement() {
 	);
 }
 
-function Advertisement({ advertisement }: any) {
+class AdvertisementData {
+    id: number;
+    title: string;
+    description?: string;
+    creationTime: string;
+    price: number;
+    location: string;
+    image: string;
+    plz?: string;
+
+    constructor(id: number, title: string, creationTime: string, price: number, location: string, image: string, description?: string, plz?: string) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.creationTime = creationTime;
+        this.price = price;
+        this.location = location;
+        this.image = image;
+        this.plz = plz;
+    }
+}
+
+function Advertisement({advertisement}: { advertisement: AdvertisementData }) {
 	return (
 		<CardGridItem>
 			<InformationImage src={advertisement.image} alt={advertisement.title} />
