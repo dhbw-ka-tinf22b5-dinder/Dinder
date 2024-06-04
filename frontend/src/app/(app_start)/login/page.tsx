@@ -1,14 +1,14 @@
 "use client";
-import {ButtonSubmit} from "@/components/atoms/Button.component.tsx";
-import {Form} from "@/components/atoms/Form.component.tsx";
-import {Input} from "@/components/atoms/Input.component.tsx";
-import type {RootState} from "@/lib/store.ts";
-import {store} from "@/lib/store.ts";
-import {loginThunk} from "@/lib/thunks/loginAndRegistration.ts";
-import {MainBackgroundImg} from "@/styles/mainPage.styles.ts";
-import type {FrontendError, UserLogin} from "@/types/general.types.ts";
-import {useRouter} from "next/navigation";
-import {useSelector} from "react-redux";
+import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
+import { Form } from "@/components/atoms/Form.component.tsx";
+import { Input } from "@/components/atoms/Input.component.tsx";
+import type { RootState } from "@/lib/store.ts";
+import { store } from "@/lib/store.ts";
+import { loginThunk } from "@/lib/thunks/loginAndRegistration.ts";
+import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
+import type { FrontendError, UserLogin } from "@/types/general.types.ts";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 const Page = () => {
 	const valueError: FrontendError = useSelector(
