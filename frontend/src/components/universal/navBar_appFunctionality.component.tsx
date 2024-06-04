@@ -1,11 +1,12 @@
 "use client";
-import HandymanIcon from "@mui/icons-material/Handyman";
 import {
 	Header,
 	HeaderLogout,
 	HeaderSubpages,
 } from "@/styles/universal.styles";
+import HandymanIcon from "@mui/icons-material/Handyman";
 import { useRouter } from "next/navigation";
+
 const NavBarAppFunctionalityComponent = () => {
 	const { push } = useRouter();
 	const nav = (href: string) => {

@@ -17,7 +17,6 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.ByteArrayInputStream;
@@ -104,36 +103,50 @@ public class AdvertisementController {
     }
 
     @PostMapping("advertisement")
-    public Advertisement createAdvertisement(@RequestPart("json") AddAdvertisementModel model,
-                                             @RequestPart(value = "file", required = false) MultipartFile file,
-                                             Principal principal) throws IOException {
-        String fileExtension = null;
+    public Advertisement createAdvertisement(@RequestBody AddAdvertisementModel model, Principal principal) {
+        Users user = userService.loadUserByUsername(principal.getName());
+
+        return advertisementService.createAdvertisement(model, user);
+    }
+
+    @PutMapping("advertisement/{id}/image")
+    public Advertisement addImage(@RequestBody Resource file, @PathVariable int id, Principal principal) throws IOException {
+        Advertisement advertisement =
+                advertisementService.getAdvertisementById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (file == null || file.getContentAsByteArray().length == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        String fileExtension;
         try {
-            if (file != null) {
-                fileExtension = getMimeType(new ByteArrayInputStream(file.getBytes())).getExtension();
-            }
+            fileExtension = getMimeType(new ByteArrayInputStream(file.getContentAsByteArray())).getExtension();
         }
         catch (MimeTypeException mimeTypeException) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        if (file != null && (fileExtension == null || fileExtension.isBlank())) {
+        if (fileExtension == null || fileExtension.isBlank()) {
             throw new ResponseStatusException(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
         }
 
         //Change quicktime into mp4 because Apple
-        if (fileExtension != null && fileExtension.equalsIgnoreCase(".qt")) {
+        if (fileExtension.equalsIgnoreCase(".qt")) {
             fileExtension = ".mp4";
         }
 
         Users user = userService.loadUserByUsername(principal.getName());
-        String filePath = fileExtension == null ? "" : supabaseService.uploadFile(supabaseService.getBucket(
-                        "advertisement"), file.getBytes(),
+        String filePath = supabaseService.uploadFile(supabaseService.getBucket(
+                        "advertisement"), file.getContentAsByteArray(),
                 user.getUsername() + "/" + UUID.randomUUID() + fileExtension).join();
 
+        if (filePath == null || filePath.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        advertisement.setImagePath(filePath);
+
         //TODO return advertisement information model?? -> there are some fields missing in it
-        return filePath != null
-                ? advertisementService.createAdvertisement(model, user, filePath)
-                : advertisementService.createAdvertisement(model, user);
+        return advertisementService.updateAdvertisement(advertisement);
     }
 }

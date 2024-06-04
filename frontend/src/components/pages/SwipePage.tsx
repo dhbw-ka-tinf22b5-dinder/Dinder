@@ -1,17 +1,17 @@
 // SwipePage.js
 
-import { AdvertismentImage, Card, Info } from "@/styles/swipecard.styles";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import PersonIcon from "@mui/icons-material/Person";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Button } from "../atoms/Button.component";
-import { advertisementThunk } from "@/lib/thunks/AdvertisementThunk.ts";
-import { type RootState, store } from "@/lib/store.ts";
-import { useSelector } from "react-redux";
 import {
 	decrementDisplay,
 	incrementDisplay,
 } from "@/lib/slices/advertisement.ts";
+import { type RootState, store } from "@/lib/store.ts";
+import { advertisementThunk } from "@/lib/thunks/AdvertisementThunk.ts";
+import { AdvertismentImage, Card, Info } from "@/styles/swipecard.styles";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import PersonIcon from "@mui/icons-material/Person";
+import { useSelector } from "react-redux";
+import { Button } from "../atoms/Button.component";
 
 function SwipePage() {
 	const advertisements = useSelector(

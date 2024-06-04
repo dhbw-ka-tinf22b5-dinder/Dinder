@@ -1,6 +1,6 @@
+import { StoreProvider } from "@/lib/StoreProvider.tsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { StoreProvider } from "@/lib/StoreProvider.tsx";
 import "./globals.css";
 import Navbar from "@/components/universal/Navbar.tsx";
 

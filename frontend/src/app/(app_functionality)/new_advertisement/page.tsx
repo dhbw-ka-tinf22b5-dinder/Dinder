@@ -1,10 +1,10 @@
 "use client";
-import { Input } from "@/components/atoms/Input.component.tsx";
+import { publishAdvertisement } from "@/clients/http-client.ts";
 import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
 import { Form } from "@/components/atoms/Form.component.tsx";
-import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
-import { publishAdvertisement } from "@/clients/http-client.ts";
+import { Input } from "@/components/atoms/Input.component.tsx";
 import { AdvertisementCreationStyled } from "@/styles/AdvertisementCreation.styles.ts";
+import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
 
 export default function NewAdvertisement() {
 	function addAdvertisement(e: React.SyntheticEvent) {

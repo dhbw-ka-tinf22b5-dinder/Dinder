@@ -1,5 +1,6 @@
-import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import type { Advertisement } from "@/types/general.types.ts";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
 interface AdvertisementData {
 	Advertisement: Advertisement[];
 	displayedAdvertisement: number;

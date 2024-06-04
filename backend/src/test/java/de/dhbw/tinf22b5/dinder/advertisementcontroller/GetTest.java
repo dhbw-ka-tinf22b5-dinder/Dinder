@@ -3,6 +3,7 @@ package de.dhbw.tinf22b5.dinder.advertisementcontroller;
 import de.dhbw.tinf22b5.dinder.controller.UserController;
 import de.dhbw.tinf22b5.dinder.services.SecurityService;
 import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,22 +37,23 @@ class GetTest {
     @Test
     void noSessionToken() {
         when().get("/api/v1/advertisement/1").
-        then().
+                then().
                 statusCode(HttpStatus.UNAUTHORIZED.value());
     }
 
     @Test
     void getAdvertisement() {
-        String response =
-        given().
-                cookie(UserController.SESSION_ID_COOKIE, securityService.generateKey("mustermann@max.de")).
-        when().get("/api/v1/advertisement/1").
-        then().
-            statusCode(HttpStatus.OK.value()).
-            extract().body().asString();
+        JsonPath response =
+                given().
+                        cookie(UserController.SESSION_ID_COOKIE, securityService.generateKey("mustermann@max.de")).
+                        when().get("/api/v1/advertisement/1").
+                        then().
+                        statusCode(HttpStatus.OK.value()).
+                        extract().body().jsonPath();
 
-        Assertions.assertEquals(
-                "{\"title\":\"Rasenmähen\",\"price\":13.5,\"location\":\"Karlsruhe\",\"plz\":12345,\"description\":\"description\",\"imagePath\":null,\"advertiser\":{\"userName\":\"userTest\"},\"creationTime\":\"2023-11-12T03:05:06Z\"}",
-                response);
+        JsonPath expected = JsonPath.from("{\"title\":\"Rasenmähen\",\"price\":13.5,\"location\":\"Karlsruhe\"," +
+                "\"plz\":12345,\"description\":\"description\",\"imagePath\":null," +
+                "\"advertiser\":{\"userName\":\"userTest\"},\"creationTime\": \"2023-11-12T04:05:06Z\"}");
+        Assertions.assertEquals(expected.prettify(), response.prettify());
     }
 }

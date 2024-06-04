@@ -1,16 +1,16 @@
 "use client";
-import { useSelector } from "react-redux";
-import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
-import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
-import { store } from "@/lib/store.ts";
+import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
+import { Form } from "@/components/atoms/Form.component.tsx";
+import { Input } from "@/components/atoms/Input.component.tsx";
 import type { RootState } from "@/lib/store.ts";
+import { store } from "@/lib/store.ts";
+import { registerThunk } from "@/lib/thunks/loginAndRegistration.ts";
+import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import type {
 	FrontendError,
 	UserRegisterConfirmation,
 } from "@/types/general.types.ts";
-import { ButtonSubmit } from "@/components/atoms/Button.component.tsx";
-import { Form } from "@/components/atoms/Form.component.tsx";
-import { Input } from "@/components/atoms/Input.component.tsx";
+import { useSelector } from "react-redux";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
