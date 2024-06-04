@@ -8,7 +8,6 @@ import de.dhbw.tinf22b5.dinder.models.response.SwipeInformationModel;
 import de.dhbw.tinf22b5.dinder.services.AdvertisementService;
 import de.dhbw.tinf22b5.dinder.services.SwipeInformationService;
 import de.dhbw.tinf22b5.dinder.services.UserService;
-import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class SwipeInformationController {
     private final AdvertisementService advertisementService;
 
     @GetMapping("all")
-    public List<SwipeInformationModel> getAll(@PathParam("advertisement") int advertisementId) {
+    public List<SwipeInformationModel> getAll(@PathVariable("advertisement") int advertisementId) {
         Advertisement advertisement =
                 advertisementService.getAdvertisementById(advertisementId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -37,7 +36,7 @@ public class SwipeInformationController {
 
     @PostMapping()
     public SwipeInformationModel addSwipe(@RequestBody AddSwipeInformationModel model,
-                                          @PathParam("advertisement") int advertisementId, Principal principal) {
+                                          @PathVariable("advertisement") int advertisementId, Principal principal) {
         Users user = userService.loadUserByUsername(principal.getName());
 
         Advertisement advertisement =
