@@ -5,9 +5,10 @@ import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
 import { AdvertisementCreationStyled } from "@/styles/AdvertisementCreation.styles.ts";
 import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
+import { SyntheticEvent } from "react";
 
 export default function NewAdvertisement() {
-	function addAdvertisement(e: React.SyntheticEvent) {
+	function addAdvertisement(e: SyntheticEvent) {
 		e.preventDefault();
 		const target = e.target as typeof e.target & {
 			title: { value: string };
@@ -27,25 +28,27 @@ export default function NewAdvertisement() {
 			},
 			file: target.picture.value,
 		};
-		publishAdvertisement(AdvertisementPayload);
+		publishAdvertisement(AdvertisementPayload)
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
 	}
 
 	return (
 		<AdvertisementCreationStyled>
 			<h3>Create new advertisement</h3>
-			<Form method={"POST"} submit={addAdvertisement}>
+			<Form method="POST" submit={addAdvertisement}>
 				title
-				<Input type={"text"} name={"title"} />
+				<Input type="text" name="title" />
 				description
-				<Input type={"text"} name={"description"} />
+				<Input type="text" name="description" />
 				price
-				<Input type={"text"} name={"price"} />
+				<Input type="text" name="price" />
 				location
-				<Input type={"text"} name={"location"} />
+				<Input type="text" name="location" />
 				postal code
-				<Input type={"text"} name={"postalCode"} />
+				<Input type="text" name="postalCode" />
 				picture
-				<Input type={"file"} name={"picture"} />
+				<Input type="file" name="picture" />
 				<ButtonSubmit span={2}>Create</ButtonSubmit>
 			</Form>
 		</AdvertisementCreationStyled>

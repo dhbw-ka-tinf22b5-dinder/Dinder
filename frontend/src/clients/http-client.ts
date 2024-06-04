@@ -81,19 +81,30 @@ function parseToAdvertisement(
 		creationTime: new Date(data.creationTime),
 	};
 }
+export function acceptAdvertisement(id: number) {
+	return axios.post(`${url}advertisement/${id}/swipe`, {
+		swipeState: "ACCEPTED",
+	});
+}
+export function declineAdvertisement(id: number) {
+	return axios.post(`${url}advertisement/${id}/swipe`, {
+		swipeState: "DECLINED",
+	});
+}
+export function getSwipes(id: number) {
+	return axios.get(`${url}advertisement/${id}/swipe/all`);
+}
 export function publishAdvertisement(payload: CreateAdvertisementPayload) {
-	const formdata = new FormData();
-	formdata.append(
-		"json",
-		`${JSON.stringify(payload.json)};type=application/json`,
-	);
-	formdata.append("file", `${JSON.stringify(payload.file)};type=image/png`);
 	return axios
-		.post(`${url}advertisement`, formdata, {
-			headers: {
-				"Content-Type": "multipart/form-data",
-			},
+		.post(`${url}advertisement`, payload.json)
+		.then((res) => {
+			axios
+				.put(
+					`${url}advertisement/${res.data.advertisementId}/image`,
+					payload.file,
+				)
+				.then((resImage) => resImage)
+				.catch((resError) => resError);
 		})
-		.then((res) => console.log(res))
-		.catch((res) => console.log(res));
+		.catch((res) => res);
 }
