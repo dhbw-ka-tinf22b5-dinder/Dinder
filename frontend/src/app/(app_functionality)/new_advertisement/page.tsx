@@ -5,7 +5,7 @@ import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
 import { AdvertisementCreationStyled } from "@/styles/AdvertisementCreation.styles.ts";
 import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
-import {SyntheticEvent} from "react";
+import { SyntheticEvent } from "react";
 
 export default function NewAdvertisement() {
 	function addAdvertisement(e: SyntheticEvent) {
@@ -29,16 +29,16 @@ export default function NewAdvertisement() {
 			file: target.picture.value,
 		};
 		publishAdvertisement(AdvertisementPayload)
-                .then((res)=> console.log(res))
-                .catch((err) => console.log(err));
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
 	}
 
 	return (
 		<AdvertisementCreationStyled>
 			<h3>Create new advertisement</h3>
-			<Form method="POST" submit={addAdvertisement} >
+			<Form method="POST" submit={addAdvertisement}>
 				title
-				<Input type="text" name="title"  />
+				<Input type="text" name="title" />
 				description
 				<Input type="text" name="description" />
 				price

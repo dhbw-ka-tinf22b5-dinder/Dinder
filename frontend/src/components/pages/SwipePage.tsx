@@ -12,7 +12,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import { useSelector } from "react-redux";
 import { Button } from "../atoms/Button.component";
-import {acceptAdvertisement} from "@/clients/http-client.ts";
+import { acceptAdvertisement } from "@/clients/http-client.ts";
 
 function SwipePage() {
 	const advertisements = useSelector(
@@ -34,11 +34,10 @@ function SwipePage() {
 		store.dispatch(decrementDisplay());
 	};
 
-    const currentItem = advertisements[currentAdvertisement];
+	const currentItem = advertisements[currentAdvertisement];
 	const handleAccept = () => {
 		// Add logic for accepting the active box
-        acceptAdvertisement(currentItem.id)
-                .then((res)=>console.log(res))
+		acceptAdvertisement(currentItem.id).then((res) => console.log(res));
 	};
 	return (
 		<Card>

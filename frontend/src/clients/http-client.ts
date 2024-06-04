@@ -81,22 +81,30 @@ function parseToAdvertisement(
 		creationTime: new Date(data.creationTime),
 	};
 }
-export function acceptAdvertisement(id:number){
-    return axios.post(`${url}advertisement/${id}/swipe`,{"swipeState":"ACCEPTED"})
+export function acceptAdvertisement(id: number) {
+	return axios.post(`${url}advertisement/${id}/swipe`, {
+		swipeState: "ACCEPTED",
+	});
 }
-export function declineAdvertisement(id:number){
-    return axios.post(`${url}advertisement/${id}/swipe`,{"swipeState":"DECLINED"})
+export function declineAdvertisement(id: number) {
+	return axios.post(`${url}advertisement/${id}/swipe`, {
+		swipeState: "DECLINED",
+	});
 }
-export function getSwipes(id:number){
-    return axios.get(`${url}advertisement/${id}/swipe/all`)
+export function getSwipes(id: number) {
+	return axios.get(`${url}advertisement/${id}/swipe/all`);
 }
 export function publishAdvertisement(payload: CreateAdvertisementPayload) {
-    return axios.post(`${url}advertisement`,payload.json)
-        .then(
-            (res) =>{
-                axios.put(`${url}advertisement/${res.data.advertisementId}/image`, payload.file)
-                    .then((resImage)=>resImage)
-                    .catch((resError)=>resError);
-            }
-        ).catch((res)=> res)
+	return axios
+		.post(`${url}advertisement`, payload.json)
+		.then((res) => {
+			axios
+				.put(
+					`${url}advertisement/${res.data.advertisementId}/image`,
+					payload.file,
+				)
+				.then((resImage) => resImage)
+				.catch((resError) => resError);
+		})
+		.catch((res) => res);
 }
