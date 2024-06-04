@@ -45,6 +45,10 @@ public class Advertisement {
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
 
     public String getFileName() {
+        if (getImagePath() == null) {
+            return "image";
+        }
+
         try {
             String path = getImagePath().substring(getImagePath().indexOf("/") + 1);
             return path.substring(path.indexOf("/") + 1);
