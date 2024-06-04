@@ -1,6 +1,6 @@
-import {Button} from "@/components/atoms/Button.component";
-import {MainBackgroundImg, MainContainer} from "@/styles/mainPage.styles";
-import {useRouter} from "next/navigation";
+import { Button } from "@/components/atoms/Button.component";
+import { MainBackgroundImg, MainContainer } from "@/styles/mainPage.styles";
+import { useRouter } from "next/navigation";
 
 const StartPage = () => {
 	const router = useRouter();

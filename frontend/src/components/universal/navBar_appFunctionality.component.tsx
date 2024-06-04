@@ -1,7 +1,11 @@
 "use client";
-import {Header, HeaderLogout, HeaderSubpages,} from "@/styles/universal.styles";
+import {
+	Header,
+	HeaderLogout,
+	HeaderSubpages,
+} from "@/styles/universal.styles";
 import HandymanIcon from "@mui/icons-material/Handyman";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const NavBarAppFunctionalityComponent = () => {
 	const { push } = useRouter();
