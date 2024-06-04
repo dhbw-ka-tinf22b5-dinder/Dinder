@@ -1,7 +1,11 @@
 "use client";
-import {Button} from "@/components/atoms/Button.component.tsx";
-import {CardGrid, CardGridItem, InformationImage,} from "@/styles/advertisementManagement.styles.ts";
-import {Info} from "@/styles/swipecard.styles.ts";
+import { Button } from "@/components/atoms/Button.component.tsx";
+import {
+	CardGrid,
+	CardGridItem,
+	InformationImage,
+} from "@/styles/advertisementManagement.styles.ts";
+import { Info } from "@/styles/swipecard.styles.ts";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import style from "../Advertisement.module.css";
@@ -109,28 +113,39 @@ export default function PublishedAdvertisements() {
 }
 
 class AdvertisementData {
-    id: number;
-    title: string;
-    description?: string;
-    creationTime: string;
-    price: number;
-    location: string;
-    image: string;
-    plz?: string;
+	id: number;
+	title: string;
+	description?: string;
+	creationTime: string;
+	price: number;
+	location: string;
+	image: string;
+	plz?: string;
 
-    constructor(id: number, title: string, creationTime: string, price: number, location: string, image: string, description?: string, plz?: string) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.creationTime = creationTime;
-        this.price = price;
-        this.location = location;
-        this.image = image;
-        this.plz = plz;
-    }
+	constructor(
+		id: number,
+		title: string,
+		creationTime: string,
+		price: number,
+		location: string,
+		image: string,
+		description?: string,
+		plz?: string,
+	) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.creationTime = creationTime;
+		this.price = price;
+		this.location = location;
+		this.image = image;
+		this.plz = plz;
+	}
 }
 
-function Advertisement({advertisement}: { advertisement: AdvertisementData }) {
+function Advertisement({
+	advertisement,
+}: { advertisement: AdvertisementData }) {
 	return (
 		<CardGridItem>
 			<InformationImage src={advertisement.image} alt={advertisement.title} />

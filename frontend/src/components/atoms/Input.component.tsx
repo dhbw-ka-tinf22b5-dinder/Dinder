@@ -1,5 +1,5 @@
-import {ErrorMessageStyles} from "@/styles/errorMessage.style.ts";
-import {InputStyles} from "@/styles/input.styles.ts";
+import { ErrorMessageStyles } from "@/styles/errorMessage.style.ts";
+import { InputStyles } from "@/styles/input.styles.ts";
 
 export const Input = ({ type = "text", name = "input", error = "" }) => {
 	return (
