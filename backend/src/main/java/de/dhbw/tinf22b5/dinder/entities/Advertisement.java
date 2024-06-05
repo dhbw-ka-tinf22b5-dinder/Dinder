@@ -25,7 +25,7 @@ public class Advertisement {
     private double price;
     private String location;
     @Column(name = "postal_code")
-    private int plz;
+    private int postalCode;
     private String description;
     @Column(name = "image")
     private String imagePath;
@@ -74,14 +74,14 @@ public class Advertisement {
         advertisement.setTitle(addAdvertisementModel.title());
         advertisement.setPrice(addAdvertisementModel.price());
         advertisement.setLocation(addAdvertisementModel.location());
-        advertisement.setPlz(addAdvertisementModel.postalCode());
+        advertisement.setPostalCode(addAdvertisementModel.postalCode());
         advertisement.setDescription(addAdvertisementModel.description());
         advertisement.setCreationTime(Instant.now());
         return advertisement;
     }
 
     public AdvertisementInformationModel toInformationModel() {
-        return new AdvertisementInformationModel(title, price, location, plz, description, imagePath,
+        return new AdvertisementInformationModel(title, price, location, postalCode, description, imagePath,
                 advertiser.toInformationModel(), creationTime);
     }
 }
