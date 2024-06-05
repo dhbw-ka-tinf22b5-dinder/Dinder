@@ -1,5 +1,6 @@
 // SwipePage.js
 
+import { acceptAdvertisement } from "@/clients/http-client.ts";
 import {
 	decrementDisplay,
 	incrementDisplay,
@@ -12,7 +13,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import { useSelector } from "react-redux";
 import { Button } from "../atoms/Button.component";
-import { acceptAdvertisement } from "@/clients/http-client.ts";
 
 function SwipePage() {
 	const advertisements = useSelector(

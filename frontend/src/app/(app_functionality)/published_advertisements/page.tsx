@@ -1,17 +1,17 @@
 "use client";
 import { Button } from "@/components/atoms/Button.component.tsx";
+import type { RootState } from "@/lib/store.ts";
 import {
 	CardGrid,
 	CardGridItem,
 	InformationImage,
 } from "@/styles/advertisementManagement.styles.ts";
 import { Info } from "@/styles/swipecard.styles.ts";
+import type { Advertisement } from "@/types/general.types.ts";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import style from "../Advertisement.module.css";
-import { Advertisement } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
-import { RootState } from "@/lib/store.ts";
+import style from "../Advertisement.module.css";
 
 function usePublishedAdvertisements(): Advertisement[] {
 	const publishedAdvertisements: Advertisement[] = [];
