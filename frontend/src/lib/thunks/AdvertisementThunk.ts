@@ -23,4 +23,4 @@ export const advertisementThunk =
 		getAdvertisementList().then((res) => {
 			dispatch(advertisementReducer(res));
 		});
-	};
+};
