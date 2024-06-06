@@ -21,7 +21,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 @ActiveProfiles("dev")
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
-public class AllTest {
+class AllTest {
     @Autowired
     SecurityService securityService;
 
