@@ -8,7 +8,7 @@ import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
 import { type ChangeEvent, type SyntheticEvent, useState } from "react";
 
 export default function NewAdvertisement() {
-	const [file, setFile] = useState<string>();
+	const [file, setFile] = useState<ArrayBuffer>();
 
 	function addAdvertisement(e: SyntheticEvent) {
 		e.preventDefault();
@@ -39,10 +39,10 @@ export default function NewAdvertisement() {
 		reader.onload = async (f) => {
 			if (!f.target) return;
 			const image: ArrayBuffer | string | null = f.target.result;
-			if (typeof image === "string") setFile(image);
+			if (image instanceof ArrayBuffer) setFile(image);
 		};
 		if (!e.target.files) return;
-		reader.readAsDataURL(e.target.files[0]);
+		reader.readAsArrayBuffer(e.target.files[0]);
 	}
 
 	return (

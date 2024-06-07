@@ -42,5 +42,5 @@ export interface CreateAdvertisementPayload {
 		postalCode: number;
 		description: string;
 	};
-	file?: string;
+	file?: ArrayBuffer;
 }

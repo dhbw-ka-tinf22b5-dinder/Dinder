@@ -100,8 +100,11 @@ export function publishAdvertisement(payload: CreateAdvertisementPayload) {
 		.then((res) => {
 			axios
 				.put(
-					`${url}advertisement/${res.data.advertisementId}/image`,
-					payload.file,
+					`${url}advertisement/${res.data.advertisementId}/image`,payload.file,{
+                        headers:{
+                            'Content-Type': 'application/octet-stream'
+                        }
+                    }
 				)
 				.then((resImage) => resImage)
 				.catch((resError) => resError);
