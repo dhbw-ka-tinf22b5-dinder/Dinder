@@ -64,15 +64,15 @@ class AllTest {
                         extract().body().jsonPath();
 
         JsonPath expected = JsonPath.from("[{\"swipeId\":1,\"swipeTime\":\"2023-11-13T08:09:10Z\"," +
-                "\"swipeState\":\"ACCEPTED\",\"advertisement\":{\"title\":\"Haus bauen\",\"price\":17.5," +
-                "\"location\":\"Karlsruhe\",\"postalCode\":12345,\"description\":\"description123\"," +
-                "\"imagePath\":null,\"advertiser\":{\"userName\":\"maxMustermann\"}," +
+                "\"swipeState\":\"ACCEPTED\",\"advertisement\":{\"advertisementId\":2,\"title\":\"Haus bauen\"," +
+                "\"price\":17.5,\"location\":\"Karlsruhe\",\"postalCode\":12345,\"description\":\"description123\"," +
+                "\"imagePath\":null,\"advertiser\":{\"userName\":\"maxMustermann\"},\"contractor\":null," +
                 "\"creationTime\":\"2023-11-12T08:09:10Z\"},\"user\":{\"userName\":\"userTest\"}},{\"swipeId\": 2," +
                 "\"swipeTime\":\"2023-11-12T08:09:11Z\",\"swipeState\":\"ACCEPTED\"," +
-                "\"advertisement\":{\"title\":\"Haus bauen\",\"price\":17.5,\"location\":\"Karlsruhe\"," +
-                "\"postalCode\":12345,\"description\":\"description123\",\"imagePath\":null," +
-                "\"advertiser\":{\"userName\":\"maxMustermann\"},\"creationTime\":\"2023-11-12T08:09:10Z\"}," +
-                "\"user\":{\"userName\":\"user123\"}}]");
+                "\"advertisement\":{\"advertisementId\":2,\"title\":\"Haus bauen\",\"price\":17.5," +
+                "\"location\":\"Karlsruhe\",\"postalCode\":12345,\"description\":\"description123\"," +
+                "\"imagePath\":null,\"advertiser\":{\"userName\":\"maxMustermann\"},\"contractor\":null," +
+                "\"creationTime\":\"2023-11-12T08:09:10Z\"},\"user\":{\"userName\":\"user123\"}}]");
 
         Assertions.assertEquals(expected.prettify(), response.prettify());
     }
