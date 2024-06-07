@@ -83,6 +83,7 @@ public class Advertisement {
 
     public AdvertisementInformationModel toInformationModel() {
         return new AdvertisementInformationModel(advertisementId, title, price, location, postalCode, description,
-                imagePath, advertiser.toInformationModel(), contractor.toInformationModel(), creationTime);
+                imagePath, advertiser.toInformationModel(), contractor != null ? contractor.toInformationModel() :
+                null, creationTime);
     }
 }
