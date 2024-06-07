@@ -44,19 +44,6 @@ public class Advertisement {
     @OneToMany(mappedBy = "advertisement")
     private Set<SwipeInformation> swipeInformations = new LinkedHashSet<>();
 
-    public String getFileName() {
-        if (getImagePath() == null) {
-            return "image";
-        }
-
-        try {
-            String path = getImagePath().substring(getImagePath().indexOf("/") + 1);
-            return path.substring(path.indexOf("/") + 1);
-        } catch (StringIndexOutOfBoundsException e) {
-            return "image";
-        }
-    }
-
     public static Advertisement fromModel(AddAdvertisementModel addAdvertisementModel, Users advertiser, String image) {
         Advertisement advertisement = fromModel(addAdvertisementModel, advertiser);
         advertisement.setImagePath(image);
@@ -80,8 +67,22 @@ public class Advertisement {
         return advertisement;
     }
 
+    public String getFileName() {
+        if (getImagePath() == null) {
+            return "image";
+        }
+
+        try {
+            String path = getImagePath().substring(getImagePath().indexOf("/") + 1);
+            return path.substring(path.indexOf("/") + 1);
+        }
+        catch (StringIndexOutOfBoundsException e) {
+            return "image";
+        }
+    }
+
     public AdvertisementInformationModel toInformationModel() {
-        return new AdvertisementInformationModel(title, price, location, postalCode, description, imagePath,
-                advertiser.toInformationModel(), creationTime);
+        return new AdvertisementInformationModel(advertisementId, title, price, location, postalCode, description,
+                imagePath, advertiser.toInformationModel(), contractor.toInformationModel(), creationTime);
     }
 }
