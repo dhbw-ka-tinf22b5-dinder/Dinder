@@ -1,7 +1,11 @@
 "use client";
-import {Button} from "@/components/atoms/Button.component.tsx";
-import {CardGrid, CardGridItem, InformationImage,} from "@/styles/advertisementManagement.styles.ts";
-import {Info} from "@/styles/swipecard.styles.ts";
+import { Button } from "@/components/atoms/Button.component.tsx";
+import {
+	CardGrid,
+	CardGridItem,
+	InformationImage,
+} from "@/styles/advertisementManagement.styles.ts";
+import { Info } from "@/styles/swipecard.styles.ts";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import style from "../Advertisement.module.css";
@@ -158,7 +162,7 @@ function Advertisement({
 					<LocationOnIcon /> {advertisement.plz} {advertisement.location}
 				</p>
 				<p>
-                    <CalendarMonthIcon/> {advertisement.creationTime.toLocaleDateString()}
+					<CalendarMonthIcon /> {advertisement.creationTime}
 				</p>
 			</Info>
 			<label className={style.state}>Pending</label>
