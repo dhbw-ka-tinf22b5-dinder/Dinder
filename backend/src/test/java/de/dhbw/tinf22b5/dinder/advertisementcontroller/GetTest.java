@@ -52,7 +52,7 @@ class GetTest {
                         extract().body().jsonPath();
 
         JsonPath expected = JsonPath.from("{\"title\":\"Rasenmähen\",\"price\":13.5,\"location\":\"Karlsruhe\"," +
-                "\"plz\":12345,\"description\":\"description\",\"imagePath\":null," +
+                "\"postalCode\":12345,\"description\":\"description\",\"imagePath\":null," +
                 "\"advertiser\":{\"userName\":\"userTest\"},\"creationTime\": \"2023-11-12T04:05:06Z\"}");
         Assertions.assertEquals(expected.prettify(), response.prettify());
     }

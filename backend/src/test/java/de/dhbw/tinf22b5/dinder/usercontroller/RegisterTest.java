@@ -40,9 +40,40 @@ class RegisterTest {
         given().
                 body("{\"email\":\"test@yahoo.de\",\"userName\":\"1234\",\"password\":\"123\"}").
                 contentType("application/json").
-        when().post("/api/v1/register").
-        then().
+                when().post("/api/v1/register").
+                then().
                 statusCode(HttpStatus.CONFLICT.value());
+    }
+
+    @Test
+    void registerBadRequestEmailTest() {
+        given().
+                body("{\"email\":\"newUser@\",\"userName\":\"newUser\",\"password\":\"123\"}").
+                contentType("application/json").
+                when().post("/api/v1/register").
+                then().
+                statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+
+    @Test
+    void registerBadRequestUsernameTest() {
+        given().
+                body("{\"email\":\"newUser@yahoo.de\",\"userName\":\"newly registered User\",\"password\":\"123\"}").
+                contentType("application/json").
+                when().post("/api/v1/register").
+                then().
+                statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    void registerBadRequestPasswordTest() {
+        given().
+                body("{\"email\":\"newUser@yahoo.de\",\"userName\":\"newUser\",\"password\":\"12\"}").
+                contentType("application/json").
+                when().post("/api/v1/register").
+                then().
+                statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
     @Test
@@ -50,8 +81,8 @@ class RegisterTest {
         given().
                 body("{\"email\":\"newUser@yahoo.de\",\"userName\":\"newUser\",\"password\":\"123\"}").
                 contentType("application/json").
-        when().post("/api/v1/register").
-        then().
+                when().post("/api/v1/register").
+                then().
                 statusCode(HttpStatus.OK.value()).
                 cookie(UserController.SESSION_ID_COOKIE);
     }
