@@ -39,6 +39,7 @@ val restAssuredVersion = "5.4.0"
 val junitVersion = "4.13.1"
 val jupiterVersion = "5.8.1"
 val testContainersJupiterVersion = "1.19.8"
+val mockitoVersion = "3.+"
 
 dependencies {
     implementation("org.jetbrains:annotations:$jetbrainsAnnotationsVersion")
@@ -75,6 +76,7 @@ dependencies {
     testImplementation("junit:junit:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:$jupiterVersion")
     testImplementation("org.testcontainers:junit-jupiter:$testContainersJupiterVersion")
+    testImplementation("org.mockito:mockito-core:$mockitoVersion")
 }
 
 application {

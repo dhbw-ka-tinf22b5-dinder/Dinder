@@ -1,8 +1,8 @@
+import Navbar from "@/components/universal/Navbar.tsx";
 import { StoreProvider } from "@/lib/StoreProvider.tsx";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/universal/Navbar.tsx";
 
 const inter = Inter({ subsets: ["latin"] });
 

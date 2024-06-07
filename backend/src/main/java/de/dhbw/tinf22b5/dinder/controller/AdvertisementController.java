@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
@@ -110,7 +111,7 @@ public class AdvertisementController {
     }
 
     @PutMapping("advertisement/{id}/image")
-    public Advertisement addImage(@RequestBody Resource file, @PathVariable int id, Principal principal) throws IOException {
+    public AdvertisementInformationModel addImage(@RequestBody Resource file, @PathVariable int id, Principal principal) throws IOException {
         Advertisement advertisement =
                 advertisementService.getAdvertisementById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
@@ -138,7 +139,7 @@ public class AdvertisementController {
         Users user = userService.loadUserByUsername(principal.getName());
         String filePath = supabaseService.uploadFile(supabaseService.getBucket(
                         "advertisement"), file.getContentAsByteArray(),
-                user.getUsername() + "/" + UUID.randomUUID() + fileExtension).join();
+                user.getUsername() + File.pathSeparator + UUID.randomUUID() + fileExtension).join();
 
         if (filePath == null || filePath.isBlank()) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -146,7 +147,6 @@ public class AdvertisementController {
 
         advertisement.setImagePath(filePath);
 
-        //TODO return advertisement information model?? -> there are some fields missing in it
-        return advertisementService.updateAdvertisement(advertisement);
+        return advertisementService.updateAdvertisement(advertisement).toInformationModel();
     }
 }
