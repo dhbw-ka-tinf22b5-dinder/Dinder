@@ -30,7 +30,7 @@ public class Advertisement {
     @Column(name = "image")
     private String imagePath;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "advertiser", nullable = false)
     private Users advertiser;
