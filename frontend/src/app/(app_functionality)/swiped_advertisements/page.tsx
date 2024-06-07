@@ -162,7 +162,8 @@ function Advertisement({
 					<LocationOnIcon /> {advertisement.plz} {advertisement.location}
 				</p>
 				<p>
-					<CalendarMonthIcon /> {advertisement.creationTime}
+					<CalendarMonthIcon />{" "}
+					{advertisement.creationTime.toLocaleDateString()}
 				</p>
 			</Info>
 			<label className={style.state}>Pending</label>
