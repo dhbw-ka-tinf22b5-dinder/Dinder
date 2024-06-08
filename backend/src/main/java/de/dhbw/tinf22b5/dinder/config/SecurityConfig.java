@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/logout").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/index.html").permitAll()
