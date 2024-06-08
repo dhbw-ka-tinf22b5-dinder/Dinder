@@ -41,7 +41,7 @@ public class UserController {
     }
 
     private Cookie generateLogoutCookie() {
-        Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, null);
+        Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, "TMP");
         sessionIdCookie.setHttpOnly(true);
         sessionIdCookie.setSecure(true);
         sessionIdCookie.setMaxAge(0);
@@ -67,6 +67,9 @@ public class UserController {
 
     @PostMapping("/logout")
     public boolean logout(HttpServletRequest request, HttpServletResponse response) {
+        if(request.getCookies() == null)
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+
         boolean hasCookie = Arrays.stream(request.getCookies())
                 .anyMatch(cookie -> cookie.getName().equalsIgnoreCase(SESSION_ID_COOKIE));
 
@@ -96,6 +99,9 @@ public class UserController {
 
     @GetMapping("/user/me")
     public UserInformationModel getMyUserInfo(HttpServletRequest request) {
+        if(request.getCookies() == null)
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+
         String email = Arrays.stream(request.getCookies())
                 .filter(cookie -> cookie.getName().equalsIgnoreCase(SESSION_ID_COOKIE))
                 .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
