@@ -44,6 +44,7 @@ public class UserController {
         Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, null);
         sessionIdCookie.setHttpOnly(true);
         sessionIdCookie.setSecure(true);
+        sessionIdCookie.setMaxAge(0);
         return sessionIdCookie;
     }
 
