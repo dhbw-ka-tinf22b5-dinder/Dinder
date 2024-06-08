@@ -5,9 +5,11 @@ import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
 import { AdvertisementCreationStyled } from "@/styles/AdvertisementCreation.styles.ts";
 import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
-import type { SyntheticEvent } from "react";
+import { type ChangeEvent, type SyntheticEvent, useState } from "react";
 
 export default function NewAdvertisement() {
+	const [file, setFile] = useState<ArrayBuffer>();
+
 	function addAdvertisement(e: SyntheticEvent) {
 		e.preventDefault();
 		const target = e.target as typeof e.target & {
@@ -16,7 +18,6 @@ export default function NewAdvertisement() {
 			location: { value: string };
 			postalCode: { value: number };
 			description: { value: string };
-			picture: { value: File };
 		};
 		const AdvertisementPayload: CreateAdvertisementPayload = {
 			json: {
@@ -26,11 +27,22 @@ export default function NewAdvertisement() {
 				postalCode: target.postalCode.value,
 				description: target.description.value,
 			},
-			file: target.picture.value,
+			file: file,
 		};
 		publishAdvertisement(AdvertisementPayload)
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
+	}
+
+	function change(e: ChangeEvent<HTMLInputElement>) {
+		const reader = new FileReader();
+		reader.onload = async (f) => {
+			if (!f.target) return;
+			const image: ArrayBuffer | string | null = f.target.result;
+			if (image instanceof ArrayBuffer) setFile(image);
+		};
+		if (!e.target.files) return;
+		reader.readAsArrayBuffer(e.target.files[0]);
 	}
 
 	return (
@@ -48,7 +60,7 @@ export default function NewAdvertisement() {
 				postal code
 				<Input type="text" name="postalCode" />
 				picture
-				<Input type="file" name="picture" />
+				<input type="file" onChange={(e) => change(e)} name="picture" />
 				<ButtonSubmit span={2}>Create</ButtonSubmit>
 			</Form>
 		</AdvertisementCreationStyled>
