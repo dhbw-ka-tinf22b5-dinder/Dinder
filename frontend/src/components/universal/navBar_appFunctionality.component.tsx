@@ -6,6 +6,8 @@ import {
 } from "@/styles/universal.styles";
 import HandymanIcon from "@mui/icons-material/Handyman";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+import router from "next/dist/client/router";
 
 const NavBarAppFunctionalityComponent = () => {
 	const { push } = useRouter();
@@ -27,7 +29,7 @@ const NavBarAppFunctionalityComponent = () => {
 			<HeaderSubpages onClick={() => nav("/new_advertisement")}>
 				new advertisement
 			</HeaderSubpages>
-			<HeaderLogout onClick={() => nav("/")}>logout</HeaderLogout>
+			<HeaderLogout onClick={() => axios.post('/api/v1/logout').then(() => { window.sessionStorage.setItem("isLoggedIn", "0"); nav("/"); router.reload(); })}>logout</HeaderLogout>
 		</div>
 	);
 };
