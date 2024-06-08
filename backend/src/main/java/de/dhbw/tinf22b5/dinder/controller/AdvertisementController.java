@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.Principal;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -56,29 +57,39 @@ public class AdvertisementController {
         return headers;
     }
 
+    public ResponseEntity<Resource> getNoImageResponse() {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("assets/no-image.jpg")) {
+            if (inputStream != null) {
+                ByteArrayResource image = new ByteArrayResource(inputStream.readAllBytes());
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .headers(getHeadersForResource("no-image.jpg"))
+                        .contentLength(image.contentLength())
+                        .contentType(MediaType.IMAGE_JPEG)
+                        .body(image);
+            }
+        }
+        catch (IOException ignored) {
+            //both the else case and this catch should throw the following exception, meaning this saves redundancy
+        }
+        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @GetMapping("advertisement/{id}/image")
     public ResponseEntity<Resource> getAdvertisementImageById(@PathVariable int id) {
         Advertisement advertisement =
                 advertisementService.getAdvertisementById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-        Optional<byte[]> content = supabaseService.getImage(advertisement).map(CompletableFuture::join);
+        Optional<byte[]> content;
+
+        try {
+            content = supabaseService.getImage(advertisement).map(CompletableFuture::join);
+        } catch (NoSuchElementException ignored) {
+            return getNoImageResponse();
+        }
 
         if (content.isEmpty()) {
-            try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("assets/no-image.jpg")) {
-                if (inputStream != null) {
-                    ByteArrayResource image = new ByteArrayResource(inputStream.readAllBytes());
-                    return ResponseEntity
-                            .status(HttpStatus.NOT_FOUND)
-                            .headers(getHeadersForResource("no-image.jpg"))
-                            .contentLength(image.contentLength())
-                            .contentType(MediaType.IMAGE_JPEG)
-                            .body(image);
-                }
-            }
-            catch (IOException ignored) {
-                //both the else case and this catch should throw the following exception, meaning this saves redundancy
-            }
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            return getNoImageResponse();
         }
 
         ByteArrayResource image = new ByteArrayResource(content.get());

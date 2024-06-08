@@ -9,9 +9,7 @@ import io.github.jan.supabase.storage.Storage;
 import io.github.jan.supabase.storage.StorageKt;
 import kotlin.Unit;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -32,7 +30,7 @@ public class SupabaseService {
         return getStorage().from(name);
     }
 
-    public Optional<CompletableFuture<byte[]>> getImage(Advertisement advertisement) {
+    public Optional<CompletableFuture<byte[]>> getImage(Advertisement advertisement) throws NoSuchElementException {
         if (advertisement.getImagePath() == null) {
             return Optional.empty();
         }
@@ -42,14 +40,10 @@ public class SupabaseService {
             BucketApi bucket = getBucket(bucketName);
 
             String path = advertisement.getImagePath().substring(advertisement.getImagePath().indexOf("/"));
-            return Optional.ofNullable(downloadFile(bucket, path)
-            );
+            return Optional.ofNullable(downloadFile(bucket, path));
         }
         catch (StringIndexOutOfBoundsException e) {
             return Optional.empty();
-        }
-        catch (NoSuchElementException e) {
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         }
     }
 
