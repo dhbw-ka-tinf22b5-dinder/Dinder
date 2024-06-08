@@ -40,6 +40,13 @@ public class UserController {
         return sessionIdCookie;
     }
 
+    private Cookie generateLogoutCookie() {
+        Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, null);
+        sessionIdCookie.setHttpOnly(true);
+        sessionIdCookie.setSecure(true);
+        return sessionIdCookie;
+    }
+
     @Operation(description = "Log in using the credentials. The response will have a cookie attached, which contains " +
             "the " +
             "JWT token.")
@@ -55,6 +62,20 @@ public class UserController {
             response.addCookie(generateSessionIDCookie(loginModel.loginName()));
 
         return loginSuccessful;
+    }
+
+    @PostMapping("/logout")
+    public boolean logout(HttpServletRequest request, HttpServletResponse response) {
+        boolean hasCookie = Arrays.stream(request.getCookies())
+                .anyMatch(cookie -> cookie.getName().equalsIgnoreCase(SESSION_ID_COOKIE));
+
+        if(!hasCookie) {
+            return false;
+        }
+
+        response.addCookie(generateLogoutCookie());
+
+        return true;
     }
 
     @PostMapping("/register")

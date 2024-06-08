@@ -7,6 +7,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -76,7 +77,7 @@ public class SecurityService {
                 .getSubject();
     }
 
-    public String generateKey(String email) {
+    public String generateKey(@NotNull String email) {
         Instant issued = Instant.now();
 
         return Jwts.builder()
