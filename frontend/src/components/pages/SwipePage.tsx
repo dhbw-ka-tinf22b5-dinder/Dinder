@@ -38,6 +38,7 @@ function SwipePage() {
 	const handleAccept = () => {
 		// Add logic for accepting the active box
 		acceptAdvertisement(currentItem.id).then((res) => console.log(res));
+        handleNext();
 	};
 	return (
 		<Card>
