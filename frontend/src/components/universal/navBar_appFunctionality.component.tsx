@@ -19,7 +19,7 @@ const NavBarAppFunctionalityComponent = () => {
 		<div className={"NavBar"}>
 			<HandymanIcon fontSize={"large"} onClick={() => nav("/")} />
 			<Header onClick={() => nav("/")}>DINDER</Header>
-			<HeaderSubpages onClick={() => nav("/swipe")}>SWIPE</HeaderSubpages>
+			<HeaderSubpages onClick={() => nav("/")}>SWIPE</HeaderSubpages>
 			<HeaderSubpages onClick={() => nav("/published_advertisements")}>
 				published advertisements
 			</HeaderSubpages>

@@ -30,7 +30,6 @@ function usePublishedAdvertisements(): Advertisement[] {
 }
 
 export default function PublishedAdvertisements() {
-	//const advertisements //TODO: Get advertisements from backend
 	const advertisements: Advertisement[] = usePublishedAdvertisements();
 	return (
 		<CardGrid>

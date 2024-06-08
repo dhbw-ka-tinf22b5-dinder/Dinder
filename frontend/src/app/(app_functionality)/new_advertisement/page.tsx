@@ -49,17 +49,17 @@ export default function NewAdvertisement() {
 		<AdvertisementCreationStyled>
 			<h3>Create new advertisement</h3>
 			<Form method="POST" submit={addAdvertisement}>
-				title
+				Title
 				<Input type="text" name="title" />
-				description
+				Description
 				<Input type="text" name="description" />
-				price
-				<Input type="text" name="price" />
-				location
+				Price in €
+				<Input type="number" name="price" />
+				Location
 				<Input type="text" name="location" />
-				postal code
-				<Input type="text" name="postalCode" />
-				picture
+				Postal code
+				<Input type="number" name="postalCode" />
+				Picture
 				<input type="file" onChange={(e) => change(e)} name="picture" />
 				<ButtonSubmit span={2}>Create</ButtonSubmit>
 			</Form>

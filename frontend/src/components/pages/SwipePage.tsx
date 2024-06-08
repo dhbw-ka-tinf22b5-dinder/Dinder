@@ -61,11 +61,11 @@ function SwipePage() {
 					<PersonIcon /> {currentItem.advertiser.userName}
 				</p>
 			</Info>
+            <Button span={1} click={handleNext} text={"Reject"} />
+
 			<Button span={1} click={handlePrev} text={"Previous"} />
 
 			<Button span={1} click={handleAccept} text={"Accept"} />
-
-			<Button span={1} click={handleNext} text={"Next"} />
 		</Card>
 	);
 }

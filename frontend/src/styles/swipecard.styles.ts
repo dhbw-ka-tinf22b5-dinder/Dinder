@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Card = styled.div`
   position: relative;
-  margin: 100px auto 20px auto;
+  margin: 115px auto auto auto;
+  width: 20%;
   display: grid;
   gap: 10px;
   grid-template-columns: auto auto auto;
