@@ -5,9 +5,9 @@ import {
 	HeaderSubpages,
 } from "@/styles/universal.styles";
 import HandymanIcon from "@mui/icons-material/Handyman";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import router from "next/dist/client/router";
+import { useRouter } from "next/navigation";
 
 const NavBarAppFunctionalityComponent = () => {
 	const { push } = useRouter();
