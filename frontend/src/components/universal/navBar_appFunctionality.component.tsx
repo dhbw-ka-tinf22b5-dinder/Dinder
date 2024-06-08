@@ -29,7 +29,17 @@ const NavBarAppFunctionalityComponent = () => {
 			<HeaderSubpages onClick={() => nav("/new_advertisement")}>
 				new advertisement
 			</HeaderSubpages>
-			<HeaderLogout onClick={() => axios.post('/api/v1/logout').then(() => { window.sessionStorage.setItem("isLoggedIn", "0"); nav("/"); router.reload(); })}>logout</HeaderLogout>
+			<HeaderLogout
+				onClick={() =>
+					axios.post("/api/v1/logout").then(() => {
+						window.sessionStorage.setItem("isLoggedIn", "0");
+						nav("/");
+						router.reload();
+					})
+				}
+			>
+				logout
+			</HeaderLogout>
 		</div>
 	);
 };
