@@ -84,7 +84,7 @@ public class AdvertisementController {
 
         try {
             content = supabaseService.getImage(advertisement).map(CompletableFuture::join);
-        } catch (NoSuchElementException ignored) {
+        } catch (Exception ignored) {
             return getNoImageResponse();
         }
 
