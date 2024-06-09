@@ -18,7 +18,7 @@ export const advertisementThunk =
 		dispatch: (arg0: {
 			payload: Advertisement[];
 			type: "error/advertisementReducer";
-		}) => void
+		}) => void,
 	) => {
 		getAdvertisementList().then((res) => {
 			dispatch(advertisementReducer(res));

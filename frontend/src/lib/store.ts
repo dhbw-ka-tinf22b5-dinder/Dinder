@@ -10,7 +10,7 @@ export const store = configureStore({
 		login: loginReducer,
 		error: errorReducer,
 		advertisement: advertisementReducer,
-        swipes: swipeReducer,
+		swipes: swipeReducer,
 	},
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself

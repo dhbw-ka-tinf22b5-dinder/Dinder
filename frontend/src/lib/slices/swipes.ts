@@ -1,15 +1,15 @@
-import type {swipe} from "@/types/general.types.ts";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import type { swipe } from "@/types/general.types.ts";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: swipe[] = []
+const initialState: swipe[] = [];
 export const swipeSlice = createSlice({
-    name: "swipes",
-    initialState,
-    reducers:{
-        swipeReducer(_state,action:PayloadAction<swipe[]>){
-            return action.payload;
-        }
-    }
-})
-export const {swipeReducer} = swipeSlice.actions;
+	name: "swipes",
+	initialState,
+	reducers: {
+		swipeReducer(_state, action: PayloadAction<swipe[]>) {
+			return action.payload;
+		},
+	},
+});
+export const { swipeReducer } = swipeSlice.actions;
 export default swipeSlice.reducer;

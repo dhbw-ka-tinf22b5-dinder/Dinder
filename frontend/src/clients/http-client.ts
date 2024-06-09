@@ -1,9 +1,10 @@
 import axios from "axios";
 import type {
-    Advertisement,
-    CreateAdvertisementPayload, swipe,
-    UserLogin,
-    UserRegister,
+	Advertisement,
+	CreateAdvertisementPayload,
+	swipe,
+	UserLogin,
+	UserRegister,
 } from "../types/general.types";
 
 const url = "http://localhost:8080/api/v1/";
@@ -19,11 +20,11 @@ interface advertisementFromServer {
 	};
 	creationTime: string;
 }
-interface swipeFromServer{
-    swipeState:string,
-    user:{
-        userName: string;
-    }
+interface swipeFromServer {
+	swipeState: string;
+	user: {
+		userName: string;
+	};
 }
 export function login(user: UserLogin): Promise<boolean> {
 	// later this will be a json
@@ -96,25 +97,25 @@ export function declineAdvertisement(id: number) {
 		swipeState: "DECLINED",
 	});
 }
-export function getSwipes(id: number):Promise<swipe[]> {
+export function getSwipes(id: number): Promise<swipe[]> {
 	return axios.get(`${url}advertisement/${id}/swipe/all`).then((res) => {
-        const rawSwipe: swipeFromServer[]= res.data;
-        return parseToSwipes(rawSwipe,id)}
-    )
+		const rawSwipe: swipeFromServer[] = res.data;
+		return parseToSwipes(rawSwipe, id);
+	});
 }
-function parseToSwipes(swipe:swipeFromServer[],advertisementID:number):swipe[]{
-    const betterSwipes:swipe[]= []
-    for (const swipeFromServer of swipe) {
-        betterSwipes.push(
-            {
-                swipeState:swipeFromServer.swipeState,
-                userName:swipeFromServer.user.userName,
-                advertisementID:advertisementID
-            }
-        )
-
-    }
-    return betterSwipes
+function parseToSwipes(
+	swipe: swipeFromServer[],
+	advertisementID: number,
+): swipe[] {
+	const betterSwipes: swipe[] = [];
+	for (const swipeFromServer of swipe) {
+		betterSwipes.push({
+			swipeState: swipeFromServer.swipeState,
+			userName: swipeFromServer.user.userName,
+			advertisementID: advertisementID,
+		});
+	}
+	return betterSwipes;
 }
 export function publishAdvertisement(payload: CreateAdvertisementPayload) {
 	return axios
