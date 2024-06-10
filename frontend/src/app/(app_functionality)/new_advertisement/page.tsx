@@ -46,23 +46,23 @@ export default function NewAdvertisement() {
 	}
 
 	return (
-		<AdvertisementCreationStyled>
-			<h3>Create new advertisement</h3>
-			<Form method="POST" submit={addAdvertisement}>
-				Title
-				<Input type="text" name="title" />
-				Description
-				<Input type="text" name="description" />
-				Price in €
-				<Input type="number" name="price" />
-				Location
-				<Input type="text" name="location" />
-				Postal code
-				<Input type="number" name="postalCode" />
-				Picture
-				<input type="file" onChange={(e) => change(e)} name="picture" />
-				<ButtonSubmit span={2}>Create</ButtonSubmit>
-			</Form>
-		</AdvertisementCreationStyled>
-	);
+            <AdvertisementCreationStyled>
+                <Form method="POST" submit={addAdvertisement}>
+                    <h3 style={{gridColumn: 'span 2'}} >Create new advertisement</h3>
+                    Title
+                    <Input type="text" name="title"/>
+                    Description
+                    <Input type="text" name="description"/>
+                    Price in €
+                    <Input type="number" name="price"/>
+                    Location
+                    <Input type="text" name="location"/>
+                    Postal code
+                    <Input type="number" name="postalCode"/>
+                    Picture
+                    <input type="file" onChange={(e) => change(e)} name="picture"/>
+                    <ButtonSubmit span={2}>Create</ButtonSubmit>
+                </Form>
+            </AdvertisementCreationStyled>
+    );
 }

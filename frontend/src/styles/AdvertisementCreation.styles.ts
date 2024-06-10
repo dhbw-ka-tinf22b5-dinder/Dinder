@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const AdvertisementCreationStyled = styled.div`
-    height: 80%;    
-    width: 33%;
+    max-height: 75%;    
+    max-width: 30%;
     vertical-align: center;
     margin: auto;
 `;
