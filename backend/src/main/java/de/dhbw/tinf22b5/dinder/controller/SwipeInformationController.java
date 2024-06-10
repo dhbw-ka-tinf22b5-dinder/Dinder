@@ -4,6 +4,7 @@ import de.dhbw.tinf22b5.dinder.entities.Advertisement;
 import de.dhbw.tinf22b5.dinder.entities.SwipeInformation;
 import de.dhbw.tinf22b5.dinder.entities.Users;
 import de.dhbw.tinf22b5.dinder.models.request.AddSwipeInformationModel;
+import de.dhbw.tinf22b5.dinder.models.response.AdvertisementInformationModel;
 import de.dhbw.tinf22b5.dinder.models.response.SwipeInformationModel;
 import de.dhbw.tinf22b5.dinder.services.AdvertisementService;
 import de.dhbw.tinf22b5.dinder.services.SwipeInformationService;
@@ -32,6 +33,30 @@ public class SwipeInformationController {
                 advertisementService.getAdvertisementById(advertisementId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         return swipeInformationService.getAllByAdvertisement(advertisement).stream().map(SwipeInformation::toInformationModel).toList();
+    }
+
+    @PostMapping("{id}/accept")
+    public AdvertisementInformationModel acceptAdvertisement(@PathVariable("advertisement") int advertisementId,
+                                                             @PathVariable("id") int id, Principal principal) {
+        Advertisement advertisement = advertisementService.getAdvertisementById(advertisementId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        SwipeInformation swipeInformation = swipeInformationService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        if (swipeInformation.getAdvertisement().getAdvertisementId() != advertisement.getAdvertisementId()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (!advertisement.getAdvertiser().getEmail().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        advertisement.setContractor(swipeInformation.getContractor());
+
+        advertisementService.updateAdvertisement(advertisement);
+
+        return advertisement.toInformationModel();
     }
 
     @PostMapping()
