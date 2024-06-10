@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Card = styled.div`
   position: relative;
   margin: 115px auto auto auto;
-  width: 20%;
+  width:25%;  
   display: grid;
   gap: 10px;
   grid-template-columns: auto auto auto;
@@ -19,7 +19,8 @@ export const Info = styled.div`
 
 export const AdvertismentImage = styled.img`
   width: 100%;
-  height: 25vh;
+  height: 250px;
+  object-fit: cover;
   border-radius: 25px;
   grid-column: span 3;
   border: 1px solid darkgray;
