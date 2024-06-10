@@ -15,4 +15,6 @@ public interface SwipeInformationRepository extends JpaRepository<SwipeInformati
 
     Optional<SwipeInformation> findSwipeInformationByAdvertisementAndContractor(Advertisement advertisement,
                                                                                 Users contractor);
+
+    List<SwipeInformation> findAllByContractor(Users contractor);
 }

@@ -1,10 +1,14 @@
 package de.dhbw.tinf22b5.dinder.controller;
 
 
+import de.dhbw.tinf22b5.dinder.entities.SwipeInformation;
+import de.dhbw.tinf22b5.dinder.entities.Users;
 import de.dhbw.tinf22b5.dinder.models.request.LoginModel;
 import de.dhbw.tinf22b5.dinder.models.request.RegisterModel;
+import de.dhbw.tinf22b5.dinder.models.response.SwipeInformationModel;
 import de.dhbw.tinf22b5.dinder.models.response.UserInformationModel;
 import de.dhbw.tinf22b5.dinder.services.SecurityService;
+import de.dhbw.tinf22b5.dinder.services.SwipeInformationService;
 import de.dhbw.tinf22b5.dinder.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -20,7 +24,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -32,6 +38,7 @@ public class UserController {
     public static final String SESSION_ID_COOKIE = "session-id";
     private UserService userService;
     private SecurityService securityService;
+    private SwipeInformationService swipeInformationService;
 
     private Cookie generateSessionIDCookie(String email) {
         Cookie sessionIdCookie = new Cookie(SESSION_ID_COOKIE, securityService.generateKey(email));
@@ -109,5 +116,14 @@ public class UserController {
                 .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         return userService.getUserInfo(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    }
+
+    @GetMapping("/user/swipes")
+    public List<SwipeInformationModel> getMySwipes(Principal principal) {
+        Users user = userService.loadUserByUsername(principal.getName());
+
+        return swipeInformationService.getAllByUser(user).stream()
+                .map(SwipeInformation::toInformationModel)
+                .toList();
     }
 }
