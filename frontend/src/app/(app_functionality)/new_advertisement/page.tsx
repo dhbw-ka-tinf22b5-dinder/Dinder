@@ -48,7 +48,7 @@ export default function NewAdvertisement() {
 	return (
             <AdvertisementCreationStyled>
                 <Form method="POST" submit={addAdvertisement}>
-                    <h3 style={{gridColumn: 'span 2'}} >Create new advertisement</h3>
+                    <h3 className="headerGrid" >Create new advertisement</h3>
                     Title
                     <Input type="text" name="title"/>
                     Description

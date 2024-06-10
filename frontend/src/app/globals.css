@@ -55,6 +55,14 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.headerGrid {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
 .NavBar {
     position: absolute;
     top: 0;

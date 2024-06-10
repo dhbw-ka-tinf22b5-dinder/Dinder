@@ -7,7 +7,7 @@ import {
 } from "@/lib/slices/advertisement.ts";
 import { type RootState, store } from "@/lib/store.ts";
 import { advertisementThunk } from "@/lib/thunks/AdvertisementThunk.ts";
-import { AdvertismentImage, Card, Info } from "@/styles/swipecard.styles";
+import {AdvertisementImage, Card, SwipeInfo} from "@/styles/swipecard.styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
@@ -41,33 +41,33 @@ function SwipePage() {
 		handleNext();
 	};
 	return (
-		<Card>
-			<AdvertismentImage src={currentItem.image} alt={currentItem.title} />
-			<Info>
-				<h2>{currentItem.title}</h2>
-				<p>
-					<b>Description</b> {currentItem.description}
-				</p>
-				<p>
-					<b>Price</b> {currentItem.price} €
-				</p>
-				<p>
-					<LocationOnIcon /> {currentItem.plz} {currentItem.location}
-				</p>
-				<p>
-					<CalendarMonthIcon /> {currentItem.creationTime.toLocaleDateString()}
-				</p>
-				<p>
-					<PersonIcon /> {currentItem.advertiser.userName}
-				</p>
-			</Info>
-			<Button span={1} click={handleNext} text={"Reject"} />
+            <Card>
+                <h2 className="headerGrid">{currentItem.title}</h2>
+                <AdvertisementImage src={currentItem.image} alt={currentItem.title}/>
+                <SwipeInfo>
+                    <p>
+                        <b>Description</b> {currentItem.description}
+                    </p>
+                    <p>
+                        <b>Price</b> {currentItem.price} €
+                    </p>
+                    <p>
+                        <LocationOnIcon/> {currentItem.plz} {currentItem.location}
+                    </p>
+                    <p>
+                        <CalendarMonthIcon/> {currentItem.creationTime.toLocaleDateString()}
+                    </p>
+                    <p>
+                        <PersonIcon/> {currentItem.advertiser.userName}
+                    </p>
+                </SwipeInfo>
+                <Button span={1} click={handleNext} text={"Reject"}/>
 
-			<Button span={1} click={handlePrev} text={"Previous"} />
+                <Button span={1} click={handlePrev} text={"Previous"}/>
 
-			<Button span={1} click={handleAccept} text={"Accept"} />
-		</Card>
-	);
+                <Button span={1} click={handleAccept} text={"Accept"}/>
+            </Card>
+    );
 }
 
 export default SwipePage;
