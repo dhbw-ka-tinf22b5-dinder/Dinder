@@ -2,14 +2,14 @@ import axios from "axios";
 import type {
 	Advertisement,
 	CreateAdvertisementPayload,
-	swipe,
 	UserLogin,
 	UserRegister,
+	swipe,
 } from "../types/general.types";
 
 const url = "http://localhost:8080/api/v1/";
 
-interface advertisementFromServer {
+interface AdvertisementFromServer {
 	title: string;
 	price: number;
 	location: string;
@@ -20,7 +20,7 @@ interface advertisementFromServer {
 	};
 	creationTime: string;
 }
-interface swipeFromServer {
+interface SwipeFromServer {
 	swipeState: string;
 	user: {
 		userName: string;
@@ -64,14 +64,14 @@ export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 		.get(`${url}advertisement/${id}`)
 
 		.then((res) => {
-			const rawAdvertisement: advertisementFromServer = res.data;
+			const rawAdvertisement: AdvertisementFromServer = res.data;
 			return parseToAdvertisement(rawAdvertisement, id);
 		})
 		.catch((error) => error.status);
 }
 
 function parseToAdvertisement(
-	data: advertisementFromServer,
+	data: AdvertisementFromServer,
 	id: number,
 ): Advertisement {
 	return {
@@ -99,12 +99,12 @@ export function declineAdvertisement(id: number) {
 }
 export function getSwipes(id: number): Promise<swipe[]> {
 	return axios.get(`${url}advertisement/${id}/swipe/all`).then((res) => {
-		const rawSwipe: swipeFromServer[] = res.data;
+		const rawSwipe: SwipeFromServer[] = res.data;
 		return parseToSwipes(rawSwipe, id);
 	});
 }
 function parseToSwipes(
-	swipe: swipeFromServer[],
+	swipe: SwipeFromServer[],
 	advertisementID: number,
 ): swipe[] {
 	const betterSwipes: swipe[] = [];

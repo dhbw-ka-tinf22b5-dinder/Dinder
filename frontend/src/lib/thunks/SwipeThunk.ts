@@ -1,13 +1,13 @@
-import { Advertisement, swipe } from "@/types/general.types.ts";
 import { getSwipes } from "@/clients/http-client.ts";
 import { swipeReducer } from "@/lib/slices/swipes.ts";
+import type { Advertisement, swipe } from "@/types/general.types.ts";
 
 function getListOfAdvertisements(
 	currentUser: string,
 	Advertisements: Advertisement[],
 ): number[] {
 	return Advertisements.filter(
-		(value) => value.advertiser.userName == currentUser,
+		(value) => value.advertiser.userName === currentUser,
 	).map((value) => value.id);
 }
 function getAllSwipes(
@@ -26,9 +26,9 @@ function concatSwipes(
 ): Promise<swipe[]> {
 	return getAllSwipes(user, Advertisements).then((res) => {
 		let listOfSwipes: swipe[] = [];
-		res.forEach((e) => {
+		for (const e of res) {
 			listOfSwipes = listOfSwipes.concat(e);
-		});
+		}
 		return listOfSwipes;
 	});
 }

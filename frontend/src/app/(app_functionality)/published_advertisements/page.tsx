@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/atoms/Button.component.tsx";
-import { RootState, store } from "@/lib/store.ts";
+import { type RootState, store } from "@/lib/store.ts";
+import { swipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 import {
 	CardGrid,
 	CardGridItem,
@@ -12,7 +13,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
 import style from "../Advertisement.module.css";
-import { swipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 let swipes: swipe[] = [];
 function usePublishedAdvertisements(): Advertisement[] {
@@ -34,7 +34,7 @@ function usePublishedAdvertisements(): Advertisement[] {
 function handleShowSwipes(id: number) {
 	const user: string[] = [];
 	for (const swipe of swipes) {
-		if (swipe.advertisementID == id && swipe.swipeState == "ACCEPTED")
+		if (swipe.advertisementID === id && swipe.swipeState === "ACCEPTED")
 			user.push(swipe.userName);
 	}
 	alert(user);
