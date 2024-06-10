@@ -149,7 +149,7 @@ public class AdvertisementController {
         Users user = userService.loadUserByUsername(principal.getName());
         String filePath = supabaseService.uploadFile(supabaseService.getBucket(
                         "advertisement"), file.getContentAsByteArray(),
-                user.getUsername() + File.pathSeparator + UUID.randomUUID() + fileExtension).join();
+                user.getUsername() + File.separator + UUID.randomUUID() + fileExtension).join();
 
         if (filePath == null || filePath.isBlank()) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
