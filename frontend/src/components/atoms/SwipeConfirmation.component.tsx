@@ -12,7 +12,7 @@ interface Props {
 export const SwipeConfirmation = (props: Props) => {
 	return (
 		<ConfirmationElementStyled>
-			<p style={{margin: "auto"}}>{props.name}</p>
+			<p style={{ margin: "auto" }}>{props.name}</p>
 			<Button
 				text={"Accept"}
 				click={() => handleAccept(props.currentSwipe)}

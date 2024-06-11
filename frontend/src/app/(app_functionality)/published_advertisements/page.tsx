@@ -30,7 +30,7 @@ function usePublishedAdvertisements(): Advertisement[] {
 			publishedAdvertisements.push(advertisement);
 		}
 	}
-    console.log(publishedAdvertisements);
+	console.log(publishedAdvertisements);
 	return publishedAdvertisements;
 }
 function handleShowSwipes(id: number) {
@@ -83,15 +83,22 @@ const AdvertisementItem = ({
 				click={() => handleShowSwipes(advertisementProp.id)}
 				text={"Show swipes"}
 			/>
-			{advertisementProp.id == currentList  && user.length==0 && (
-                    <p style={{textAlign: "center", gridColumn: "span 3"}}>No swipes yet</p>
+			{advertisementProp.id == currentList && user.length == 0 && (
+				<p style={{ textAlign: "center", gridColumn: "span 3" }}>
+					No swipes yet
+				</p>
 			)}
-            {advertisementProp.id == currentList  && advertisementProp.contractor != null && (
-                    <p style={{textAlign: "center", gridColumn: "span 3"}}>{advertisementProp.contractor.userName}</p>
-            )}
-            {advertisementProp.id == currentList && user.length!=0 && advertisementProp.contractor == null &&(
-                <ConfirmationBoxComponent names={user} swipes={swipes} />
-            )}
+			{advertisementProp.id == currentList &&
+				advertisementProp.contractor != null && (
+					<p style={{ textAlign: "center", gridColumn: "span 3" }}>
+						{advertisementProp.contractor.userName}
+					</p>
+				)}
+			{advertisementProp.id == currentList &&
+				user.length != 0 &&
+				advertisementProp.contractor == null && (
+					<ConfirmationBoxComponent names={user} swipes={swipes} />
+				)}
 		</CardGridItem>
 	);
 };
