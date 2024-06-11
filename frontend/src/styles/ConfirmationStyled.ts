@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const ConfirmationElementStyled = styled.div`
    display: grid;
-  border-radius: 12px;
-  background: white;
-  grid-template-columns: auto auto;
+  border-radius: 25px;
+  background: darkgray;
+  grid-template-columns: 2fr 1fr;
   margin: 3px;
   font-size: large;
   text-align: center;
   column-gap: 4px;
-  padding: 4px;
+  padding: 10px;
 `;
 export const ConfirmationListStyled = styled.div`
     position: relative;

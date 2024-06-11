@@ -5,10 +5,12 @@ import { Form } from "@/components/atoms/Form.component.tsx";
 import { Input } from "@/components/atoms/Input.component.tsx";
 import { AdvertisementCreationStyled } from "@/styles/AdvertisementCreation.styles.ts";
 import type { CreateAdvertisementPayload } from "@/types/general.types.ts";
+import { useRouter } from "next/navigation";
 import { type ChangeEvent, type SyntheticEvent, useState } from "react";
 
 export default function NewAdvertisement() {
 	const [file, setFile] = useState<ArrayBuffer>();
+    const router = useRouter();
 
 	function addAdvertisement(e: SyntheticEvent) {
 		e.preventDefault();
@@ -32,6 +34,7 @@ export default function NewAdvertisement() {
 		publishAdvertisement(AdvertisementPayload)
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
+        router.push("/");
 	}
 
 	function change(e: ChangeEvent<HTMLInputElement>) {
