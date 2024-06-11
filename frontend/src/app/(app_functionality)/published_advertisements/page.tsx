@@ -10,7 +10,7 @@ import {
 import type { Advertisement, swipe } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
 import style from "../Advertisement.module.css";
-import {Info} from "@/components/atoms/Info.component.tsx";
+import { Info } from "@/components/atoms/Info.component.tsx";
 
 let swipes: swipe[] = [];
 function usePublishedAdvertisements(): Advertisement[] {
@@ -66,7 +66,7 @@ const AdvertisementItem = ({
 				src={advertisementProp.image}
 				alt={advertisementProp.title}
 			/>
-			<Info  advertisement={advertisementProp}/>
+			<Info advertisement={advertisementProp} />
 			<Button
 				span={3}
 				click={() => handleShowSwipes(advertisementProp.id)}
