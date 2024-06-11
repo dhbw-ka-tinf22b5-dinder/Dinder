@@ -1,7 +1,9 @@
 "use client";
 import { Button } from "@/components/atoms/Button.component.tsx";
-import { type RootState, store } from "@/lib/store.ts";
 import { swipeThunk } from "@/lib/thunks/SwipeThunk.ts";
+import { ConfirmationBoxComponent } from "@/components/atoms/ConfirmationBox.Component.tsx";
+import { Info } from "@/components/atoms/Info.component.tsx";
+import { type RootState, store } from "@/lib/store.ts";
 import {
 	CardGrid,
 	CardGridItem,
@@ -10,12 +12,10 @@ import {
 import type { Advertisement, swipe } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
 import style from "../Advertisement.module.css";
-import { Info } from "@/components/atoms/Info.component.tsx";
-import { ConfirmationBoxComponent } from "@/components/atoms/ConfirmationBox.Component.tsx";
 
 let swipes: swipe[] = [];
 let user: string[] = [];
-let currentList: number = 0;
+let currentList = 0;
 function usePublishedAdvertisements(): Advertisement[] {
 	const publishedAdvertisements: Advertisement[] = [];
 	const advertisementSelector: Advertisement[] = useSelector(
@@ -34,7 +34,7 @@ function usePublishedAdvertisements(): Advertisement[] {
 	return publishedAdvertisements;
 }
 function handleShowSwipes(id: number) {
-	if (id == currentList) return;
+	if (id === currentList) return;
 	user = [];
 	for (const swipe of swipes) {
 		if (swipe.advertisementID === id && swipe.swipeState === "ACCEPTED")
@@ -83,19 +83,19 @@ const AdvertisementItem = ({
 				click={() => handleShowSwipes(advertisementProp.id)}
 				text={"Show swipes"}
 			/>
-			{advertisementProp.id == currentList && user.length == 0 && (
+			{advertisementProp.id === currentList && user.length === 0 && (
 				<p style={{ textAlign: "center", gridColumn: "span 3" }}>
 					No swipes yet
 				</p>
 			)}
-			{advertisementProp.id == currentList &&
+			{advertisementProp.id === currentList &&
 				advertisementProp.contractor != null && (
 					<p style={{ textAlign: "center", gridColumn: "span 3" }}>
 						{advertisementProp.contractor.userName}
 					</p>
 				)}
-			{advertisementProp.id == currentList &&
-				user.length != 0 &&
+			{advertisementProp.id === currentList &&
+				user.length !== 0 &&
 				advertisementProp.contractor == null && (
 					<ConfirmationBoxComponent names={user} swipes={swipes} />
 				)}

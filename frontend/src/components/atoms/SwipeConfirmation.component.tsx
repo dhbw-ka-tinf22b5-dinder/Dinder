@@ -1,9 +1,10 @@
-import { ConfirmationElementStyled } from "@/styles/ConfirmationStyled.ts";
-import { Button } from "@/components/atoms/Button.component.tsx";
-import { swipe } from "@/types/general.types.ts";
 import { confirmSwipe } from "@/clients/http-client.ts";
+import { Button } from "@/components/atoms/Button.component.tsx";
 import { store } from "@/lib/store.ts";
 import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
+import { ConfirmationElementStyled } from "@/styles/ConfirmationStyled.ts";
+import type { swipe } from "@/types/general.types.ts";
+
 
 interface Props {
 	name: string;

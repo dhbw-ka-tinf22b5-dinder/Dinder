@@ -10,8 +10,8 @@ import type {
 	FrontendError,
 	UserRegisterConfirmation,
 } from "@/types/general.types.ts";
-import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 

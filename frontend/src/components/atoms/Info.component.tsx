@@ -1,7 +1,7 @@
-import { type Advertisement } from "@/types/general.types.ts";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { InfoStyle } from "@/styles/swipecard.styles.ts";
+import type { Advertisement } from "@/types/general.types.ts";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 interface Props {
 	advertisement: Advertisement;

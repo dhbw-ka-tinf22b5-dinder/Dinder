@@ -7,9 +7,9 @@ import { store } from "@/lib/store.ts";
 import { loginThunk } from "@/lib/thunks/loginAndRegistration.ts";
 import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import type { FrontendError, UserLogin } from "@/types/general.types.ts";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import Link from "next/link";
 
 const Page = () => {
 	const valueError: FrontendError = useSelector(

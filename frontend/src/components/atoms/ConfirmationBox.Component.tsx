@@ -1,6 +1,6 @@
-import { ConfirmationListStyled } from "@/styles/ConfirmationStyled.ts";
 import { SwipeConfirmation } from "@/components/atoms/SwipeConfirmation.component.tsx";
-import { swipe } from "@/types/general.types.ts";
+import { ConfirmationListStyled } from "@/styles/ConfirmationStyled.ts";
+import type { swipe } from "@/types/general.types.ts";
 
 interface Props {
 	names: string[];

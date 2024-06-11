@@ -1,15 +1,15 @@
 "use client";
+import { Info } from "@/components/atoms/Info.component";
+import { type RootState, store } from "@/lib/store.ts";
+import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 import {
 	CardGrid,
 	CardGridItem,
 	InformationImage,
 } from "@/styles/advertisementManagement.styles.ts";
-import { Info } from "@/components/atoms/Info.component";
-import style from "../Advertisement.module.css";
-import { type Advertisement } from "@/types/general.types.ts";
+import type { Advertisement } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
-import { RootState, store } from "@/lib/store.ts";
-import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
+import style from "../Advertisement.module.css";
 
 export default function SwipedAdvertisement() {
 	store.dispatch(OwnSwipeThunk());
@@ -18,7 +18,7 @@ export default function SwipedAdvertisement() {
 	);
 	const swipes = useSelector((state: RootState) => state.swipes.ownSwipes);
 	const AdvertisementIDsFromSwipe: number[] = swipes
-		.filter((swipe) => swipe.swipeState == "ACCEPTED")
+		.filter((swipe) => swipe.swipeState === "ACCEPTED")
 		.map((swipe) => swipe.advertisementID);
 	return (
 		<CardGrid>
@@ -27,7 +27,7 @@ export default function SwipedAdvertisement() {
 					?.filter((ad) => AdvertisementIDsFromSwipe.includes(ad.id))
 					.map((advertisement) => {
 						return (
-							<Advertisement
+							<AdvertisementSwiped
 								key={advertisement.id}
 								advertisement={advertisement}
 							/>
@@ -38,7 +38,7 @@ export default function SwipedAdvertisement() {
 	);
 }
 
-function Advertisement({ advertisement }: { advertisement: Advertisement }) {
+function AdvertisementSwiped({ advertisement }: { advertisement: Advertisement }) {
 	return (
 		<CardGridItem>
 			<InformationImage src={advertisement.image} alt={advertisement.title} />
@@ -57,7 +57,7 @@ function SwipeState({ advertisement }: { advertisement: Advertisement }) {
 				Pending
 			</label>
 		);
-	} else if (advertisement.contractor.userName == valueUser) {
+	} else if (advertisement.contractor.userName === valueUser) {
 		return (
 			<label className={style.state} style={{ backgroundColor: "lightgreen" }}>
 				Accepted
