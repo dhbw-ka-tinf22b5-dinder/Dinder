@@ -1,6 +1,9 @@
 // SwipePage.js
 
-import {acceptAdvertisement, declineAdvertisement} from "@/clients/http-client.ts";
+import {
+	acceptAdvertisement,
+	declineAdvertisement,
+} from "@/clients/http-client.ts";
 import {
 	decrementDisplay,
 	incrementDisplay,
@@ -40,10 +43,10 @@ function SwipePage() {
 		acceptAdvertisement(currentItem.id).then((res) => console.log(res));
 		handleNext();
 	};
-    const handleReject = () =>{
-        declineAdvertisement(currentItem.id).then((res) => console.log(res));
+	const handleReject = () => {
+		declineAdvertisement(currentItem.id).then((res) => console.log(res));
 		handleNext();
-    }
+	};
 	return (
 		<Card>
 			<AdvertismentImage src={currentItem.image} alt={currentItem.title} />
