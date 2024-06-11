@@ -13,7 +13,7 @@ export const Card = styled.div`
   padding: 1.5rem 2rem 2rem 2rem;
   `;
 
-export const Info = styled.div`
+export const InfoStyle = styled.div`
   grid-column: span 3;
 `;
 

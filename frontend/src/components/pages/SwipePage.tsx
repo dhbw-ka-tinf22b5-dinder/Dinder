@@ -16,6 +16,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import { useSelector } from "react-redux";
 import { Button } from "../atoms/Button.component";
+import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
 	const advertisements = useSelector(
@@ -26,6 +27,7 @@ function SwipePage() {
 	);
 	if (advertisements.length === 0) {
 		store.dispatch(advertisementThunk());
+		store.dispatch(OwnSwipeThunk());
 		return <h1>loading</h1>;
 	}
 	//Next task advertisements
