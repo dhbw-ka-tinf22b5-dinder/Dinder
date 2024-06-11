@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/atoms/Button.component.tsx";
 import {
 	CardGrid,
 	CardGridItem,
