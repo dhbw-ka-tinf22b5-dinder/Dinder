@@ -17,6 +17,10 @@ public class AdvertisementService {
 
     private final AdvertisementRepository advertisementRepository;
 
+    public List<Advertisement> getAllAdvertisements() {
+        return advertisementRepository.findAll();
+    }
+
     public List<Advertisement> getOpenAdvertisements() {
         return advertisementRepository.findAllByContractorIsNull();
     }

@@ -39,6 +39,11 @@ public class AdvertisementController {
 
     @GetMapping("advertisement/all")
     public List<Integer> getAllAdvertisements() {
+        return advertisementService.getAllAdvertisements().stream().map(Advertisement::getAdvertisementId).toList();
+    }
+
+    @GetMapping("advertisement/open")
+    public List<Integer> getAllOpenAdvertisements() {
         return advertisementService.getOpenAdvertisements().stream().map(Advertisement::getAdvertisementId).toList();
     }
 
