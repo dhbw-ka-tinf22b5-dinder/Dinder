@@ -5,7 +5,6 @@ import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 import { ConfirmationElementStyled } from "@/styles/ConfirmationStyled.ts";
 import type { swipe } from "@/types/general.types.ts";
 
-
 interface Props {
 	name: string;
 	currentSwipe: swipe;

@@ -38,7 +38,9 @@ export default function SwipedAdvertisement() {
 	);
 }
 
-function AdvertisementSwiped({ advertisement }: { advertisement: Advertisement }) {
+function AdvertisementSwiped({
+	advertisement,
+}: { advertisement: Advertisement }) {
 	return (
 		<CardGridItem>
 			<InformationImage src={advertisement.image} alt={advertisement.title} />
