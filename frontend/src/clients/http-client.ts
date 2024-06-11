@@ -60,7 +60,7 @@ export function getUserName(): Promise<string> {
 export function fetchListOfAdvertisements(): Promise<number[]> {
 	// later this will be a json
 	return axios
-		.get(`${url}advertisement/open`)
+		.get(`${url}advertisement/all`)
 		.then((res) => res.data)
 		.catch((error) => error.status);
 }

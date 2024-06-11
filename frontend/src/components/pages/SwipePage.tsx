@@ -4,29 +4,24 @@ import {
 	acceptAdvertisement,
 	declineAdvertisement,
 } from "@/clients/http-client.ts";
-import {
-	decrementDisplay,
-	incrementDisplay,
-} from "@/lib/slices/advertisement.ts";
 import { type RootState, store } from "@/lib/store.ts";
 import { advertisementThunk } from "@/lib/thunks/AdvertisementThunk.ts";
 import { AdvertisementImage, Card, SwipeInfo } from "@/styles/swipecard.styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "../atoms/Button.component";
 import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
-
+    const ownUser = useSelector((state: RootState) => state.login.userName);
 	const advertisements = useSelector(
 		(state: RootState) => state.advertisement.Advertisement,
-	);
+	).filter((ad) => ad.contractor === null && ad.advertiser.userName !== ownUser);
 
-	const currentAdvertisement = useSelector(
-		(state: RootState) => state.advertisement.displayedAdvertisement,
-	);
+	const [currentAdvertisement, setCurrentAdvertisement] = useState(0);
 
 	if (advertisements.length === 0) {
 		store.dispatch(advertisementThunk());
@@ -35,42 +30,41 @@ function SwipePage() {
 	}
 	//Next task advertisements
 	const handleNext = () => {
-		store.dispatch(incrementDisplay());
+		setCurrentAdvertisement((currentAdvertisement + 1) % advertisements.length);
 	};
 	//Next task advertisements
 	const handlePrev = () => {
-		store.dispatch(decrementDisplay());
+		setCurrentAdvertisement((currentAdvertisement - 1 + advertisements.length) % advertisements.length);
 	};
 
-	const currentItem = advertisements[currentAdvertisement];
 	const handleAccept = () => {
 		// Add logic for accepting the active box
-		acceptAdvertisement(currentItem.id).then((res) => console.log(res));
+		acceptAdvertisement(advertisements[currentAdvertisement].id).then((res) => console.log(res));
 		handleNext();
 	};
 	const handleReject = () => {
-		declineAdvertisement(currentItem.id).then((res) => console.log(res));
+		declineAdvertisement(advertisements[currentAdvertisement].id).then((res) => console.log(res));
 		handleNext();
 	};
 	return (
 		<Card>
-			<h2 className="headerGrid">{currentItem.title}</h2>
-			<AdvertisementImage src={currentItem.image} alt={currentItem.title} />
+			<h2 className="headerGrid">{advertisements[currentAdvertisement].title}</h2>
+			<AdvertisementImage src={advertisements[currentAdvertisement].image} alt={advertisements[currentAdvertisement].title} />
 			<SwipeInfo>
 				<p>
-					<b>Description</b> {currentItem.description}
+					<b>Description</b> {advertisements[currentAdvertisement].description}
 				</p>
 				<p>
-					<b>Price</b> {currentItem.price} €
+					<b>Price</b> {advertisements[currentAdvertisement].price} €
 				</p>
 				<p>
-					<LocationOnIcon /> {currentItem.plz} {currentItem.location}
+					<LocationOnIcon /> {advertisements[currentAdvertisement].plz} {advertisements[currentAdvertisement].location}
 				</p>
 				<p>
-					<CalendarMonthIcon /> {currentItem.creationTime.toLocaleDateString()}
+					<CalendarMonthIcon /> {advertisements[currentAdvertisement].creationTime.toLocaleDateString()}
 				</p>
 				<p>
-					<PersonIcon /> {currentItem.advertiser.userName}
+					<PersonIcon /> {advertisements[currentAdvertisement].advertiser.userName}
 				</p>
 			</SwipeInfo>
 			<Button span={1} click={handleReject} text={"Reject"} />

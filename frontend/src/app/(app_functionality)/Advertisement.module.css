@@ -10,7 +10,6 @@
 
 .state{
     grid-column: span 3;
-    background-color: chocolate; /*rot oder grün*/
     padding: 8px 24px;
     border-radius: 25px;
     text-align: center;

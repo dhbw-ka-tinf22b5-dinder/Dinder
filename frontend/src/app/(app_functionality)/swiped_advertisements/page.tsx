@@ -48,10 +48,10 @@ function Advertisement({ advertisement }: { advertisement: Advertisement }) {
 function SwipeState({ advertisement }: { advertisement: Advertisement }) {
 	const valueUser = useSelector((state: RootState) => state.login.userName);
 	if (advertisement.contractor == null) {
-		return <label className={style.state}>Pending</label>;
+		return <label className={style.state} style={{backgroundColor: "yellow"}}>Pending</label>;
 	} else if (advertisement.contractor.userName == valueUser) {
-		return <label className={style.state}>Accepted</label>;
+		return <label className={style.state} style={{backgroundColor: "lightgreen"}}>Accepted</label>;
 	} else {
-		return <label className={style.state}>Declined</label>;
+		return <label className={style.state} style={{backgroundColor: "red"}}>Declined</label>;
 	}
 }
