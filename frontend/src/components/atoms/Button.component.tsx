@@ -3,7 +3,7 @@ interface ButtonProps {
 	click: () => void;
 	text: string;
 	span: number;
-    color?:string;
+	color?: string;
 }
 interface ButtonSubmitProps {
 	span: number;

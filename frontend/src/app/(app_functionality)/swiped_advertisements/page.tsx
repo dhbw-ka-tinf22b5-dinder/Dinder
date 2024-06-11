@@ -7,44 +7,43 @@ import {
 } from "@/styles/advertisementManagement.styles.ts";
 import { Info } from "@/components/atoms/Info.component";
 import style from "../Advertisement.module.css";
-import {type Advertisement} from "@/types/general.types.ts";
-import {useSelector} from "react-redux";
-import {RootState, store} from "@/lib/store.ts";
-import {OwnSwipeThunk} from "@/lib/thunks/SwipeThunk.ts";
-
+import { type Advertisement } from "@/types/general.types.ts";
+import { useSelector } from "react-redux";
+import { RootState, store } from "@/lib/store.ts";
+import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 export default function SwipedAdvertisement() {
-    store.dispatch(OwnSwipeThunk())
-	const advertisements = useSelector((state:RootState) => state.advertisement.Advertisement)//TODO: Get advertisements from backend
-    const swipes = useSelector((state:RootState)=> state.swipes.ownSwipes)
-    const AdvertisementIDsFromSwipe:number[] = swipes
-            .filter((swipe)=>swipe.swipeState=="ACCEPTED")
-            .map((swipe)=>swipe.advertisementID)
+	store.dispatch(OwnSwipeThunk());
+	const advertisements = useSelector(
+		(state: RootState) => state.advertisement.Advertisement,
+	); //TODO: Get advertisements from backend
+	const swipes = useSelector((state: RootState) => state.swipes.ownSwipes);
+	const AdvertisementIDsFromSwipe: number[] = swipes
+		.filter((swipe) => swipe.swipeState == "ACCEPTED")
+		.map((swipe) => swipe.advertisementID);
 	return (
 		<CardGrid>
 			<div className={style.grid}>
-				{advertisements?.filter((ad) => AdvertisementIDsFromSwipe.includes(ad.id)).map((advertisement) => {
-					return (
-						<Advertisement
-							key={advertisement.id}
-							advertisement={advertisement}
-						/>
-					);
-				})}
+				{advertisements
+					?.filter((ad) => AdvertisementIDsFromSwipe.includes(ad.id))
+					.map((advertisement) => {
+						return (
+							<Advertisement
+								key={advertisement.id}
+								advertisement={advertisement}
+							/>
+						);
+					})}
 			</div>
 		</CardGrid>
 	);
 }
 
-
-
-function Advertisement({
-	advertisement,
-}: { advertisement: Advertisement}) {
+function Advertisement({ advertisement }: { advertisement: Advertisement }) {
 	return (
 		<CardGridItem>
 			<InformationImage src={advertisement.image} alt={advertisement.title} />
-			<Info advertisement={advertisement}/>
+			<Info advertisement={advertisement} />
 
 			<label className={style.state}>Pending</label>
 			<Button span={3} click={handleDecline} text={"Delete"} />

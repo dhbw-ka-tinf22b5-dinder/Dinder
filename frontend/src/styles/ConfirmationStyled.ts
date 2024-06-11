@@ -10,11 +10,11 @@ export const ConfirmationElementStyled = styled.div`
   text-align: center;
   column-gap: 4px;
   padding: 4px;
-`
+`;
 export const ConfirmationListStyled = styled.div`
     position: relative;
     border-radius: 10px;
     grid-column: span 3;
     padding: 5px;
 
-`
+`;

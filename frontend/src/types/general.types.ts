@@ -45,7 +45,7 @@ export interface CreateAdvertisementPayload {
 	file?: ArrayBuffer;
 }
 export interface swipe {
-    swipeID:number;
+	swipeID: number;
 	swipeState: string;
 	userName: string;
 	advertisementID: number;
