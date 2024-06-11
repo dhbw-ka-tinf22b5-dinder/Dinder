@@ -17,6 +17,14 @@ import java.util.Optional;
 public class SwipeInformationService {
     private final SwipeInformationRepository swipeInformationRepository;
 
+    public Optional<SwipeInformation> findById(int id) {
+        return swipeInformationRepository.findById(id);
+    }
+
+    public List<SwipeInformation> getAllByUser(Users users) {
+        return swipeInformationRepository.findAllByContractor(users);
+    }
+
     public Optional<SwipeInformation> findByAdvertisementAndContractor(Advertisement advertisement, Users contractor) {
         return swipeInformationRepository.findSwipeInformationByAdvertisementAndContractor(advertisement, contractor);
     }
