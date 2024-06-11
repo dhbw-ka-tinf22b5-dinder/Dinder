@@ -19,7 +19,6 @@ import { Button } from "../atoms/Button.component";
 import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
-
 	const advertisements = useSelector(
 		(state: RootState) => state.advertisement.Advertisement,
 	);
