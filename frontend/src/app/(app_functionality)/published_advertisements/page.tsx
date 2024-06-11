@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@/components/atoms/Button.component.tsx";
-import { swipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 import { ConfirmationBoxComponent } from "@/components/atoms/ConfirmationBox.Component.tsx";
 import { Info } from "@/components/atoms/Info.component.tsx";
 import { type RootState, store } from "@/lib/store.ts";
+import { swipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 import {
 	CardGrid,
 	CardGridItem,
