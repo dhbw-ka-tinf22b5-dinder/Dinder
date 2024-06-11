@@ -1,26 +1,31 @@
 "use client";
+import { Button } from "@/components/atoms/Button.component.tsx";
 import {
 	CardGrid,
 	CardGridItem,
 	InformationImage,
 } from "@/styles/advertisementManagement.styles.ts";
 import { Info } from "@/components/atoms/Info.component";
-import { RootState } from "@/lib/store.ts";
 import style from "../Advertisement.module.css";
 import { type Advertisement } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
+import { RootState, store } from "@/lib/store.ts";
+import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 export default function SwipedAdvertisement() {
+	store.dispatch(OwnSwipeThunk());
 	const advertisements = useSelector(
 		(state: RootState) => state.advertisement.Advertisement,
 	);
 	const swipes = useSelector((state: RootState) => state.swipes.ownSwipes);
-	const SwipeIDs: number[] = swipes.map((swipe) => swipe.advertisementID);
+	const AdvertisementIDsFromSwipe: number[] = swipes
+		.filter((swipe) => swipe.swipeState == "ACCEPTED")
+		.map((swipe) => swipe.advertisementID);
 	return (
 		<CardGrid>
 			<div className={style.grid}>
 				{advertisements
-					?.filter((ad) => SwipeIDs.includes(ad.id))
+					?.filter((ad) => AdvertisementIDsFromSwipe.includes(ad.id))
 					.map((advertisement) => {
 						return (
 							<Advertisement

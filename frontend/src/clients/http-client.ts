@@ -24,6 +24,7 @@ interface AdvertisementFromServer {
 	};
 }
 interface SwipeFromServer {
+	swipeId: number;
 	swipeState: string;
 	user: {
 		userName: string;
@@ -75,7 +76,12 @@ export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 		})
 		.catch((error) => error.status);
 }
-
+export function confirmSwipe(advertisementID: number, swipeID: number) {
+	console.log(advertisementID + " : " + swipeID);
+	return axios.post(
+		`${url}advertisement/${advertisementID}/swipe/${swipeID}/accept`,
+	);
+}
 function parseToAdvertisement(
 	data: AdvertisementFromServer,
 	id: number,
@@ -119,6 +125,7 @@ function parseToSwipes(swipe: SwipeFromServer[]): swipe[] {
 	const betterSwipes: swipe[] = [];
 	for (const swipeFromServer of swipe) {
 		betterSwipes.push({
+			swipeID: swipeFromServer.swipeId,
 			swipeState: swipeFromServer.swipeState,
 			userName: swipeFromServer.user.userName,
 			advertisementID: swipeFromServer.advertisement.advertisementId,

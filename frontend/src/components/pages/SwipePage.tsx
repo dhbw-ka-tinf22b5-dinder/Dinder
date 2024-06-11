@@ -13,7 +13,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Button } from "../atoms/Button.component";
-import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
 	const ownUser = useSelector((state: RootState) => state.login.userName);
@@ -27,7 +26,6 @@ function SwipePage() {
 
 	if (advertisements.length === 0) {
 		store.dispatch(advertisementThunk());
-		store.dispatch(OwnSwipeThunk());
 		return <h1>loading</h1>;
 	}
 	//Next task advertisements
