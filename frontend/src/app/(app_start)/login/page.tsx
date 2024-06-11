@@ -47,10 +47,10 @@ const Page = () => {
 					type={"password"}
 					error={isPassword ? valueError.errorMessage : ""}
 				/>
-                <div className="loginRegistrDiv">
-                    <ButtonSubmit span={1}>Login</ButtonSubmit>
-                    <Link href={"/registration"}>Registration</Link>
-                </div>
+				<div className="loginRegistrDiv">
+					<ButtonSubmit span={1}>Login</ButtonSubmit>
+					<Link href={"/registration"}>Registration</Link>
+				</div>
 			</Form>
 		</>
 	);

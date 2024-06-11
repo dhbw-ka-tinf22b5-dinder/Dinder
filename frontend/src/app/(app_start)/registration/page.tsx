@@ -63,10 +63,10 @@ const Page = () => {
 					name={"CtrlPwd"}
 					error={isPassword ? valueError.errorMessage : ""}
 				/>
-                <div className="loginRegistrDiv">
-                    <ButtonSubmit span={1}>Registration </ButtonSubmit>
-                    <Link href={"/login"}>Login</Link>
-                </div>
+				<div className="loginRegistrDiv">
+					<ButtonSubmit span={1}>Registration </ButtonSubmit>
+					<Link href={"/login"}>Login</Link>
+				</div>
 			</Form>
 		</>
 	);
