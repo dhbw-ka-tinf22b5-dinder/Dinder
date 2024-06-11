@@ -9,6 +9,7 @@ import { MainBackgroundImg } from "@/styles/mainPage.styles.ts";
 import type { FrontendError, UserLogin } from "@/types/general.types.ts";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 const Page = () => {
 	const valueError: FrontendError = useSelector(
@@ -46,7 +47,10 @@ const Page = () => {
 					type={"password"}
 					error={isPassword ? valueError.errorMessage : ""}
 				/>
-				<ButtonSubmit span={2}>Login</ButtonSubmit>
+                <div className="loginRegistrDiv">
+                    <ButtonSubmit span={1}>Login</ButtonSubmit>
+                    <Link href={"/registration"}>Registration</Link>
+                </div>
 			</Form>
 		</>
 	);

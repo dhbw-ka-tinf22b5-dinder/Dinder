@@ -11,6 +11,7 @@ import type {
 	UserRegisterConfirmation,
 } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
 
@@ -62,7 +63,10 @@ const Page = () => {
 					name={"CtrlPwd"}
 					error={isPassword ? valueError.errorMessage : ""}
 				/>
-				<ButtonSubmit span={2}>Registrieren </ButtonSubmit>
+                <div className="loginRegistrDiv">
+                    <ButtonSubmit span={1}>Registration </ButtonSubmit>
+                    <Link href={"/login"}>Login</Link>
+                </div>
 			</Form>
 		</>
 	);

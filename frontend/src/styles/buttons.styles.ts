@@ -7,4 +7,5 @@ export const ButtonStyled = styled.button<{ $span: number }>`
   box-shadow: none;
   border: none;
   grid-column: span ${(props) => props.$span};
+  width: 100%;  
 `;

@@ -77,6 +77,15 @@ button:focus-visible {
     align-items: center;
 }
 
+.loginRegistrDiv{
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
