@@ -26,11 +26,11 @@ public class AdvertisementService {
     }
 
     public Optional<Advertisement> getAdvertisementById(int id) {
-        return advertisementRepository.findById(id).filter(e -> e.getContractor() == null);
+        return advertisementRepository.findById(id);
     }
 
     public Optional<AdvertisementInformationModel> getAdvertisementFromId(int id) {
-        return advertisementRepository.findById(id).filter(e -> e.getContractor() == null).map(Advertisement::toInformationModel);
+        return advertisementRepository.findById(id).map(Advertisement::toInformationModel);
     }
 
     public Advertisement createAdvertisement(AddAdvertisementModel model, Users user, String filePath) {
