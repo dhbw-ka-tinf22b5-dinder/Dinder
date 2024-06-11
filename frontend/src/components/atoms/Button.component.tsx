@@ -3,6 +3,7 @@ interface ButtonProps {
 	click: () => void;
 	text: string;
 	span: number;
+    color?:string;
 }
 interface ButtonSubmitProps {
 	span: number;
@@ -12,7 +13,7 @@ interface ButtonSubmitProps {
 //span ist ein sogenanntes Property also ein extra Attribut
 export const Button = (props: ButtonProps) => {
 	return (
-		<ButtonStyled $span={props.span} onClick={props.click}>
+		<ButtonStyled $span={props.span} onClick={props.click} $color={props.color}>
 			{props.text}
 		</ButtonStyled>
 	);
