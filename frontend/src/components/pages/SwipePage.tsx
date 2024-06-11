@@ -16,10 +16,12 @@ import { Button } from "../atoms/Button.component";
 import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
-    const ownUser = useSelector((state: RootState) => state.login.userName);
+	const ownUser = useSelector((state: RootState) => state.login.userName);
 	const advertisements = useSelector(
 		(state: RootState) => state.advertisement.Advertisement,
-	).filter((ad) => ad.contractor === null && ad.advertiser.userName !== ownUser);
+	).filter(
+		(ad) => ad.contractor === null && ad.advertiser.userName !== ownUser,
+	);
 
 	const [currentAdvertisement, setCurrentAdvertisement] = useState(0);
 
@@ -34,22 +36,34 @@ function SwipePage() {
 	};
 	//Next task advertisements
 	const handlePrev = () => {
-		setCurrentAdvertisement((currentAdvertisement - 1 + advertisements.length) % advertisements.length);
+		setCurrentAdvertisement(
+			(currentAdvertisement - 1 + advertisements.length) %
+				advertisements.length,
+		);
 	};
 
 	const handleAccept = () => {
 		// Add logic for accepting the active box
-		acceptAdvertisement(advertisements[currentAdvertisement].id).then((res) => console.log(res));
+		acceptAdvertisement(advertisements[currentAdvertisement].id).then((res) =>
+			console.log(res),
+		);
 		handleNext();
 	};
 	const handleReject = () => {
-		declineAdvertisement(advertisements[currentAdvertisement].id).then((res) => console.log(res));
+		declineAdvertisement(advertisements[currentAdvertisement].id).then((res) =>
+			console.log(res),
+		);
 		handleNext();
 	};
 	return (
 		<Card>
-			<h2 className="headerGrid">{advertisements[currentAdvertisement].title}</h2>
-			<AdvertisementImage src={advertisements[currentAdvertisement].image} alt={advertisements[currentAdvertisement].title} />
+			<h2 className="headerGrid">
+				{advertisements[currentAdvertisement].title}
+			</h2>
+			<AdvertisementImage
+				src={advertisements[currentAdvertisement].image}
+				alt={advertisements[currentAdvertisement].title}
+			/>
 			<SwipeInfo>
 				<p>
 					<b>Description</b> {advertisements[currentAdvertisement].description}
@@ -58,13 +72,18 @@ function SwipePage() {
 					<b>Price</b> {advertisements[currentAdvertisement].price} €
 				</p>
 				<p>
-					<LocationOnIcon /> {advertisements[currentAdvertisement].plz} {advertisements[currentAdvertisement].location}
+					<LocationOnIcon /> {advertisements[currentAdvertisement].plz}{" "}
+					{advertisements[currentAdvertisement].location}
 				</p>
 				<p>
-					<CalendarMonthIcon /> {advertisements[currentAdvertisement].creationTime.toLocaleDateString()}
+					<CalendarMonthIcon />{" "}
+					{advertisements[
+						currentAdvertisement
+					].creationTime.toLocaleDateString()}
 				</p>
 				<p>
-					<PersonIcon /> {advertisements[currentAdvertisement].advertiser.userName}
+					<PersonIcon />{" "}
+					{advertisements[currentAdvertisement].advertiser.userName}
 				</p>
 			</SwipeInfo>
 			<Button span={1} click={handleReject} text={"Reject"} />
