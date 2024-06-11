@@ -23,6 +23,9 @@ export interface FrontendError {
 export interface Advertiser {
 	userName: string;
 }
+export interface Contractor{
+    userName: string;
+}
 export interface Advertisement {
 	id: number;
 	title: string;
@@ -33,6 +36,7 @@ export interface Advertisement {
 	advertiser: Advertiser;
 	image: string;
 	creationTime: Date;
+    contractor: Contractor;
 }
 export interface CreateAdvertisementPayload {
 	json: {

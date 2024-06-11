@@ -19,6 +19,9 @@ interface AdvertisementFromServer {
 		userName: string;
 	};
 	creationTime: string;
+    contractor: {
+        userName: string;
+    };
 }
 interface SwipeFromServer {
 	swipeState: string;
@@ -86,8 +89,8 @@ function parseToAdvertisement(
 		description: data.description,
 		image: `${url}advertisement/${id}/image`,
 		advertiser: data.advertiser,
-
 		creationTime: new Date(data.creationTime),
+        contractor: data.contractor,
 	};
 }
 export function acceptAdvertisement(id: number) {
