@@ -1,5 +1,5 @@
-import {getOwnSwipes, getSwipes} from "@/clients/http-client.ts";
-import {ownSwipeReducer, swipeReducer} from "@/lib/slices/swipes.ts";
+import { getOwnSwipes, getSwipes } from "@/clients/http-client.ts";
+import { ownSwipeReducer, swipeReducer } from "@/lib/slices/swipes.ts";
 import type { Advertisement, swipe } from "@/types/general.types.ts";
 
 function getListOfAdvertisements(
@@ -45,14 +45,15 @@ export const swipeThunk =
 		);
 	};
 
-export const OwnSwipeThunk = ()=>
-    async (
-        dispatch:(arg0:{
-            payload: swipe[];
-            type: "swipes/ownSwipeReducer";
-        }) => void,
-    ) =>{
-        getOwnSwipes().then((res) =>{
-            dispatch(ownSwipeReducer(res))
-        })
-    }
+export const OwnSwipeThunk =
+	() =>
+	async (
+		dispatch: (arg0: {
+			payload: swipe[];
+			type: "swipes/ownSwipeReducer";
+		}) => void,
+	) => {
+		getOwnSwipes().then((res) => {
+			dispatch(ownSwipeReducer(res));
+		});
+	};
