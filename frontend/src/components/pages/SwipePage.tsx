@@ -19,10 +19,10 @@ import { Button } from "../atoms/Button.component";
 import { OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
-    //const ownUsername = useSelector((state: RootState) => state.login.userName);
+	//const ownUsername = useSelector((state: RootState) => state.login.userName);
 	const advertisements = useSelector(
 		(state: RootState) => state.advertisement.Advertisement,
-	);//.filter((ad) => ad.advertiser.userName !== ownUsername);
+	); //.filter((ad) => ad.advertiser.userName !== ownUsername);
 
 	const currentAdvertisement = useSelector(
 		(state: RootState) => state.advertisement.displayedAdvertisement,
@@ -35,7 +35,7 @@ function SwipePage() {
 	}
 	//Next task advertisements
 	const handleNext = () => {
-        store.dispatch(incrementDisplay());
+		store.dispatch(incrementDisplay());
 	};
 	//Next task advertisements
 	const handlePrev = () => {

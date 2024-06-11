@@ -40,21 +40,18 @@ function Advertisement({ advertisement }: { advertisement: Advertisement }) {
 			<InformationImage src={advertisement.image} alt={advertisement.title} />
 			<Info advertisement={advertisement} />
 
-            <SwipeState
-                    key={advertisement.id}
-                    advertisement={advertisement}
-            />
+			<SwipeState key={advertisement.id} advertisement={advertisement} />
 		</CardGridItem>
 	);
 }
 
-function SwipeState({advertisement}: {advertisement: Advertisement}) {
-    const valueUser = useSelector((state: RootState) => state.login.userName);
-    if(advertisement.contractor == null){
-        return <label className={style.state}>Pending</label>
-    }else if (advertisement.contractor.userName == valueUser){
-        return <label className={style.state}>Accepted</label>
-    }else{
-        return <label className={style.state}>Declined</label>
-    }
+function SwipeState({ advertisement }: { advertisement: Advertisement }) {
+	const valueUser = useSelector((state: RootState) => state.login.userName);
+	if (advertisement.contractor == null) {
+		return <label className={style.state}>Pending</label>;
+	} else if (advertisement.contractor.userName == valueUser) {
+		return <label className={style.state}>Accepted</label>;
+	} else {
+		return <label className={style.state}>Declined</label>;
+	}
 }
