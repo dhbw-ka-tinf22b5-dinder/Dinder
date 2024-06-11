@@ -7,12 +7,13 @@ import {
 } from "@/lib/slices/advertisement.ts";
 import { type RootState, store } from "@/lib/store.ts";
 import { advertisementThunk } from "@/lib/thunks/AdvertisementThunk.ts";
-import { AdvertismentImage, Card, Info } from "@/styles/swipecard.styles";
+import { AdvertismentImage, Card, InfoStyle } from "@/styles/swipecard.styles";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PersonIcon from "@mui/icons-material/Person";
 import { useSelector } from "react-redux";
 import { Button } from "../atoms/Button.component";
+import {OwnSwipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 
 function SwipePage() {
 	const advertisements = useSelector(
@@ -23,6 +24,7 @@ function SwipePage() {
 	);
 	if (advertisements.length === 0) {
 		store.dispatch(advertisementThunk());
+        store.dispatch(OwnSwipeThunk())
 		return <h1>loading</h1>;
 	}
 	//Next task advertisements
@@ -47,7 +49,7 @@ function SwipePage() {
 	return (
 		<Card>
 			<AdvertismentImage src={currentItem.image} alt={currentItem.title} />
-			<Info>
+			<InfoStyle>
 				<h2>{currentItem.title}</h2>
 				<p>
 					<b>Description</b> {currentItem.description}
@@ -64,7 +66,7 @@ function SwipePage() {
 				<p>
 					<PersonIcon /> {currentItem.advertiser.userName}
 				</p>
-			</Info>
+			</InfoStyle>
 			<Button span={1} click={handleReject} text={"Reject"} />
 
 			<Button span={1} click={handlePrev} text={"Previous"} />

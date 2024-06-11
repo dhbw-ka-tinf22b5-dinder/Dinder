@@ -25,6 +25,9 @@ interface SwipeFromServer {
 	user: {
 		userName: string;
 	};
+    advertisement:{
+        advertisementId:number;
+    }
 }
 export function login(user: UserLogin): Promise<boolean> {
 	// later this will be a json
@@ -97,22 +100,27 @@ export function declineAdvertisement(id: number) {
 		swipeState: "DECLINED",
 	});
 }
+export function getOwnSwipes():Promise<swipe[]>{
+    return axios.get(`${url}user/swipes`).then((res) => {
+		const rawSwipe: SwipeFromServer[] = res.data;
+		return parseToSwipes(rawSwipe);
+	})
+}
 export function getSwipes(id: number): Promise<swipe[]> {
 	return axios.get(`${url}advertisement/${id}/swipe/all`).then((res) => {
 		const rawSwipe: SwipeFromServer[] = res.data;
-		return parseToSwipes(rawSwipe, id);
+		return parseToSwipes(rawSwipe);
 	});
 }
 function parseToSwipes(
 	swipe: SwipeFromServer[],
-	advertisementID: number,
 ): swipe[] {
 	const betterSwipes: swipe[] = [];
 	for (const swipeFromServer of swipe) {
 		betterSwipes.push({
 			swipeState: swipeFromServer.swipeState,
 			userName: swipeFromServer.user.userName,
-			advertisementID: advertisementID,
+			advertisementID: swipeFromServer.advertisement.advertisementId,
 		});
 	}
 	return betterSwipes;
