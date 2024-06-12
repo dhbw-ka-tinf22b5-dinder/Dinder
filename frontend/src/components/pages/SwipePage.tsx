@@ -70,8 +70,7 @@ function SwipePage() {
 					<b>Price</b> {advertisements[currentAdvertisement].price} €
 				</p>
 				<p>
-					<LocationOnIcon /> {advertisements[currentAdvertisement].plz}{" "}
-					{advertisements[currentAdvertisement].location}
+					<LocationOnIcon /> {`${advertisements[currentAdvertisement].plz} ${advertisements[currentAdvertisement].location}`}
 				</p>
 				<p>
 					<CalendarMonthIcon />{" "}

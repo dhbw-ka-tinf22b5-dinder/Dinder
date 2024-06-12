@@ -44,7 +44,7 @@ function AdvertisementSwiped({
 	return (
 		<CardGridItem>
 			<InformationImage src={advertisement.image} alt={advertisement.title} />
-			<Info advertisement={advertisement} />
+			<Info advertisement={advertisement} isSwipe={true} />
 
 			<SwipeState key={advertisement.id} advertisement={advertisement} />
 		</CardGridItem>

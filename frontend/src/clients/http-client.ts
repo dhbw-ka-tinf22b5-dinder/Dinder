@@ -13,7 +13,7 @@ interface AdvertisementFromServer {
 	title: string;
 	price: number;
 	location: string;
-	plz: number;
+	postalCode: number;
 	description: string;
 	advertiser: {
 		userName: string;
@@ -59,7 +59,6 @@ export function getUserName(): Promise<string> {
 		.catch((error) => error.status);
 }
 export function fetchListOfAdvertisements(): Promise<number[]> {
-	// later this will be a json
 	return axios
 		.get(`${url}advertisement/all`)
 		.then((res) => res.data)
@@ -72,6 +71,7 @@ export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 
 		.then((res) => {
 			const rawAdvertisement: AdvertisementFromServer = res.data;
+            console.log(rawAdvertisement)
 			return parseToAdvertisement(rawAdvertisement, id);
 		})
 		.catch((error) => error.status);
@@ -90,7 +90,7 @@ function parseToAdvertisement(
 		title: data.title,
 		price: data.price,
 		location: data.location,
-		plz: data.plz,
+		plz: data.postalCode,
 		description: data.description,
 		image: `${url}advertisement/${id}/image`,
 		advertiser: data.advertiser,
