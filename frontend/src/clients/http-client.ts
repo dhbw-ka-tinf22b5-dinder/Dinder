@@ -116,7 +116,7 @@ export function getOwnSwipes(): Promise<swipe[]> {
 }
 export function getSwipes(id: number): Promise<swipe[]> {
 	return axios.get(`${url}advertisement/${id}/swipe/all`).then((res) => {
-        console.log(res)
+		console.log(res);
 		const rawSwipe: SwipeFromServer[] = res.data;
 		return parseToSwipes(rawSwipe);
 	});

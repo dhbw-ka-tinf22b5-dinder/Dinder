@@ -59,17 +59,19 @@ function SwipeState({ advertisement }: { advertisement: Advertisement }) {
 				Pending
 			</label>
 		);
-	} else if (advertisement.contractor.userName === valueUser) {
+	}
+
+	if (advertisement.contractor.userName === valueUser) {
 		return (
 			<label className={style.state} style={{ backgroundColor: "lightgreen" }}>
 				Accepted
 			</label>
 		);
-	} else {
-		return (
-			<label className={style.state} style={{ backgroundColor: "red" }}>
-				Declined
-			</label>
-		);
 	}
+
+	return (
+		<label className={style.state} style={{ backgroundColor: "red" }}>
+			Declined
+		</label>
+	);
 }
