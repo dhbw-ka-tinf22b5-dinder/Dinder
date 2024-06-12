@@ -77,7 +77,6 @@ export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 		.catch((error) => error.status);
 }
 export function confirmSwipe(advertisementID: number, swipeID: number) {
-	console.log(`${advertisementID} : ${swipeID}`);
 	return axios.post(
 		`${url}advertisement/${advertisementID}/swipe/${swipeID}/accept`,
 	);
@@ -117,6 +116,7 @@ export function getOwnSwipes(): Promise<swipe[]> {
 }
 export function getSwipes(id: number): Promise<swipe[]> {
 	return axios.get(`${url}advertisement/${id}/swipe/all`).then((res) => {
+		console.log(res);
 		const rawSwipe: SwipeFromServer[] = res.data;
 		return parseToSwipes(rawSwipe);
 	});

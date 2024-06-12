@@ -6,13 +6,12 @@ import { ConfirmationElementStyled } from "@/styles/ConfirmationStyled.ts";
 import type { swipe } from "@/types/general.types.ts";
 
 interface Props {
-	name: string;
 	currentSwipe: swipe;
 }
 export const SwipeConfirmation = (props: Props) => {
 	return (
 		<ConfirmationElementStyled>
-			<p style={{ margin: "auto" }}>{props.name}</p>
+			<p style={{ margin: "auto" }}>{props.currentSwipe.userName}</p>
 			<Button
 				text={"Accept"}
 				click={() => handleAccept(props.currentSwipe)}
