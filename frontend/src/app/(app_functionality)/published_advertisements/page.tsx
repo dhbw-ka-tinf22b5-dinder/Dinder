@@ -10,9 +10,9 @@ import {
 	InformationImage,
 } from "@/styles/advertisementManagement.styles.ts";
 import type { Advertisement, swipe } from "@/types/general.types.ts";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import style from "../Advertisement.module.css";
-import { useState } from "react";
 
 function usePublishedAdvertisements(
 	advertisementSelector: Advertisement[],
@@ -29,8 +29,8 @@ function usePublishedAdvertisements(
 	const swipeTester: swipe[] = useSelector(
 		(state: RootState) => state.swipes.otherSwipes,
 	);
-	console.log("swipes " + swipeTester.length);
-	if (publishedAdvertisements.length == 0 || swipeTester.length != 0)
+	console.log(`swipes ${swipeTester.length}`);
+	if (publishedAdvertisements.length === 0 || swipeTester.length !== 0)
 		return publishedAdvertisements;
 	store.dispatch(swipeThunk(publishedAdvertisements));
 	return publishedAdvertisements;
@@ -69,7 +69,7 @@ export default function PublishedAdvertisements() {
 							advertisement={advertisement}
 							currentList={currentList}
 							swipes={globalSwipes.filter(
-								(s) => s.advertisementID == advertisement.id,
+								(s) => s.advertisementID === advertisement.id,
 							)}
 							setCurrentList={() => setList(advertisement.id)}
 						/>
