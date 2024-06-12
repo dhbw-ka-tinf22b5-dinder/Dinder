@@ -71,7 +71,7 @@ export function fetchAdvertisementById(id: number): Promise<Advertisement> {
 
 		.then((res) => {
 			const rawAdvertisement: AdvertisementFromServer = res.data;
-            console.log(rawAdvertisement)
+			console.log(rawAdvertisement);
 			return parseToAdvertisement(rawAdvertisement, id);
 		})
 		.catch((error) => error.status);
