@@ -2,7 +2,7 @@
 import { Button } from "@/components/atoms/Button.component.tsx";
 import { ConfirmationBoxComponent } from "@/components/atoms/ConfirmationBox.Component.tsx";
 import { Info } from "@/components/atoms/Info.component.tsx";
-import { type RootState, store } from "@/lib/store.ts";
+import {type RootState, store} from "@/lib/store.ts";
 import { swipeThunk } from "@/lib/thunks/SwipeThunk.ts";
 import {
 	CardGrid,
@@ -12,39 +12,39 @@ import {
 import type { Advertisement, swipe } from "@/types/general.types.ts";
 import { useSelector } from "react-redux";
 import style from "../Advertisement.module.css";
+import {useState} from "react";
 
-let swipes: swipe[] = [];
-let user: string[] = [];
-let currentList = 0;
-function usePublishedAdvertisements(): Advertisement[] {
+
+function usePublishedAdvertisements(advertisementSelector:Advertisement[],username:string): Advertisement[] {
 	const publishedAdvertisements: Advertisement[] = [];
-	const advertisementSelector: Advertisement[] = useSelector(
-		(state: RootState) => state.advertisement.Advertisement,
-	);
-	const username: string = useSelector(
-		(state: RootState) => state.login.userName,
-	);
-	store.dispatch(swipeThunk(username, advertisementSelector));
+
 	for (const advertisement of advertisementSelector) {
 		if (advertisement.advertiser.userName === username) {
 			publishedAdvertisements.push(advertisement);
 		}
 	}
-	console.log(publishedAdvertisements);
+
+    const swipeTester:swipe[] =  useSelector(
+            (state:RootState)=>state.swipes.otherSwipes
+    )
+    console.log("swipes "+swipeTester.length)
+    if ( publishedAdvertisements.length==0||swipeTester.length!=0) return publishedAdvertisements
+    store.dispatch(swipeThunk(publishedAdvertisements))
 	return publishedAdvertisements;
 }
-function handleShowSwipes(id: number) {
-	if (id === currentList) return;
-	user = [];
-	for (const swipe of swipes) {
-		if (swipe.advertisementID === id && swipe.swipeState === "ACCEPTED")
-			user.push(swipe.userName);
-	}
-	currentList = id;
-}
+
 export default function PublishedAdvertisements() {
-	const advertisements: Advertisement[] = usePublishedAdvertisements();
-	swipes = useSelector((state: RootState) => state.swipes.otherSwipes);
+
+    const [currentList,setList] = useState(0)
+    const advertisementSelector: Advertisement[] = useSelector(
+		(state: RootState) => state.advertisement.Advertisement,
+	);
+	const username: string = useSelector(
+		(state: RootState) => state.login.userName,
+	);
+	//store.dispatch(swipeThunk(username, advertisementSelector));
+	const advertisements: Advertisement[] = usePublishedAdvertisements(advertisementSelector,username);
+    const globalSwipes:swipe[] = useSelector((state: RootState) => state.swipes.otherSwipes);
 	if (advertisements.length === 0) {
 		return (
 			<>
@@ -59,7 +59,10 @@ export default function PublishedAdvertisements() {
 					return (
 						<AdvertisementItem
 							key={advertisement.id}
-							advertisementProp={advertisement}
+							advertisement={advertisement}
+                            currentList={currentList}
+                            swipes={globalSwipes.filter((s)=>s.advertisementID==advertisement.id)}
+                            setCurrentList={()=>setList(advertisement.id)}
 						/>
 					);
 				})}
@@ -67,37 +70,40 @@ export default function PublishedAdvertisements() {
 		</CardGrid>
 	);
 }
-
-const AdvertisementItem = ({
-	advertisementProp,
-}: { advertisementProp: Advertisement }) => {
+interface advertisementItems{
+    advertisement: Advertisement,
+    currentList:number,
+    swipes:swipe[]
+    setCurrentList:()=>void
+}
+const AdvertisementItem = (advertisementProp:advertisementItems) => {
 	return (
 		<CardGridItem>
 			<InformationImage
-				src={advertisementProp.image}
-				alt={advertisementProp.title}
+				src={advertisementProp.advertisement.image}
+				alt={advertisementProp.advertisement.title}
 			/>
-			<Info advertisement={advertisementProp} />
+			<Info advertisement={advertisementProp.advertisement} />
 			<Button
 				span={3}
-				click={() => handleShowSwipes(advertisementProp.id)}
+				click={advertisementProp.setCurrentList}
 				text={"Show swipes"}
 			/>
-			{advertisementProp.id === currentList && user.length === 0 && (
+			{advertisementProp.advertisement.id === advertisementProp.currentList&& advertisementProp.swipes.length === 0 && (
 				<p style={{ textAlign: "center", gridColumn: "span 3" }}>
 					No swipes yet
 				</p>
 			)}
-			{advertisementProp.id === currentList &&
-				advertisementProp.contractor != null && (
+			{advertisementProp.advertisement.id === advertisementProp.currentList &&
+				advertisementProp.advertisement.contractor != null && (
 					<p style={{ textAlign: "center", gridColumn: "span 3" }}>
-						{advertisementProp.contractor.userName}
+						{advertisementProp.advertisement.contractor.userName}
 					</p>
 				)}
-			{advertisementProp.id === currentList &&
-				user.length !== 0 &&
-				advertisementProp.contractor == null && (
-					<ConfirmationBoxComponent names={user} swipes={swipes} />
+			{advertisementProp.advertisement.id === advertisementProp.currentList &&
+				advertisementProp.swipes.length !== 0 &&
+				advertisementProp.advertisement.contractor == null && (
+					<ConfirmationBoxComponent swipes={advertisementProp.swipes} />
 				)}
 		</CardGridItem>
 	);
