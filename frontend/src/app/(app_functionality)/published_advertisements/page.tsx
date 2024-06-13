@@ -55,7 +55,7 @@ export default function PublishedAdvertisements() {
 	if (advertisements.length === 0) {
 		return (
 			<>
-				<h1>Nothing to show here</h1>
+				<h1>No published advertisements yet</h1>
 			</>
 		);
 	}

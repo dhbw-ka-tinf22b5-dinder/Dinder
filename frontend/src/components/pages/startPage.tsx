@@ -13,7 +13,7 @@ const StartPage = () => {
 				<Button
 					span={1}
 					click={() => router.push("/registration")}
-					text={"Registrierung"}
+					text={"Registration"}
 				/>
 			</MainContainer>
 		</>

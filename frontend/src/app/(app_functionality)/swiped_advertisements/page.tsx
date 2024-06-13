@@ -20,12 +20,20 @@ export default function SwipedAdvertisement() {
 	const AdvertisementIDsFromSwipe: number[] = swipes
 		.filter((swipe) => swipe.swipeState === "ACCEPTED")
 		.map((swipe) => swipe.advertisementID);
+    const filteredAdvertisements = advertisements
+            ?.filter((ad) => AdvertisementIDsFromSwipe.includes(ad.id))
+    if(filteredAdvertisements.length === 0){
+        return (
+            <>
+                <h1>No swipes yet</h1>
+            </>
+        );
+
+    }
 	return (
 		<CardGrid>
 			<div className={style.grid}>
-				{advertisements
-					?.filter((ad) => AdvertisementIDsFromSwipe.includes(ad.id))
-					.map((advertisement) => {
+                {filteredAdvertisements.map((advertisement) => {
 						return (
 							<AdvertisementSwiped
 								key={advertisement.id}
