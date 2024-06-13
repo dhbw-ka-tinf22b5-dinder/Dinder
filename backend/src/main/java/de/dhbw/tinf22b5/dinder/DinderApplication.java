@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 @EntityScan("de.dhbw.tinf22b5.dinder.")
 @OpenAPIDefinition(info = @Info(title = "Dinder", version = "v1"))
 public class DinderApplication {
+    @ExcludeFromJacocoGeneratedReport
     public static void main(String[] args) {
         SpringApplication.run(DinderApplication.class, args);
     }
