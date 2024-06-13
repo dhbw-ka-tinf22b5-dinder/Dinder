@@ -80,6 +80,17 @@ class ImageTest {
     }
 
     @Test
+    void uploadEmptyImage() {
+        given().
+                cookie(UserController.SESSION_ID_COOKIE, securityService.generateKey("mustermann@max.de")).
+                contentType("image/jpeg").
+                body((byte[]) null).
+            when().put("/api/v1/advertisement/2/image").
+            then().
+                statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
     void uploadImageAndTestQuery() throws IOException {
         try {
             byte[] image = null;
