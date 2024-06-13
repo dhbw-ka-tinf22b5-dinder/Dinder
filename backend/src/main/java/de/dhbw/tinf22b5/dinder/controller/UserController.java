@@ -105,17 +105,8 @@ public class UserController {
     }
 
     @GetMapping("/user/me")
-    public UserInformationModel getMyUserInfo(HttpServletRequest request) {
-        if(request.getCookies() == null)
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-
-        String email = Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equalsIgnoreCase(SESSION_ID_COOKIE))
-                .flatMap(cookie -> Optional.ofNullable(cookie.getValue()).stream())
-                .map(s -> securityService.getEmail(s))
-                .findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-
-        return userService.getUserInfo(email).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+    public UserInformationModel getMyUserInfo(Principal principal) {
+        return userService.getUserInfo(principal.getName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
     @GetMapping("/user/swipes")
