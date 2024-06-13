@@ -21,7 +21,7 @@ export const Info = (props: Props) => {
 			</p>
 			<p>
 				<LocationOnIcon />{" "}
-				{props.advertisement.plz + " " + props.advertisement.location}
+				{`${props.advertisement.plz} ${props.advertisement.location}`}
 			</p>
 			<p>
 				<CalendarMonthIcon />{" "}
